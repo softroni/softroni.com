@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service — Softroni</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa, #6366f1);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 6s ease infinite;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa);
+            background-size: 200% 200%;
+            animation: gradient-shift 6s ease infinite;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .fade-in-delay-1 { transition-delay: 0.1s; }
+        .btn-gradient {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            transition: all 0.3s ease;
+        }
+        .btn-gradient:hover {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            box-shadow: 0 8px 24px rgba(99,102,241,0.3);
+            transform: translateY(-1px);
+        }
+        .hero-bg {
+            background: radial-gradient(ellipse at 30% 20%, rgba(99,102,241,0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 60%, rgba(139,92,246,0.06) 0%, transparent 50%);
+        }
+        .policy-section {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        .policy-section::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #6366f1, #a78bfa);
+            border-radius: 999px;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-600 font-sans antialiased">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 glass border-b border-gray-100/50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2 text-gray-900 font-bold text-xl tracking-tight">
+                <div class="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center">
+                    <span class="text-white font-bold text-sm">S</span>
+                </div>
+                Softroni
+            </a>
+            <div class="flex items-center gap-6">
+                <a href="/" class="hidden sm:flex items-center gap-1.5 text-gray-500 hover:text-indigo-600 text-sm font-medium transition-colors">
+                    <i data-lucide="home" class="w-4 h-4"></i> Home
+                </a>
+                <a href="/support.html" class="btn-gradient text-white text-sm font-medium px-5 py-2.5 rounded-full inline-flex items-center gap-2">
+                    <i data-lucide="send" class="w-4 h-4"></i> Get in Touch
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero-bg pt-20 pb-16 sm:pt-28 sm:pb-20">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="max-w-3xl fade-in">
+                    <a href="/" class="inline-flex items-center gap-1.5 text-indigo-600 text-sm font-medium mb-6 hover:gap-2.5 transition-all">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home
+                    </a>
+                    <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-3">
+                        Terms of <span class="gradient-text">Service</span>
+                    </h1>
+                    <p class="text-gray-400 text-lg flex items-center gap-2">
+                        <i data-lucide="calendar" class="w-4 h-4"></i> Effective date: January 1, 2025
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Terms Content -->
+        <section class="py-16 sm:py-20">
+            <div class="max-w-3xl mx-auto px-6">
+                <div class="space-y-12 text-gray-600 leading-relaxed">
+                    <div class="fade-in policy-section">
+                        <h2 class="text-gray-900 text-xl font-bold mb-3">1. Acceptance of Terms</h2>
+                        <p>By accessing or using any website, mobile application, or service provided by Softroni ("we," "our," or "us"), you agree to be bound by these Terms of Service. If you do not agree to these terms, you may not use our Services.</p>
+                    </div>
+
+                    <div class="fade-in policy-section">
+                        <h2 class="text-gray-900 text-xl font-bold mb-3">2. Description of Services</h2>
+                        <p>Softroni provides software development services, mobile applications, web platforms, and related digital products. We reserve the right to modify, suspend, or discontinue any part of our Services at any time, with or without notice.</p>
+                    </div>
+
+                    <div class="fade-in policy-section">
+                        <h2 class="text-gray-900 text-xl font-bold mb-3">3. User Accounts</h2>
+                        <p class="mb-4">When you create an account with us, you agree to:</p>
+                        <ul class="space-y-2">
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check" class="w-4 h-4 text-indigo-500 mt-1 flex-shrink-0"></i>
+                                <span>Provide accurate, current, and complete information during registration.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check" class="w-4 h-4 text-indigo-500 mt-1 flex-shrink-0"></i>
+                                <span>Maintain the security of your password and account credentials.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check" class="w-4 h-4 text-indigo-500 mt-1 flex-shrink-0"></i>
+                                <span>Promptly update your account information if it changes.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check" class="w-4 h-4 text-indigo-500 mt-1 flex-shrink-0"></i>
+                                <span>Accept responsibility for all activities that occur under your account.</span>
+                            </li>
+                        </ul>
+                        <p class="mt-4">We reserve the right to suspend or terminate accounts that violate these terms or engage in unauthorized activity.</p>
+                    </div>
+
+                    <div class="fade-in policy-section">
+                        <h2 class="text-gray-900 text-xl font-bold mb-3">4. Acceptable Use</h2>
+                        <p class="mb-4">You agree not to use our Services to:</p>
+                        <ul class="space-y-2">
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="x" class="w-4 h-4 text-red-400 mt-1 flex-shrink-0"></i>
+                                <span>Violate any applicable law, regulation, or third-party rights.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="x" class="w-4 h-4 text-red-400 mt-1 flex-shrink-0"></i>
+                                <span>Transmit malicious code, viruses, or any harmful software.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="x" class="w-4 h-4 text-red-400 mt-1 flex-shrink-0"></i>
+                                <span>Attempt to gain unauthorized access to our systems or other users' accounts.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="x" class="w-4 h-4 text-red-400 mt-1 flex-shrink-0"></i>
+                                <span>Interfere with or disrupt the integrity or performance of our Services.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="x" class="w-4 h-4 text-red-400 mt-1 flex-shrink-0"></i>
+                                <span>Use automated systems to scrape, collect, or harvest data without permission.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="x" class="w-4 h-4 text-red-400 mt-1 flex-shrink-0"></i>
+                                <span>Engage in any activity that is fraudulent, deceptive, or misleading.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="fade-in policy-section">
+                        <h2 class="text-gray-900 text-xl font-bold mb-3">5. Intellectual Property</h2>
+                        <p>All content, features, and functionality of our Services — including text, graphics, logos, software, and design — are owned by Softroni or our licensors and are protected by copyright, trademark, and other intellectual property laws. You may not reproduce, distribute, modify, or create derivative works from our content without our express written permission.</p>
+                    </div>
+
+                    <div class="fade-in policy-section">
+                        <h2 class="text-gray-900 text-xl font-bold mb-3">6. User Content</h2>
+                        <p>You retain ownership of any content you submit, post, or display through our Services. By submitting content, you grant Softroni a non-exclusive, worldwide, royalty-free license to use, reproduce, and display such content solely for the purpose of operating and improving our Services. You represent that you have the necessary rights to grant this license.</p>
+                    </div>
+
+                    <div class="fade-in policy-section">
+                        <h2 class="text-gray-900 text-xl font-bold mb-3">7. Payment Terms</h2>
+                        <p>If you purchase any paid features or services, you agree to pay all applicable fees. All payments are non-refundable unless otherwise stated or required by law. We reserve the right to change our pricing with reasonable notice. Continued use of paid Services after a price change constitutes acceptance of the new pricing.</p>
+                    </div>
+
+                    <div class="fade-in policy-section">
+                        <h2 class="text-gray-900 text-xl font-bold mb-3">8. Limitation of Liability</h2>
+                        <p>To the maximum extent permitted by law, Softroni shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, data, use, or goodwill, arising out of or in connection with your use of our Services. Our total liability for any claim related to our Services shall not exceed the amount you paid to us in the twelve months preceding the claim.</p>
+                    </div>
+
+                    <div class="fade-in policy-section">
+                        <h2 class="text-gray-900 text-xl font-bold mb-3">9. Disclaimer of Warranties</h2>
+                        <p>Our Services are provided "as is" and "as available" without warranties of any kind, whether express or implied. We disclaim all warranties, including implied warranties of merchantability, fitness for a particular purpose, and non-infringement. We do not guarantee that our Services will be uninterrupted, secure, or error-free.</p>
+                    </div>
+
+                    <div class="fade-in policy-section">
+                        <h2 class="text-gray-900 text-xl font-bold mb-3">10. Indemnification</h2>
+                        <p>You agree to indemnify and hold harmless Softroni, its officers, directors, employees, and agents from any claims, damages, losses, liabilities, and expenses (including reasonable attorneys' fees) arising from your use of our Services or your violation of these Terms.</p>
+                    </div>
+
+                    <div class="fade-in policy-section">
+                        <h2 class="text-gray-900 text-xl font-bold mb-3">11. Termination</h2>
+                        <p>We may terminate or suspend your access to our Services immediately, without prior notice, for any reason, including if you breach these Terms. Upon termination, your right to use our Services will cease immediately. Provisions that by their nature should survive termination shall remain in effect.</p>
+                    </div>
+
+                    <div class="fade-in policy-section">
+                        <h2 class="text-gray-900 text-xl font-bold mb-3">12. Governing Law</h2>
+                        <p>These Terms shall be governed by and construed in accordance with the laws of the United States, without regard to conflict of law principles. Any disputes arising from these Terms or your use of our Services shall be resolved in the courts of competent jurisdiction.</p>
+                    </div>
+
+                    <div class="fade-in policy-section">
+                        <h2 class="text-gray-900 text-xl font-bold mb-3">13. Changes to These Terms</h2>
+                        <p>We reserve the right to update these Terms at any time. We will notify you of material changes by posting the revised Terms on our website. Your continued use of our Services after changes are posted constitutes your acceptance of the updated Terms.</p>
+                    </div>
+
+                    <div class="fade-in policy-section">
+                        <h2 class="text-gray-900 text-xl font-bold mb-3">14. Contact Us</h2>
+                        <p>If you have any questions about these Terms of Service, please reach out through our <a href="/support.html" class="text-indigo-600 hover:underline font-medium">Support</a> page.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-50 border-t border-gray-100">
+        <div class="max-w-6xl mx-auto px-6 py-12">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-8">
+                <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-lg gradient-bg flex items-center justify-center">
+                        <span class="text-white font-bold text-xs">S</span>
+                    </div>
+                    <span class="text-gray-900 font-bold tracking-tight">Softroni</span>
+                </div>
+                <nav class="flex flex-wrap gap-x-8 gap-y-3 text-sm">
+                    <a href="/about.html" class="text-gray-500 hover:text-indigo-600 transition-colors inline-flex items-center gap-1.5">
+                        <i data-lucide="users" class="w-3.5 h-3.5"></i> About
+                    </a>
+                    <a href="/privacy-policy.html" class="text-gray-500 hover:text-indigo-600 transition-colors inline-flex items-center gap-1.5">
+                        <i data-lucide="shield" class="w-3.5 h-3.5"></i> Privacy Policy
+                    </a>
+                    <a href="/terms-of-service.html" class="text-gray-500 hover:text-indigo-600 transition-colors inline-flex items-center gap-1.5">
+                        <i data-lucide="file-text" class="w-3.5 h-3.5"></i> Terms of Service
+                    </a>
+                    <a href="/support.html" class="text-gray-500 hover:text-indigo-600 transition-colors inline-flex items-center gap-1.5">
+                        <i data-lucide="life-buoy" class="w-3.5 h-3.5"></i> Support
+                    </a>
+                </nav>
+            </div>
+            <div class="border-t border-gray-200 mt-8 pt-8">
+                <p class="text-gray-400 text-sm">&copy; 2026 Softroni. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

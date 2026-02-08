@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support — Softroni</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa, #6366f1);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 6s ease infinite;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa);
+            background-size: 200% 200%;
+            animation: gradient-shift 6s ease infinite;
+        }
+        .gradient-border { position: relative; }
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6, #a78bfa);
+            border-radius: 999px 999px 0 0;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .fade-in-delay-1 { transition-delay: 0.1s; }
+        .fade-in-delay-2 { transition-delay: 0.2s; }
+        .fade-in-delay-3 { transition-delay: 0.3s; }
+        .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(99,102,241,0.1); }
+        .btn-gradient {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            transition: all 0.3s ease;
+        }
+        .btn-gradient:hover {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            box-shadow: 0 8px 24px rgba(99,102,241,0.3);
+            transform: translateY(-1px);
+        }
+        .hero-bg {
+            background: radial-gradient(ellipse at 30% 20%, rgba(99,102,241,0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 60%, rgba(139,92,246,0.06) 0%, transparent 50%);
+        }
+        .input-focus:focus {
+            border-color: #818cf8;
+            box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-600 font-sans antialiased">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 glass border-b border-gray-100/50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2 text-gray-900 font-bold text-xl tracking-tight">
+                <div class="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center">
+                    <span class="text-white font-bold text-sm">S</span>
+                </div>
+                Softroni
+            </a>
+            <div class="flex items-center gap-6">
+                <a href="/" class="hidden sm:flex items-center gap-1.5 text-gray-500 hover:text-indigo-600 text-sm font-medium transition-colors">
+                    <i data-lucide="home" class="w-4 h-4"></i> Home
+                </a>
+                <a href="/about.html" class="hidden sm:flex items-center gap-1.5 text-gray-500 hover:text-indigo-600 text-sm font-medium transition-colors">
+                    <i data-lucide="users" class="w-4 h-4"></i> About
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero-bg pt-20 pb-16 sm:pt-28 sm:pb-20">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="max-w-3xl fade-in">
+                    <a href="/" class="inline-flex items-center gap-1.5 text-indigo-600 text-sm font-medium mb-6 hover:gap-2.5 transition-all">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home
+                    </a>
+                    <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-3">
+                        <span class="gradient-text">Support</span>
+                    </h1>
+                    <p class="text-gray-400 text-lg">We're here to help</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form -->
+        <section class="py-16 sm:py-20">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="max-w-2xl fade-in">
+                    <div class="flex items-center gap-3 mb-8">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center">
+                            <i data-lucide="mail" class="w-5 h-5 text-indigo-600"></i>
+                        </div>
+                        <h2 class="text-gray-900 text-2xl font-bold">Contact Us</h2>
+                    </div>
+                    <form id="contactForm" class="space-y-6" onsubmit="return submitToGoogle(event)">
+                        <div class="grid sm:grid-cols-2 gap-5">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                                <div class="relative">
+                                    <i data-lucide="user" class="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
+                                    <input type="text" id="name" name="name" required class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl text-gray-900 text-sm placeholder-gray-400 focus:outline-none input-focus transition-all">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                <div class="relative">
+                                    <i data-lucide="at-sign" class="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
+                                    <input type="email" id="email" name="email" required class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl text-gray-900 text-sm placeholder-gray-400 focus:outline-none input-focus transition-all">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                            <div class="relative">
+                                <i data-lucide="type" class="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
+                                <input type="text" id="subject" name="subject" required class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl text-gray-900 text-sm placeholder-gray-400 focus:outline-none input-focus transition-all">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                            <div class="relative">
+                                <i data-lucide="message-square" class="w-4 h-4 text-gray-400 absolute left-4 top-4"></i>
+                                <textarea id="message" name="message" rows="5" required class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl text-gray-900 text-sm placeholder-gray-400 focus:outline-none input-focus transition-all resize-vertical"></textarea>
+                            </div>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+                            <button type="submit" class="btn-gradient text-white font-semibold px-8 py-3.5 rounded-full inline-flex items-center gap-2 text-sm">
+                                <i data-lucide="send" class="w-4 h-4"></i> Send Message
+                            </button>
+                            <p class="text-gray-400 text-sm flex items-center gap-1.5">
+                                <i data-lucide="clock" class="w-3.5 h-3.5"></i> We typically respond within 24-48 business hours.
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- What We Can Help With -->
+        <section class="py-16 sm:py-20 bg-gradient-to-br from-gray-50 to-indigo-50/30">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="fade-in mb-10">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-10 h-10 rounded-xl bg-violet-50 flex items-center justify-center">
+                            <i data-lucide="help-circle" class="w-5 h-5 text-violet-600"></i>
+                        </div>
+                        <h2 class="text-gray-900 text-2xl font-bold">What We Can Help With</h2>
+                    </div>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="fade-in fade-in-delay-1 card-hover gradient-border bg-white rounded-2xl p-7 shadow-sm border border-gray-100">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center mb-4">
+                            <i data-lucide="message-circle" class="w-5 h-5 text-indigo-600"></i>
+                        </div>
+                        <h3 class="text-gray-900 font-semibold mb-2">General Inquiries</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Questions about our company, services, or partnership opportunities.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-2 card-hover gradient-border bg-white rounded-2xl p-7 shadow-sm border border-gray-100">
+                        <div class="w-10 h-10 rounded-xl bg-violet-50 flex items-center justify-center mb-4">
+                            <i data-lucide="wrench" class="w-5 h-5 text-violet-600"></i>
+                        </div>
+                        <h3 class="text-gray-900 font-semibold mb-2">Technical Support</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Issues with our apps or services, bug reports, or troubleshooting assistance.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-3 card-hover gradient-border bg-white rounded-2xl p-7 shadow-sm border border-gray-100">
+                        <div class="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center mb-4">
+                            <i data-lucide="lightbulb" class="w-5 h-5 text-purple-600"></i>
+                        </div>
+                        <h3 class="text-gray-900 font-semibold mb-2">Feature Requests</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Suggestions for new features or improvements to our products.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-1 card-hover gradient-border bg-white rounded-2xl p-7 shadow-sm border border-gray-100">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center mb-4">
+                            <i data-lucide="shield" class="w-5 h-5 text-indigo-600"></i>
+                        </div>
+                        <h3 class="text-gray-900 font-semibold mb-2">Data & Privacy</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Questions about how we handle your data, or requests to access or delete your personal information. See our <a href="/privacy-policy.html" class="text-indigo-600 hover:underline font-medium">Privacy Policy</a>.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-2 card-hover gradient-border bg-white rounded-2xl p-7 shadow-sm border border-gray-100">
+                        <div class="w-10 h-10 rounded-xl bg-violet-50 flex items-center justify-center mb-4">
+                            <i data-lucide="user-x" class="w-5 h-5 text-violet-600"></i>
+                        </div>
+                        <h3 class="text-gray-900 font-semibold mb-2">Account Deletion</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-50 border-t border-gray-100">
+        <div class="max-w-6xl mx-auto px-6 py-12">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-8">
+                <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-lg gradient-bg flex items-center justify-center">
+                        <span class="text-white font-bold text-xs">S</span>
+                    </div>
+                    <span class="text-gray-900 font-bold tracking-tight">Softroni</span>
+                </div>
+                <nav class="flex flex-wrap gap-x-8 gap-y-3 text-sm">
+                    <a href="/about.html" class="text-gray-500 hover:text-indigo-600 transition-colors inline-flex items-center gap-1.5">
+                        <i data-lucide="users" class="w-3.5 h-3.5"></i> About
+                    </a>
+                    <a href="/privacy-policy.html" class="text-gray-500 hover:text-indigo-600 transition-colors inline-flex items-center gap-1.5">
+                        <i data-lucide="shield" class="w-3.5 h-3.5"></i> Privacy Policy
+                    </a>
+                    <a href="/terms-of-service.html" class="text-gray-500 hover:text-indigo-600 transition-colors inline-flex items-center gap-1.5">
+                        <i data-lucide="file-text" class="w-3.5 h-3.5"></i> Terms of Service
+                    </a>
+                    <a href="/support.html" class="text-gray-500 hover:text-indigo-600 transition-colors inline-flex items-center gap-1.5">
+                        <i data-lucide="life-buoy" class="w-3.5 h-3.5"></i> Support
+                    </a>
+                </nav>
+            </div>
+            <div class="border-t border-gray-200 mt-8 pt-8">
+                <p class="text-gray-400 text-sm">&copy; 2026 Softroni. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        function submitToGoogle(e) {
+            e.preventDefault();
+            const form = document.getElementById('contactForm');
+            const btn = form.querySelector('button[type="submit"]');
+            const origHTML = btn.innerHTML;
+            btn.innerHTML = '<svg class="animate-spin w-4 h-4" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg> Sending...';
+            btn.disabled = true;
+
+            const formData = new FormData();
+            formData.append('entry.128206185', form.querySelector('#name').value);
+            formData.append('entry.1122057510', form.querySelector('#email').value);
+            formData.append('entry.301973187', form.querySelector('#subject').value);
+            formData.append('entry.1283881153', form.querySelector('#message').value);
+
+            fetch('https://docs.google.com/forms/d/e/1FAIpQLSe5l_QOMI1RMWTbvT_Kp-V6Cb9S-NRdJz8D0bid6_NGXpbgaA/formResponse', {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors'
+            }).then(() => {
+                form.innerHTML = '<div class="text-center py-12"><div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4"><svg class="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div><h3 class="text-gray-900 text-xl font-bold mb-2">Message Sent!</h3><p class="text-gray-500">Thank you for reaching out. We\'ll get back to you within 24-48 business hours.</p></div>';
+            }).catch(() => {
+                btn.innerHTML = origHTML;
+                btn.disabled = false;
+                alert('Something went wrong. Please try again.');
+            });
+            return false;
+        }
+    </script>
+</body>
+</html>

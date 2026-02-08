@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us — Softroni</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa, #6366f1);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 6s ease infinite;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa);
+            background-size: 200% 200%;
+            animation: gradient-shift 6s ease infinite;
+        }
+        .gradient-border { position: relative; }
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6, #a78bfa);
+            border-radius: 999px 999px 0 0;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .fade-in-delay-1 { transition-delay: 0.1s; }
+        .fade-in-delay-2 { transition-delay: 0.2s; }
+        .fade-in-delay-3 { transition-delay: 0.3s; }
+        .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(99,102,241,0.1); }
+        .btn-gradient {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            transition: all 0.3s ease;
+        }
+        .btn-gradient:hover {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            box-shadow: 0 8px 24px rgba(99,102,241,0.3);
+            transform: translateY(-1px);
+        }
+        .hero-bg {
+            background: radial-gradient(ellipse at 30% 20%, rgba(99,102,241,0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 60%, rgba(139,92,246,0.06) 0%, transparent 50%);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-600 font-sans antialiased">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 glass border-b border-gray-100/50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2 text-gray-900 font-bold text-xl tracking-tight">
+                <div class="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center">
+                    <span class="text-white font-bold text-sm">S</span>
+                </div>
+                Softroni
+            </a>
+            <div class="flex items-center gap-6">
+                <a href="/" class="hidden sm:flex items-center gap-1.5 text-gray-500 hover:text-indigo-600 text-sm font-medium transition-colors">
+                    <i data-lucide="home" class="w-4 h-4"></i> Home
+                </a>
+                <a href="/support.html" class="btn-gradient text-white text-sm font-medium px-5 py-2.5 rounded-full inline-flex items-center gap-2">
+                    <i data-lucide="send" class="w-4 h-4"></i> Get in Touch
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero-bg pt-20 pb-16 sm:pt-28 sm:pb-20">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="max-w-3xl fade-in">
+                    <a href="/" class="inline-flex items-center gap-1.5 text-indigo-600 text-sm font-medium mb-6 hover:gap-2.5 transition-all">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home
+                    </a>
+                    <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-3">
+                        About <span class="gradient-text">Us</span>
+                    </h1>
+                    <p class="text-gray-400 text-lg">Building software that matters</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission -->
+        <section class="py-16 sm:py-20">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="max-w-3xl fade-in">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center">
+                            <i data-lucide="target" class="w-5 h-5 text-indigo-600"></i>
+                        </div>
+                        <h2 class="text-gray-900 text-2xl font-bold">Our Mission</h2>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed text-lg">Softroni is a software development company focused on building high-quality digital products. We work with startups and established businesses to turn ideas into reliable, well-crafted software that solves real problems.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- What We Do -->
+        <section class="py-16 sm:py-20 bg-gradient-to-br from-gray-50 to-indigo-50/30">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="fade-in mb-10">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-10 h-10 rounded-xl bg-violet-50 flex items-center justify-center">
+                            <i data-lucide="layers" class="w-5 h-5 text-violet-600"></i>
+                        </div>
+                        <h2 class="text-gray-900 text-2xl font-bold">What We Do</h2>
+                    </div>
+                    <p class="text-gray-500 mt-3 ml-[52px]">We specialize in three core areas:</p>
+                </div>
+                <div class="grid sm:grid-cols-3 gap-8">
+                    <div class="fade-in fade-in-delay-1 card-hover gradient-border bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center mb-5">
+                            <i data-lucide="smartphone" class="w-6 h-6 text-indigo-600"></i>
+                        </div>
+                        <h3 class="text-gray-900 font-semibold text-lg mb-3">Mobile Development</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Native and cross-platform apps built for performance, usability, and long-term maintainability on iOS and Android.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-2 card-hover gradient-border bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                        <div class="w-12 h-12 rounded-xl bg-violet-50 flex items-center justify-center mb-5">
+                            <i data-lucide="globe" class="w-6 h-6 text-violet-600"></i>
+                        </div>
+                        <h3 class="text-gray-900 font-semibold text-lg mb-3">Web Platforms</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Responsive web applications and sites engineered with modern frameworks, clean architecture, and scalable infrastructure.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-3 card-hover gradient-border bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                        <div class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center mb-5">
+                            <i data-lucide="brain" class="w-6 h-6 text-purple-600"></i>
+                        </div>
+                        <h3 class="text-gray-900 font-semibold text-lg mb-3">AI & Automation</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Intelligent features and workflows powered by machine learning — from natural language processing to predictive analytics.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Approach -->
+        <section class="py-16 sm:py-20">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="max-w-3xl fade-in">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center">
+                            <i data-lucide="compass" class="w-5 h-5 text-indigo-600"></i>
+                        </div>
+                        <h2 class="text-gray-900 text-2xl font-bold">Our Approach</h2>
+                    </div>
+                    <div class="space-y-4 text-gray-600 leading-relaxed text-lg">
+                        <p>Our approach is straightforward: understand the problem, design a clean solution, and build it right. No unnecessary complexity, no bloated features — just software that works.</p>
+                        <p>We believe in close collaboration with our clients, transparent communication, and delivering products that stand the test of time.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values -->
+        <section class="py-16 sm:py-20 bg-gradient-to-br from-indigo-50/50 to-violet-50/50">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="fade-in mb-10">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-10 h-10 rounded-xl bg-violet-50 flex items-center justify-center">
+                            <i data-lucide="gem" class="w-5 h-5 text-violet-600"></i>
+                        </div>
+                        <h2 class="text-gray-900 text-2xl font-bold">Our Values</h2>
+                    </div>
+                </div>
+                <div class="grid sm:grid-cols-3 gap-8">
+                    <div class="fade-in fade-in-delay-1 card-hover gradient-border bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center mb-5">
+                            <i data-lucide="minimize-2" class="w-6 h-6 text-indigo-600"></i>
+                        </div>
+                        <h3 class="text-gray-900 font-semibold text-lg mb-3">Simplicity</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">The best solutions are often the simplest ones. We strive to eliminate complexity in both our code and our processes.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-2 card-hover gradient-border bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                        <div class="w-12 h-12 rounded-xl bg-violet-50 flex items-center justify-center mb-5">
+                            <i data-lucide="award" class="w-6 h-6 text-violet-600"></i>
+                        </div>
+                        <h3 class="text-gray-900 font-semibold text-lg mb-3">Quality</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">We take pride in our work. Every line of code, every design decision, and every interaction reflects our commitment to excellence.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-3 card-hover gradient-border bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                        <div class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center mb-5">
+                            <i data-lucide="handshake" class="w-6 h-6 text-purple-600"></i>
+                        </div>
+                        <h3 class="text-gray-900 font-semibold text-lg mb-3">Partnership</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">We view our clients as partners. Your success is our success, and we're invested in building long-term relationships.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-50 border-t border-gray-100">
+        <div class="max-w-6xl mx-auto px-6 py-12">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-8">
+                <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-lg gradient-bg flex items-center justify-center">
+                        <span class="text-white font-bold text-xs">S</span>
+                    </div>
+                    <span class="text-gray-900 font-bold tracking-tight">Softroni</span>
+                </div>
+                <nav class="flex flex-wrap gap-x-8 gap-y-3 text-sm">
+                    <a href="/about.html" class="text-gray-500 hover:text-indigo-600 transition-colors inline-flex items-center gap-1.5">
+                        <i data-lucide="users" class="w-3.5 h-3.5"></i> About
+                    </a>
+                    <a href="/privacy-policy.html" class="text-gray-500 hover:text-indigo-600 transition-colors inline-flex items-center gap-1.5">
+                        <i data-lucide="shield" class="w-3.5 h-3.5"></i> Privacy Policy
+                    </a>
+                    <a href="/terms-of-service.html" class="text-gray-500 hover:text-indigo-600 transition-colors inline-flex items-center gap-1.5">
+                        <i data-lucide="file-text" class="w-3.5 h-3.5"></i> Terms of Service
+                    </a>
+                    <a href="/support.html" class="text-gray-500 hover:text-indigo-600 transition-colors inline-flex items-center gap-1.5">
+                        <i data-lucide="life-buoy" class="w-3.5 h-3.5"></i> Support
+                    </a>
+                </nav>
+            </div>
+            <div class="border-t border-gray-200 mt-8 pt-8">
+                <p class="text-gray-400 text-sm">&copy; 2026 Softroni. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

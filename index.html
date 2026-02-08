@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Softroni — Mobile, Web & AI Development</title>
+    <meta name="description" content="Softroni is a software company specializing in mobile, web, and AI development. We build modern digital products that solve real problems.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa, #6366f1);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 6s ease infinite;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa);
+            background-size: 200% 200%;
+            animation: gradient-shift 6s ease infinite;
+        }
+        .gradient-border {
+            position: relative;
+        }
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6, #a78bfa);
+            border-radius: 999px 999px 0 0;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Fade-in animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fade-in-delay-1 { transition-delay: 0.1s; }
+        .fade-in-delay-2 { transition-delay: 0.2s; }
+        .fade-in-delay-3 { transition-delay: 0.3s; }
+        .fade-in-delay-4 { transition-delay: 0.4s; }
+
+        /* Hero background */
+        .hero-bg {
+            background: radial-gradient(ellipse at 30% 20%, rgba(99,102,241,0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 60%, rgba(139,92,246,0.06) 0%, transparent 50%);
+        }
+
+        /* Card hover */
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(99,102,241,0.1);
+        }
+
+        /* Button hover */
+        .btn-gradient {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            transition: all 0.3s ease;
+        }
+        .btn-gradient:hover {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            box-shadow: 0 8px 24px rgba(99,102,241,0.3);
+            transform: translateY(-1px);
+        }
+
+        /* Connecting dots for How We Work */
+        .step-connector {
+            position: relative;
+        }
+        .step-connector::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -1.5rem;
+            width: 3rem;
+            border-top: 2px dashed #c7d2fe;
+        }
+        @media (max-width: 639px) {
+            .step-connector::after {
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+<body class="bg-white text-gray-600 font-sans antialiased">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 glass border-b border-gray-100/50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2 text-gray-900 font-bold text-xl tracking-tight">
+                <div class="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center">
+                    <span class="text-white font-bold text-sm">S</span>
+                </div>
+                Softroni
+            </a>
+            <div class="flex items-center gap-6">
+                <a href="/about.html" class="hidden sm:flex items-center gap-1.5 text-gray-500 hover:text-indigo-600 text-sm font-medium transition-colors">
+                    <i data-lucide="users" class="w-4 h-4"></i> About
+                </a>
+                <a href="/support.html" class="hidden sm:flex items-center gap-1.5 text-gray-500 hover:text-indigo-600 text-sm font-medium transition-colors">
+                    <i data-lucide="life-buoy" class="w-4 h-4"></i> Support
+                </a>
+                <a href="/support.html" class="btn-gradient text-white text-sm font-medium px-5 py-2.5 rounded-full inline-flex items-center gap-2">
+                    <i data-lucide="send" class="w-4 h-4"></i> Get in Touch
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-bg pt-24 pb-20 sm:pt-32 sm:pb-28">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="max-w-3xl">
+                    <div class="fade-in inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 text-indigo-600 text-sm font-medium mb-8">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i>
+                        Building the future of software
+                    </div>
+                    <h1 class="fade-in fade-in-delay-1 text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] mb-6">
+                        Software for the<br><span class="gradient-text">modern world.</span>
+                    </h1>
+                    <p class="fade-in fade-in-delay-2 text-gray-500 text-lg sm:text-xl leading-relaxed max-w-xl mb-10">
+                        We design and build mobile apps, web platforms, and AI-powered solutions that help businesses move faster and work smarter.
+                    </p>
+                    <div class="fade-in fade-in-delay-3 flex flex-wrap gap-4">
+                        <a href="/support.html" class="btn-gradient text-white font-semibold px-8 py-3.5 rounded-full inline-flex items-center gap-2 text-sm">
+                            Start a Project <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                        <a href="/about.html" class="border border-gray-200 text-gray-700 font-semibold px-8 py-3.5 rounded-full inline-flex items-center gap-2 text-sm hover:border-indigo-300 hover:text-indigo-600 transition-all">
+                            <i data-lucide="info" class="w-4 h-4"></i> Learn More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What We Do -->
+        <section class="py-20 sm:py-28">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-16 fade-in">
+                    <p class="text-indigo-600 text-sm font-semibold uppercase tracking-widest mb-3">What we do</p>
+                    <h2 class="text-gray-900 text-3xl sm:text-4xl font-bold tracking-tight">Services we offer</h2>
+                </div>
+                <div class="grid sm:grid-cols-3 gap-8">
+                    <div class="fade-in fade-in-delay-1 card-hover gradient-border bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center mb-5">
+                            <i data-lucide="smartphone" class="w-6 h-6 text-indigo-600"></i>
+                        </div>
+                        <h3 class="text-gray-900 font-semibold text-lg mb-3">Mobile Development</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Native and cross-platform apps built for performance, usability, and long-term maintainability on iOS and Android.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-2 card-hover gradient-border bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                        <div class="w-12 h-12 rounded-xl bg-violet-50 flex items-center justify-center mb-5">
+                            <i data-lucide="globe" class="w-6 h-6 text-violet-600"></i>
+                        </div>
+                        <h3 class="text-gray-900 font-semibold text-lg mb-3">Web Platforms</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Responsive web applications and sites engineered with modern frameworks, clean architecture, and scalable infrastructure.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-3 card-hover gradient-border bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                        <div class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center mb-5">
+                            <i data-lucide="brain" class="w-6 h-6 text-purple-600"></i>
+                        </div>
+                        <h3 class="text-gray-900 font-semibold text-lg mb-3">AI & Automation</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Intelligent features and workflows powered by machine learning — from natural language processing to predictive analytics.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How We Work -->
+        <section class="py-20 sm:py-28">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-16 fade-in">
+                    <p class="text-indigo-600 text-sm font-semibold uppercase tracking-widest mb-3">Our Process</p>
+                    <h2 class="text-gray-900 text-3xl sm:text-4xl font-bold tracking-tight">How we work</h2>
+                </div>
+                <div class="grid sm:grid-cols-4 gap-6">
+                    <div class="fade-in fade-in-delay-1 step-connector text-center sm:text-left">
+                        <div class="w-14 h-14 rounded-2xl gradient-bg flex items-center justify-center mx-auto sm:mx-0 mb-5 shadow-lg shadow-indigo-200">
+                            <i data-lucide="search" class="w-7 h-7 text-white"></i>
+                        </div>
+                        <div class="inline-flex items-center gap-2 mb-2">
+                            <span class="text-indigo-500 text-xs font-bold bg-indigo-50 px-2 py-0.5 rounded-full">01</span>
+                            <h3 class="text-gray-900 font-semibold">Discover</h3>
+                        </div>
+                        <p class="text-gray-500 text-sm leading-relaxed">We listen, research, and understand your goals and challenges deeply.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-2 step-connector text-center sm:text-left">
+                        <div class="w-14 h-14 rounded-2xl gradient-bg flex items-center justify-center mx-auto sm:mx-0 mb-5 shadow-lg shadow-indigo-200">
+                            <i data-lucide="pen-tool" class="w-7 h-7 text-white"></i>
+                        </div>
+                        <div class="inline-flex items-center gap-2 mb-2">
+                            <span class="text-indigo-500 text-xs font-bold bg-indigo-50 px-2 py-0.5 rounded-full">02</span>
+                            <h3 class="text-gray-900 font-semibold">Design</h3>
+                        </div>
+                        <p class="text-gray-500 text-sm leading-relaxed">We craft clean, intuitive designs and map out the technical architecture.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-3 step-connector text-center sm:text-left">
+                        <div class="w-14 h-14 rounded-2xl gradient-bg flex items-center justify-center mx-auto sm:mx-0 mb-5 shadow-lg shadow-indigo-200">
+                            <i data-lucide="code-2" class="w-7 h-7 text-white"></i>
+                        </div>
+                        <div class="inline-flex items-center gap-2 mb-2">
+                            <span class="text-indigo-500 text-xs font-bold bg-indigo-50 px-2 py-0.5 rounded-full">03</span>
+                            <h3 class="text-gray-900 font-semibold">Build</h3>
+                        </div>
+                        <p class="text-gray-500 text-sm leading-relaxed">We develop with precision, using modern tools and best practices.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-4 text-center sm:text-left">
+                        <div class="w-14 h-14 rounded-2xl gradient-bg flex items-center justify-center mx-auto sm:mx-0 mb-5 shadow-lg shadow-indigo-200">
+                            <i data-lucide="rocket" class="w-7 h-7 text-white"></i>
+                        </div>
+                        <div class="inline-flex items-center gap-2 mb-2">
+                            <span class="text-indigo-500 text-xs font-bold bg-indigo-50 px-2 py-0.5 rounded-full">04</span>
+                            <h3 class="text-gray-900 font-semibold">Launch</h3>
+                        </div>
+                        <p class="text-gray-500 text-sm leading-relaxed">We deploy, monitor, and support your product for long-term success.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Products -->
+        <section class="py-20 sm:py-28 bg-gradient-to-br from-gray-50 to-indigo-50/30">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-16 fade-in">
+                    <p class="text-indigo-600 text-sm font-semibold uppercase tracking-widest mb-3">Coming Soon</p>
+                    <h2 class="text-gray-900 text-3xl sm:text-4xl font-bold tracking-tight">Our products</h2>
+                    <p class="text-gray-500 mt-4 max-w-lg mx-auto">We're building a suite of products to help people and businesses thrive in the digital age.</p>
+                </div>
+                <div class="grid sm:grid-cols-3 gap-8">
+                    <div class="fade-in fade-in-delay-1 card-hover bg-white rounded-2xl p-8 shadow-sm border border-gray-100 relative overflow-hidden">
+                        <div class="absolute top-4 right-4">
+                            <span class="text-xs font-semibold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">Coming Soon</span>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center mb-5">
+                            <i data-lucide="tablet-smartphone" class="w-6 h-6 text-indigo-600"></i>
+                        </div>
+                        <h3 class="text-gray-900 font-semibold text-lg mb-3">iOS Apps</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Beautifully designed mobile applications that make everyday tasks simpler and more enjoyable.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-2 card-hover bg-white rounded-2xl p-8 shadow-sm border border-gray-100 relative overflow-hidden">
+                        <div class="absolute top-4 right-4">
+                            <span class="text-xs font-semibold text-violet-600 bg-violet-50 px-3 py-1 rounded-full">Coming Soon</span>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-violet-50 flex items-center justify-center mb-5">
+                            <i data-lucide="cloud" class="w-6 h-6 text-violet-600"></i>
+                        </div>
+                        <h3 class="text-gray-900 font-semibold text-lg mb-3">SaaS Tools</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Cloud-based software tools designed to streamline workflows and boost productivity for teams.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-3 card-hover bg-white rounded-2xl p-8 shadow-sm border border-gray-100 relative overflow-hidden">
+                        <div class="absolute top-4 right-4">
+                            <span class="text-xs font-semibold text-purple-600 bg-purple-50 px-3 py-1 rounded-full">Coming Soon</span>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center mb-5">
+                            <i data-lucide="book-open" class="w-6 h-6 text-purple-600"></i>
+                        </div>
+                        <h3 class="text-gray-900 font-semibold text-lg mb-3">E-Books</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">In-depth guides and resources on software development, design, and building digital products.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Preview -->
+        <section class="py-20 sm:py-28">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="max-w-3xl fade-in">
+                    <p class="text-indigo-600 text-sm font-semibold uppercase tracking-widest mb-3">About</p>
+                    <h2 class="text-gray-900 text-3xl sm:text-4xl font-bold tracking-tight mb-6">Built on simplicity</h2>
+                    <div class="space-y-4 text-gray-500 leading-relaxed text-lg">
+                        <p>Softroni is a software development company focused on building high-quality digital products. We work with startups and established businesses to turn ideas into reliable, well-crafted software.</p>
+                        <p>Our approach is straightforward: understand the problem, design a clean solution, and build it right. No unnecessary complexity, no bloated features — just software that works.</p>
+                    </div>
+                    <a href="/about.html" class="inline-flex items-center gap-2 text-indigo-600 font-semibold mt-6 hover:gap-3 transition-all text-sm">
+                        Read more about us <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="py-20 sm:py-28 bg-gradient-to-br from-indigo-600 to-violet-600 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
+                <div class="absolute bottom-10 right-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+            </div>
+            <div class="max-w-6xl mx-auto px-6 relative z-10">
+                <div class="max-w-2xl mx-auto text-center fade-in">
+                    <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white/20 mb-6">
+                        <i data-lucide="mail" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h2 class="text-white text-3xl sm:text-4xl font-bold tracking-tight mb-4">Stay in the loop</h2>
+                    <p class="text-indigo-100 text-lg mb-8">Get updates on our latest products, insights, and company news. No spam, ever.</p>
+                    <form id="newsletterForm" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onsubmit="return submitNewsletter(event)">
+                        <div class="flex-1 relative">
+                            <i data-lucide="at-sign" class="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
+                            <input type="email" id="newsletterEmail" placeholder="Enter your email" required class="w-full pl-11 pr-4 py-3.5 rounded-full text-gray-900 text-sm bg-white border-0 focus:outline-none focus:ring-2 focus:ring-white/50 placeholder-gray-400">
+                        </div>
+                        <button type="submit" id="newsletterBtn" class="bg-white text-indigo-600 font-semibold px-8 py-3.5 rounded-full text-sm hover:bg-indigo-50 transition-colors inline-flex items-center justify-center gap-2">
+                            Subscribe <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </form>
+                    <p class="text-indigo-200 text-xs mt-4">We respect your privacy. Unsubscribe at any time.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-50 border-t border-gray-100">
+        <div class="max-w-6xl mx-auto px-6 py-12">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-8">
+                <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-lg gradient-bg flex items-center justify-center">
+                        <span class="text-white font-bold text-xs">S</span>
+                    </div>
+                    <span class="text-gray-900 font-bold tracking-tight">Softroni</span>
+                </div>
+                <nav class="flex flex-wrap gap-x-8 gap-y-3 text-sm">
+                    <a href="/about.html" class="text-gray-500 hover:text-indigo-600 transition-colors inline-flex items-center gap-1.5">
+                        <i data-lucide="users" class="w-3.5 h-3.5"></i> About
+                    </a>
+                    <a href="/privacy-policy.html" class="text-gray-500 hover:text-indigo-600 transition-colors inline-flex items-center gap-1.5">
+                        <i data-lucide="shield" class="w-3.5 h-3.5"></i> Privacy Policy
+                    </a>
+                    <a href="/terms-of-service.html" class="text-gray-500 hover:text-indigo-600 transition-colors inline-flex items-center gap-1.5">
+                        <i data-lucide="file-text" class="w-3.5 h-3.5"></i> Terms of Service
+                    </a>
+                    <a href="/support.html" class="text-gray-500 hover:text-indigo-600 transition-colors inline-flex items-center gap-1.5">
+                        <i data-lucide="life-buoy" class="w-3.5 h-3.5"></i> Support
+                    </a>
+                </nav>
+            </div>
+            <div class="border-t border-gray-200 mt-8 pt-8">
+                <p class="text-gray-400 text-sm">&copy; 2026 Softroni. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Intersection Observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        function submitNewsletter(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletterEmail').value;
+            const btn = document.getElementById('newsletterBtn');
+            const form = document.getElementById('newsletterForm');
+            btn.disabled = true;
+            btn.innerHTML = 'Subscribing...';
+
+            const formData = new FormData();
+            formData.append('entry.1799011564', email);
+
+            fetch('https://docs.google.com/forms/d/e/1FAIpQLSfZmnbFP5xp05zvAUmRSmSTI-EyyBHXDMCrHBeXVOeMjGf8hA/formResponse', {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors'
+            }).then(() => {
+                form.innerHTML = '<p class="text-white text-lg font-medium flex items-center justify-center gap-2"><svg class="w-5 h-5 text-green-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> You\'re subscribed! We\'ll keep you posted.</p>';
+            }).catch(() => {
+                btn.disabled = false;
+                btn.innerHTML = 'Subscribe <i data-lucide="arrow-right" class="w-4 h-4"></i>';
+                alert('Something went wrong. Please try again.');
+            });
+            return false;
+        }
+    </script>
+</body>
+</html>
