@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beside — Free Body Doubling for iOS | Softroni</title>
+    <meta name="description" content="Beside is a free iOS body doubling app. Feel the presence of someone working beside you through ambient scenes — no camera, no strangers, no paywall.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+                    colors: {
+                        sage: {
+                            50: '#f6f7f4',
+                            100: '#e8ebe3',
+                            200: '#d4d9c9',
+                            300: '#b5bda5',
+                            400: '#96a17e',
+                            500: '#7a8763',
+                            600: '#5f6b4d',
+                            700: '#4b543e',
+                            800: '#3e4534',
+                            900: '#353b2e',
+                        },
+                        cream: {
+                            50: '#fefdfb',
+                            100: '#fdf9f0',
+                            200: '#faf3e2',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .gradient-text-sage {
+            background: linear-gradient(135deg, #5f6b4d, #7a8763, #96a17e, #5f6b4d);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 6s ease infinite;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa);
+            background-size: 200% 200%;
+            animation: gradient-shift 6s ease infinite;
+        }
+        .gradient-bg-sage {
+            background: linear-gradient(135deg, #5f6b4d, #7a8763, #96a17e);
+            background-size: 200% 200%;
+            animation: gradient-shift 6s ease infinite;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fade-in-delay-1 { transition-delay: 0.1s; }
+        .fade-in-delay-2 { transition-delay: 0.2s; }
+        .fade-in-delay-3 { transition-delay: 0.3s; }
+        .fade-in-delay-4 { transition-delay: 0.4s; }
+
+        .hero-bg-sage {
+            background: radial-gradient(ellipse at 30% 20%, rgba(122,135,99,0.1) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 60%, rgba(150,161,126,0.08) 0%, transparent 50%);
+        }
+
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(95,107,77,0.1);
+        }
+
+        .btn-sage {
+            background: linear-gradient(135deg, #5f6b4d, #7a8763);
+            transition: all 0.3s ease;
+        }
+        .btn-sage:hover {
+            background: linear-gradient(135deg, #4b543e, #5f6b4d);
+            box-shadow: 0 8px 24px rgba(95,107,77,0.3);
+            transform: translateY(-1px);
+        }
+
+        .btn-gradient {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            transition: all 0.3s ease;
+        }
+        .btn-gradient:hover {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            box-shadow: 0 8px 24px rgba(99,102,241,0.3);
+            transform: translateY(-1px);
+        }
+
+        .phone-mockup {
+            border-radius: 2rem;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.15), 0 0 0 8px #1a1a1a, 0 0 0 10px #333;
+            overflow: hidden;
+        }
+
+        .scene-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .scene-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(95,107,77,0.12);
+        }
+
+        .gradient-border-sage { position: relative; }
+        .gradient-border-sage::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #5f6b4d, #7a8763, #96a17e);
+            border-radius: 999px 999px 0 0;
+        }
+    </style>
+</head>
+<body class="bg-cream-50 text-gray-600 font-sans antialiased">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 glass border-b border-gray-100/50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2 text-gray-900 font-bold text-xl tracking-tight">
+                <div class="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center">
+                    <span class="text-white font-bold text-sm">S</span>
+                </div>
+                Softroni
+            </a>
+            <div class="flex items-center gap-6">
+                <a href="/about.html" class="hidden sm:flex items-center gap-1.5 text-gray-500 hover:text-sage-600 text-sm font-medium transition-colors">
+                    <i data-lucide="users" class="w-4 h-4"></i> About
+                </a>
+                <a href="/support.html" class="hidden sm:flex items-center gap-1.5 text-gray-500 hover:text-sage-600 text-sm font-medium transition-colors">
+                    <i data-lucide="life-buoy" class="w-4 h-4"></i> Support
+                </a>
+                <a href="#notify" class="btn-sage text-white text-sm font-medium px-5 py-2.5 rounded-full inline-flex items-center gap-2">
+                    <i data-lucide="bell" class="w-4 h-4"></i> Get Notified
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-bg-sage pt-20 pb-16 sm:pt-28 sm:pb-24">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                    <div>
+                        <div class="fade-in inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sage-100 text-sage-700 text-sm font-medium mb-8">
+                            <i data-lucide="leaf" class="w-4 h-4"></i>
+                            Free for iOS — Coming Soon
+                        </div>
+                        <h1 class="fade-in fade-in-delay-1 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] mb-4 text-gray-900">
+                            Someone's here.<br><span class="gradient-text-sage">Let's focus.</span>
+                        </h1>
+                        <p class="fade-in fade-in-delay-2 text-gray-500 text-lg sm:text-xl leading-relaxed max-w-lg mb-8">
+                            Free body doubling for iOS. No camera. No strangers. No paywall.
+                        </p>
+                        <form id="heroSignup" class="fade-in fade-in-delay-3 flex flex-col sm:flex-row gap-3 max-w-md" onsubmit="return submitSignup(event, 'heroSignup')">
+                            <div class="flex-1 relative">
+                                <i data-lucide="at-sign" class="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
+                                <input type="email" placeholder="Enter your email" required class="w-full pl-11 pr-4 py-3.5 rounded-full text-gray-900 text-sm bg-white border border-sage-200 focus:outline-none focus:ring-2 focus:ring-sage-400/50 focus:border-sage-400 placeholder-gray-400">
+                            </div>
+                            <button type="submit" class="btn-sage text-white font-semibold px-7 py-3.5 rounded-full text-sm inline-flex items-center justify-center gap-2 whitespace-nowrap">
+                                Get Notified <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                        </form>
+                        <p class="fade-in fade-in-delay-4 text-gray-400 text-xs mt-3">Get notified when we launch. No spam, ever.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-2 flex justify-center lg:justify-end">
+                        <div class="phone-mockup w-[280px] sm:w-[300px]">
+                            <img src="images/03-ScenePicker.png" alt="Beside app — Scene picker showing ambient focus environments" class="w-full block">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Problem Section -->
+        <section class="py-20 sm:py-28 bg-white">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="max-w-3xl mx-auto text-center fade-in">
+                    <p class="text-sage-600 text-sm font-semibold uppercase tracking-widest mb-3">The Problem</p>
+                    <h2 class="text-gray-900 text-3xl sm:text-4xl font-bold tracking-tight mb-6">Focusing alone is hard</h2>
+                    <p class="text-gray-500 text-lg leading-relaxed mb-12">
+                        Body doubling — having someone present while you work — is a proven ADHD and productivity technique. But current solutions make it harder than it needs to be.
+                    </p>
+                </div>
+                <div class="grid sm:grid-cols-3 gap-8">
+                    <div class="fade-in fade-in-delay-1 text-center p-8 rounded-2xl bg-red-50/50 border border-red-100/50">
+                        <div class="text-3xl mb-4">💸</div>
+                        <h3 class="text-gray-900 font-semibold text-lg mb-2">Expensive</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Competitors charge $7–40/month for what should be a simple experience.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-2 text-center p-8 rounded-2xl bg-red-50/50 border border-red-100/50">
+                        <div class="text-3xl mb-4">📹</div>
+                        <h3 class="text-gray-900 font-semibold text-lg mb-2">Camera Required</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Most apps force you on camera with strangers — adding pressure instead of reducing it.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-3 text-center p-8 rounded-2xl bg-red-50/50 border border-red-100/50">
+                        <div class="text-3xl mb-4">📅</div>
+                        <h3 class="text-gray-900 font-semibold text-lg mb-2">Scheduling Hassles</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Coordinating sessions with real people means you can't just focus when you need to.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solution Section -->
+        <section class="py-20 sm:py-28">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="max-w-3xl mx-auto text-center fade-in">
+                    <p class="text-sage-600 text-sm font-semibold uppercase tracking-widest mb-3">The Solution</p>
+                    <h2 class="text-gray-900 text-3xl sm:text-4xl font-bold tracking-tight mb-6">Feel the presence.<br>Skip the pressure.</h2>
+                    <p class="text-gray-500 text-lg leading-relaxed mb-4">
+                        Beside creates the <strong class="text-gray-700">feeling</strong> of someone working next to you through ambient scenes with visual and audio presence cues — no real people needed.
+                    </p>
+                    <p class="text-gray-500 text-lg leading-relaxed">
+                        Open the app, pick a scene, start your timer, and focus. It's that simple.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="py-20 sm:py-28 bg-white">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-16 fade-in">
+                    <p class="text-sage-600 text-sm font-semibold uppercase tracking-widest mb-3">Features</p>
+                    <h2 class="text-gray-900 text-3xl sm:text-4xl font-bold tracking-tight">Everything you need to focus</h2>
+                </div>
+
+                <!-- 6 Scenes -->
+                <div class="mb-16 fade-in">
+                    <h3 class="text-gray-900 font-semibold text-xl mb-2 text-center">6 Ambient Scenes</h3>
+                    <p class="text-gray-500 text-sm text-center mb-8 max-w-lg mx-auto">Each scene is crafted with visual and audio presence cues to make you feel like someone's right there with you.</p>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                        <div class="scene-card bg-cream-50 rounded-2xl p-5 text-center border border-sage-100">
+                            <div class="text-3xl mb-2">☁️</div>
+                            <p class="text-gray-900 font-medium text-sm">Cozy Room</p>
+                        </div>
+                        <div class="scene-card bg-cream-50 rounded-2xl p-5 text-center border border-sage-100">
+                            <div class="text-3xl mb-2">☕</div>
+                            <p class="text-gray-900 font-medium text-sm">Coffee Shop</p>
+                        </div>
+                        <div class="scene-card bg-cream-50 rounded-2xl p-5 text-center border border-sage-100">
+                            <div class="text-3xl mb-2">📚</div>
+                            <p class="text-gray-900 font-medium text-sm">Library</p>
+                        </div>
+                        <div class="scene-card bg-cream-50 rounded-2xl p-5 text-center border border-sage-100">
+                            <div class="text-3xl mb-2">🎧</div>
+                            <p class="text-gray-900 font-medium text-sm">Lo-fi Room</p>
+                        </div>
+                        <div class="scene-card bg-cream-50 rounded-2xl p-5 text-center border border-sage-100">
+                            <div class="text-3xl mb-2">🌙</div>
+                            <p class="text-gray-900 font-medium text-sm">Night Owl</p>
+                        </div>
+                        <div class="scene-card bg-cream-50 rounded-2xl p-5 text-center border border-sage-100">
+                            <div class="text-3xl mb-2">🌿</div>
+                            <p class="text-gray-900 font-medium text-sm">Garden Morning</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature Cards with Screenshots -->
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <div class="fade-in fade-in-delay-1 card-hover gradient-border-sage bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+                        <div class="bg-sage-50 p-6 flex justify-center">
+                            <img src="images/01-Onboarding-Welcome.png" alt="Beside onboarding screen" class="h-64 rounded-xl shadow-md">
+                        </div>
+                        <div class="p-6">
+                            <div class="w-10 h-10 rounded-xl bg-sage-100 flex items-center justify-center mb-4">
+                                <i data-lucide="timer" class="w-5 h-5 text-sage-700"></i>
+                            </div>
+                            <h3 class="text-gray-900 font-semibold text-lg mb-2">Focus Timer</h3>
+                            <p class="text-gray-500 text-sm leading-relaxed">Customizable session durations to match your flow. Set it, start it, focus.</p>
+                        </div>
+                    </div>
+                    <div class="fade-in fade-in-delay-2 card-hover gradient-border-sage bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+                        <div class="bg-sage-50 p-6 flex justify-center">
+                            <img src="images/03-ScenePicker.png" alt="Beside scene picker" class="h-64 rounded-xl shadow-md">
+                        </div>
+                        <div class="p-6">
+                            <div class="w-10 h-10 rounded-xl bg-sage-100 flex items-center justify-center mb-4">
+                                <i data-lucide="image" class="w-5 h-5 text-sage-700"></i>
+                            </div>
+                            <h3 class="text-gray-900 font-semibold text-lg mb-2">Ambient Scenes</h3>
+                            <p class="text-gray-500 text-sm leading-relaxed">Six handcrafted environments with visual and audio presence cues that feel natural.</p>
+                        </div>
+                    </div>
+                    <div class="fade-in fade-in-delay-3 card-hover gradient-border-sage bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+                        <div class="bg-sage-50 p-6 flex justify-center">
+                            <img src="images/04-History.png" alt="Beside session history" class="h-64 rounded-xl shadow-md">
+                        </div>
+                        <div class="p-6">
+                            <div class="w-10 h-10 rounded-xl bg-sage-100 flex items-center justify-center mb-4">
+                                <i data-lucide="bar-chart-3" class="w-5 h-5 text-sage-700"></i>
+                            </div>
+                            <h3 class="text-gray-900 font-semibold text-lg mb-2">Session History</h3>
+                            <p class="text-gray-500 text-sm leading-relaxed">Track your focus sessions and build streaks. See your progress over time.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dark Mode mention -->
+                <div class="fade-in mt-12 text-center">
+                    <div class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gray-900 text-white text-sm font-medium">
+                        <i data-lucide="moon" class="w-4 h-4"></i>
+                        Dark Mode supported — easy on the eyes, day or night
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 100% Free Callout -->
+        <section class="py-20 sm:py-28 bg-gradient-to-br from-sage-600 to-sage-800 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
+                <div class="absolute bottom-10 right-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+            </div>
+            <div class="max-w-6xl mx-auto px-6 relative z-10">
+                <div class="max-w-2xl mx-auto text-center fade-in">
+                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/20 mb-6">
+                        <i data-lucide="heart" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h2 class="text-white text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">100% Free</h2>
+                    <p class="text-sage-100 text-xl sm:text-2xl font-medium mb-3">No ads. No subscriptions. No paywall. Ever.</p>
+                    <p class="text-sage-200 text-base leading-relaxed max-w-lg mx-auto">
+                        We believe focus tools should be accessible to everyone — especially the ADHD community that needs them most. Beside will always be free.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Who It's For -->
+        <section class="py-20 sm:py-28 bg-white">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-12 fade-in">
+                    <p class="text-sage-600 text-sm font-semibold uppercase tracking-widest mb-3">Built For</p>
+                    <h2 class="text-gray-900 text-3xl sm:text-4xl font-bold tracking-tight">People who get it</h2>
+                </div>
+                <div class="grid sm:grid-cols-3 gap-8">
+                    <div class="fade-in fade-in-delay-1 text-center p-8">
+                        <div class="w-14 h-14 rounded-2xl bg-sage-100 flex items-center justify-center mx-auto mb-5">
+                            <i data-lucide="brain" class="w-7 h-7 text-sage-700"></i>
+                        </div>
+                        <h3 class="text-gray-900 font-semibold text-lg mb-2">ADHD Adults</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Body doubling is one of the most effective ADHD strategies. Now it's always available.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-2 text-center p-8">
+                        <div class="w-14 h-14 rounded-2xl bg-sage-100 flex items-center justify-center mx-auto mb-5">
+                            <i data-lucide="graduation-cap" class="w-7 h-7 text-sage-700"></i>
+                        </div>
+                        <h3 class="text-gray-900 font-semibold text-lg mb-2">Students</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Studying alone in your room? Beside makes it feel like the library — without leaving home.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-3 text-center p-8">
+                        <div class="w-14 h-14 rounded-2xl bg-sage-100 flex items-center justify-center mx-auto mb-5">
+                            <i data-lucide="home" class="w-7 h-7 text-sage-700"></i>
+                        </div>
+                        <h3 class="text-gray-900 font-semibold text-lg mb-2">Remote Workers</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Working from home can feel isolating. Add the presence you're missing to your workspace.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Email Signup -->
+        <section id="notify" class="py-20 sm:py-28 bg-gradient-to-br from-sage-700 to-sage-900 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
+                <div class="absolute bottom-10 right-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+            </div>
+            <div class="max-w-6xl mx-auto px-6 relative z-10">
+                <div class="max-w-2xl mx-auto text-center fade-in">
+                    <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white/20 mb-6">
+                        <i data-lucide="bell" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h2 class="text-white text-3xl sm:text-4xl font-bold tracking-tight mb-4">Get notified when we launch</h2>
+                    <p class="text-sage-200 text-lg mb-8">Be the first to know when Beside is available on the App Store.</p>
+                    <form id="bottomSignup" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onsubmit="return submitSignup(event, 'bottomSignup')">
+                        <div class="flex-1 relative">
+                            <i data-lucide="at-sign" class="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
+                            <input type="email" placeholder="Enter your email" required class="w-full pl-11 pr-4 py-3.5 rounded-full text-gray-900 text-sm bg-white border-0 focus:outline-none focus:ring-2 focus:ring-white/50 placeholder-gray-400">
+                        </div>
+                        <button type="submit" class="bg-white text-sage-700 font-semibold px-8 py-3.5 rounded-full text-sm hover:bg-sage-50 transition-colors inline-flex items-center justify-center gap-2">
+                            Get Notified <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </form>
+                    <p class="text-sage-300 text-xs mt-4">No spam, ever. We respect your privacy.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-50 border-t border-gray-100">
+        <div class="max-w-6xl mx-auto px-6 py-12">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-8">
+                <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-lg gradient-bg flex items-center justify-center">
+                        <span class="text-white font-bold text-xs">S</span>
+                    </div>
+                    <span class="text-gray-900 font-bold tracking-tight">Softroni</span>
+                </div>
+                <nav class="flex flex-wrap gap-x-8 gap-y-3 text-sm">
+                    <a href="/about.html" class="text-gray-500 hover:text-sage-600 transition-colors inline-flex items-center gap-1.5">
+                        <i data-lucide="users" class="w-3.5 h-3.5"></i> About
+                    </a>
+                    <a href="/privacy-policy.html" class="text-gray-500 hover:text-sage-600 transition-colors inline-flex items-center gap-1.5">
+                        <i data-lucide="shield" class="w-3.5 h-3.5"></i> Privacy Policy
+                    </a>
+                    <a href="/terms-of-service.html" class="text-gray-500 hover:text-sage-600 transition-colors inline-flex items-center gap-1.5">
+                        <i data-lucide="file-text" class="w-3.5 h-3.5"></i> Terms of Service
+                    </a>
+                    <a href="/support.html" class="text-gray-500 hover:text-sage-600 transition-colors inline-flex items-center gap-1.5">
+                        <i data-lucide="life-buoy" class="w-3.5 h-3.5"></i> Support
+                    </a>
+                </nav>
+            </div>
+            <div class="border-t border-gray-200 mt-8 pt-8">
+                <p class="text-gray-400 text-sm">&copy; 2026 Softroni. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        function submitSignup(e, formId) {
+            e.preventDefault();
+            const form = document.getElementById(formId);
+            const emailInput = form.querySelector('input[type="email"]');
+            const btn = form.querySelector('button[type="submit"]');
+            const email = emailInput.value;
+
+            btn.disabled = true;
+            btn.innerHTML = '<svg class="animate-spin w-4 h-4" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg> Sending...';
+
+            const formData = new FormData();
+            formData.append('entry.1799011564', email);
+
+            fetch('https://docs.google.com/forms/d/e/1FAIpQLSfZmnbFP5xp05zvAUmRSmSTI-EyyBHXDMCrHBeXVOeMjGf8hA/formResponse', {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors'
+            }).then(() => {
+                form.innerHTML = '<p class="text-white text-lg font-medium flex items-center justify-center gap-2"><svg class="w-5 h-5 text-green-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> You\'re on the list!</p>';
+            }).catch(() => {
+                btn.disabled = false;
+                btn.innerHTML = 'Get Notified <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+                alert('Something went wrong. Please try again.');
+            });
+            return false;
+        }
+    </script>
+</body>
+</html>
