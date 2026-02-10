@@ -289,18 +289,13 @@
             font-family: var(--font-mono);
         }
         @media (max-width: 639px) { .hero-logo { font-size: 48px; } }
-        .chevron {
-            color: var(--color-accent);
-            font-weight: 800;
-            animation: punchIn 0.4s ease-out 0.2s both;
-        }
         .softroni-type {
             display: inline-block;
             overflow: hidden;
             white-space: nowrap;
             width: 0;
             font-family: var(--font-mono);
-            animation: typeAll 1s steps(8) 0.7s forwards;
+            animation: typeAll 1s steps(8) 0.3s forwards;
         }
         .s-letter { color: var(--color-accent); font-weight: 800; }
         .oftroni-text { font-weight: 600; letter-spacing: -1px; }
@@ -308,7 +303,7 @@
             color: var(--color-accent);
             font-weight: 800;
             margin-left: 2px;
-            animation: blink 1s step-end infinite 1.9s;
+            animation: blink 1s step-end infinite 1.5s;
         }
         .hero-tagline {
             display: flex;
@@ -320,7 +315,7 @@
             text-transform: uppercase;
             opacity: 0;
             transform: translateY(15px);
-            animation: slideUp 0.6s ease-out 2s forwards;
+            animation: slideUp 0.6s ease-out 1.5s forwards;
         }
         .hero-tagline span { color: var(--color-text-secondary); }
         .hero-tagline .dot { color: var(--color-dot); }
@@ -331,7 +326,7 @@
             line-height: 1.7;
             color: var(--color-text-secondary);
             opacity: 0;
-            animation: fadeInAnim 0.6s ease-out 2.5s forwards;
+            animation: fadeInAnim 0.6s ease-out 2s forwards;
         }
         .hero-ctas {
             display: flex;
@@ -340,11 +335,9 @@
             gap: 16px;
             margin-top: 32px;
             opacity: 0;
-            animation: fadeInAnim 0.5s ease-out 3s forwards;
+            animation: fadeInAnim 0.5s ease-out 2.3s forwards;
         }
 
-        @keyframes punchIn {
-            from { opacity: 0; transform: scale(0.5) translateX(-20px); }
             to { opacity: 1; transform: scale(1) translateX(0); }
         }
         @keyframes typeAll {
@@ -535,7 +528,6 @@
             }
             .fade-in { opacity: 1; transform: none; }
             .hero-tagline, .hero-subtitle, .hero-ctas { opacity: 1; transform: none; }
-            .chevron { opacity: 1; transform: none; }
             .softroni-type { width: 8ch; }
             .underscore { opacity: 1; }
         }
@@ -544,7 +536,7 @@
 <body>
     <nav class="site-nav">
         <div class="wrap nav-inner">
-            <a href="/" class="nav-brand"><span class="brand-gt">&gt;</span><span class="brand-s">S</span><span class="brand-text">oftroni</span><span class="brand-us">_</span></a>
+            <a href="/" class="nav-brand"><span class="brand-s">S</span><span class="brand-text">oftroni</span><span class="brand-us">_</span></a>
             <div class="nav-links">
                 <a href="/about.html" class="nav-hide-mobile">About</a>
                 <a href="/support.html" class="nav-hide-mobile">Support</a>
@@ -558,7 +550,6 @@
         <section class="hero">
             <div class="wrap hero-content">
                 <div class="hero-logo">
-                    <span class="chevron">&gt;</span>
                     <span class="softroni-type"><span class="s-letter">S</span><span class="oftroni-text">oftroni</span></span>
                     <span class="underscore">_</span>
                 </div>
@@ -699,7 +690,7 @@
     <footer class="site-footer">
         <div class="wrap">
             <div class="footer-top">
-                <a href="/" class="footer-brand"><span class="brand-gt">&gt;</span><span class="brand-s">S</span><span class="brand-text">oftroni</span><span class="brand-us">_</span></a>
+                <a href="/" class="footer-brand"><span class="brand-s">S</span><span class="brand-text">oftroni</span><span class="brand-us">_</span></a>
                 <nav class="footer-links">
                     <a href="/about.html">About</a>
                     <a href="/privacy-policy.html">Privacy Policy</a>

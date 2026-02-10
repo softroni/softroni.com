@@ -3,5 +3,5 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@800');
   </style>
-  <text x="256" y="310" text-anchor="middle" font-family="'JetBrains Mono', 'SF Mono', 'Fira Code', 'Consolas', monospace" font-weight="800" font-size="220" fill="#00B368">&gt;S<tspan fill-opacity="0.6">_</tspan></text>
+  <text x="256" y="310" text-anchor="middle" font-family="'JetBrains Mono', 'SF Mono', 'Fira Code', 'Consolas', monospace" font-weight="800" font-size="220" fill="#00B368">S<tspan fill-opacity="0.6">_</tspan></text>
 </svg>
