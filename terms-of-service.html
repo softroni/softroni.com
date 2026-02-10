@@ -4,275 +4,411 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms of Service — Softroni</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
-                }
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --color-bg: #FFFFFF;
+            --color-surface: #FFFFFF;
+            --color-elevated: #F9F9F9;
+            --color-text: #1A1A1A;
+            --color-text-secondary: #999999;
+            --color-text-tertiary: #CCCCCC;
+            --color-accent: #00B368;
+            --color-accent-subtle: rgba(0, 179, 104, 0.1);
+            --color-border: #F0F0F0;
+            --color-dot: #DDDDDD;
+            --shadow-subtle: 0 4px 20px rgba(0,0,0,0.05);
+            --shadow-medium: 0 4px 20px rgba(0,0,0,0.1);
+            --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif;
+            --radius-btn: 8px;
+            --radius-card: 12px;
+            --radius-input: 8px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-bg: #0A0A0A;
+                --color-surface: #141414;
+                --color-elevated: #1E1E1E;
+                --color-text: #E8E8E8;
+                --color-text-secondary: #888888;
+                --color-text-tertiary: #555555;
+                --color-accent: #00C878;
+                --color-accent-subtle: rgba(0, 200, 120, 0.12);
+                --color-border: #222222;
+                --color-dot: #444444;
+                --shadow-subtle: none;
+                --shadow-medium: 0 4px 20px rgba(0,0,0,0.4);
             }
         }
-    </script>
-    <style>
+
         html { scroll-behavior: smooth; }
-        @keyframes gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+        body {
+            background: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-sans);
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-        .gradient-text {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa, #6366f1);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradient-shift 6s ease infinite;
+        a { color: inherit; text-decoration: none; }
+
+        .wrap { max-width: 1024px; margin: 0 auto; padding: 0 24px; }
+
+        .site-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--color-border);
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
         }
-        .gradient-bg {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa);
-            background-size: 200% 200%;
-            animation: gradient-shift 6s ease infinite;
+        @media (prefers-color-scheme: dark) {
+            .site-nav { background: rgba(10,10,10,0.85); }
         }
-        .glass {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
         }
-        .fade-in {
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--color-text);
         }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
-        .fade-in-delay-1 { transition-delay: 0.1s; }
-        .btn-gradient {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            transition: all 0.3s ease;
+        .nav-mark {
+            font-family: var(--font-mono);
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--color-accent);
         }
-        .btn-gradient:hover {
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
-            box-shadow: 0 8px 24px rgba(99,102,241,0.3);
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--color-accent); }
+        .nav-links .btn-primary { color: #fff; }
+        .nav-links .btn-primary:hover { color: #fff; }
+        @media (max-width: 639px) {
+            .nav-hide-mobile { display: none; }
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            border-radius: var(--radius-btn);
+            font-size: 14px;
+            font-weight: 600;
+            font-family: var(--font-sans);
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: var(--color-accent);
+            color: #fff;
+        }
+        .btn-primary:hover {
+            opacity: 0.9;
             transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,179,104,0.3);
         }
-        .hero-bg {
-            background: radial-gradient(ellipse at 30% 20%, rgba(99,102,241,0.08) 0%, transparent 50%),
-                        radial-gradient(ellipse at 70% 60%, rgba(139,92,246,0.06) 0%, transparent 50%);
+
+        section { padding: 80px 0; }
+
+        .page-hero { padding: 60px 0 40px; }
+        @media (min-width: 640px) { .page-hero { padding: 80px 0 48px; } }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-accent);
+            margin-bottom: 24px;
+            transition: gap 0.2s;
+        }
+        .back-link:hover { gap: 10px; }
+        .page-hero h1 {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+        @media (min-width: 640px) { .page-hero h1 { font-size: 48px; } }
+        .page-hero h1 .accent { color: var(--color-accent); }
+        .page-hero .subtitle {
+            font-size: 18px;
+            color: var(--color-text-secondary);
+        }
+
+        .policy-content {
+            max-width: 720px;
+            margin: 0 auto;
         }
         .policy-section {
-            position: relative;
-            padding-left: 1.5rem;
+            margin-bottom: 48px;
+            padding-left: 20px;
+            border-left: 3px solid var(--color-accent);
         }
-        .policy-section::before {
+        .policy-section h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .policy-section p {
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+        .policy-section p:last-child { margin-bottom: 0; }
+        .policy-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        .policy-section li {
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            padding: 4px 0 4px 24px;
+            position: relative;
+        }
+        .policy-section li.check::before {
             content: '';
             position: absolute;
             left: 0;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(180deg, #6366f1, #a78bfa);
-            border-radius: 999px;
-            opacity: 0.3;
+            top: 12px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-accent);
+            opacity: 0.5;
+        }
+        .policy-section li.cross::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #e74c3c;
+            opacity: 0.5;
+        }
+        .policy-section a {
+            color: var(--color-accent);
+            font-weight: 500;
+        }
+        .policy-section a:hover { text-decoration: underline; }
+
+        .site-footer {
+            border-top: 1px solid var(--color-border);
+            background: var(--color-surface);
+            padding: 48px 0;
+        }
+        .footer-top {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+        @media (min-width: 768px) {
+            .footer-top { flex-direction: row; align-items: center; justify-content: space-between; }
+        }
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--color-text);
+        }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 24px; }
+        .footer-links a {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--color-accent); }
+        .footer-bottom {
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 1px solid var(--color-border);
+        }
+        .footer-bottom p { font-size: 14px; color: var(--color-text-secondary); }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .fade-in { opacity: 1; transform: none; }
         }
     </style>
 </head>
-<body class="bg-white text-gray-600 font-sans antialiased">
-    <!-- Navigation -->
-    <nav class="sticky top-0 z-50 glass border-b border-gray-100/50">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-2 text-gray-900 font-bold text-xl tracking-tight">
-                <div class="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center">
-                    <span class="text-white font-bold text-sm">S</span>
-                </div>
-                Softroni
+<body>
+    <nav class="site-nav">
+        <div class="wrap nav-inner">
+            <a href="/" class="nav-brand">
+                <span class="nav-mark">&gt;S_</span>
+                <span>Softroni</span>
             </a>
-            <div class="flex items-center gap-6">
-                <a href="/" class="hidden sm:flex items-center gap-1.5 text-gray-500 hover:text-indigo-600 text-sm font-medium transition-colors">
-                    <i data-lucide="home" class="w-4 h-4"></i> Home
-                </a>
-                <a href="/support.html" class="btn-gradient text-white text-sm font-medium px-5 py-2.5 rounded-full inline-flex items-center gap-2">
-                    <i data-lucide="send" class="w-4 h-4"></i> Get in Touch
-                </a>
+            <div class="nav-links">
+                <a href="/about.html" class="nav-hide-mobile">About</a>
+                <a href="/support.html" class="nav-hide-mobile">Support</a>
+                <a href="/support.html" class="btn btn-primary">Get in Touch</a>
             </div>
         </div>
     </nav>
 
     <main>
-        <!-- Hero -->
-        <section class="hero-bg pt-20 pb-16 sm:pt-28 sm:pb-20">
-            <div class="max-w-6xl mx-auto px-6">
-                <div class="max-w-3xl fade-in">
-                    <a href="/" class="inline-flex items-center gap-1.5 text-indigo-600 text-sm font-medium mb-6 hover:gap-2.5 transition-all">
-                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home
-                    </a>
-                    <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-3">
-                        Terms of <span class="gradient-text">Service</span>
-                    </h1>
-                    <p class="text-gray-400 text-lg flex items-center gap-2">
-                        <i data-lucide="calendar" class="w-4 h-4"></i> Effective date: January 1, 2025
-                    </p>
+        <section class="page-hero">
+            <div class="wrap">
+                <div class="fade-in">
+                    <a href="/" class="back-link">&larr; Back to Home</a>
+                    <h1>Terms of <span class="accent">Service</span></h1>
+                    <p class="subtitle">Effective date: January 1, 2025</p>
                 </div>
             </div>
         </section>
 
-        <!-- Terms Content -->
-        <section class="py-16 sm:py-20">
-            <div class="max-w-3xl mx-auto px-6">
-                <div class="space-y-12 text-gray-600 leading-relaxed">
-                    <div class="fade-in policy-section">
-                        <h2 class="text-gray-900 text-xl font-bold mb-3">1. Acceptance of Terms</h2>
-                        <p>By accessing or using any website, mobile application, or service provided by Softroni LLC ("we," "our," or "us"), you agree to be bound by these Terms of Service. If you do not agree to these terms, you may not use our Services.</p>
-                    </div>
+        <section>
+            <div class="wrap policy-content">
+                <div class="policy-section fade-in">
+                    <h2>1. Acceptance of Terms</h2>
+                    <p>By accessing or using any website, mobile application, or service provided by Softroni LLC ("we," "our," or "us"), you agree to be bound by these Terms of Service. If you do not agree to these terms, you may not use our Services.</p>
+                </div>
 
-                    <div class="fade-in policy-section">
-                        <h2 class="text-gray-900 text-xl font-bold mb-3">2. Description of Services</h2>
-                        <p>Softroni provides software development services, mobile applications, web platforms, and related digital products. We reserve the right to modify, suspend, or discontinue any part of our Services at any time, with or without notice.</p>
-                    </div>
+                <div class="policy-section fade-in">
+                    <h2>2. Description of Services</h2>
+                    <p>Softroni provides software development services, mobile applications, web platforms, and related digital products. We reserve the right to modify, suspend, or discontinue any part of our Services at any time, with or without notice.</p>
+                </div>
 
-                    <div class="fade-in policy-section">
-                        <h2 class="text-gray-900 text-xl font-bold mb-3">3. User Accounts</h2>
-                        <p class="mb-4">When you create an account with us, you agree to:</p>
-                        <ul class="space-y-2">
-                            <li class="flex items-start gap-3">
-                                <i data-lucide="check" class="w-4 h-4 text-indigo-500 mt-1 flex-shrink-0"></i>
-                                <span>Provide accurate, current, and complete information during registration.</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i data-lucide="check" class="w-4 h-4 text-indigo-500 mt-1 flex-shrink-0"></i>
-                                <span>Maintain the security of your password and account credentials.</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i data-lucide="check" class="w-4 h-4 text-indigo-500 mt-1 flex-shrink-0"></i>
-                                <span>Promptly update your account information if it changes.</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i data-lucide="check" class="w-4 h-4 text-indigo-500 mt-1 flex-shrink-0"></i>
-                                <span>Accept responsibility for all activities that occur under your account.</span>
-                            </li>
-                        </ul>
-                        <p class="mt-4">We reserve the right to suspend or terminate accounts that violate these terms or engage in unauthorized activity.</p>
-                    </div>
+                <div class="policy-section fade-in">
+                    <h2>3. User Accounts</h2>
+                    <p>When you create an account with us, you agree to:</p>
+                    <ul>
+                        <li class="check">Provide accurate, current, and complete information during registration.</li>
+                        <li class="check">Maintain the security of your password and account credentials.</li>
+                        <li class="check">Promptly update your account information if it changes.</li>
+                        <li class="check">Accept responsibility for all activities that occur under your account.</li>
+                    </ul>
+                    <p>We reserve the right to suspend or terminate accounts that violate these terms or engage in unauthorized activity.</p>
+                </div>
 
-                    <div class="fade-in policy-section">
-                        <h2 class="text-gray-900 text-xl font-bold mb-3">4. Acceptable Use</h2>
-                        <p class="mb-4">You agree not to use our Services to:</p>
-                        <ul class="space-y-2">
-                            <li class="flex items-start gap-3">
-                                <i data-lucide="x" class="w-4 h-4 text-red-400 mt-1 flex-shrink-0"></i>
-                                <span>Violate any applicable law, regulation, or third-party rights.</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i data-lucide="x" class="w-4 h-4 text-red-400 mt-1 flex-shrink-0"></i>
-                                <span>Transmit malicious code, viruses, or any harmful software.</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i data-lucide="x" class="w-4 h-4 text-red-400 mt-1 flex-shrink-0"></i>
-                                <span>Attempt to gain unauthorized access to our systems or other users' accounts.</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i data-lucide="x" class="w-4 h-4 text-red-400 mt-1 flex-shrink-0"></i>
-                                <span>Interfere with or disrupt the integrity or performance of our Services.</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i data-lucide="x" class="w-4 h-4 text-red-400 mt-1 flex-shrink-0"></i>
-                                <span>Use automated systems to scrape, collect, or harvest data without permission.</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i data-lucide="x" class="w-4 h-4 text-red-400 mt-1 flex-shrink-0"></i>
-                                <span>Engage in any activity that is fraudulent, deceptive, or misleading.</span>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="policy-section fade-in">
+                    <h2>4. Acceptable Use</h2>
+                    <p>You agree not to use our Services to:</p>
+                    <ul>
+                        <li class="cross">Violate any applicable law, regulation, or third-party rights.</li>
+                        <li class="cross">Transmit malicious code, viruses, or any harmful software.</li>
+                        <li class="cross">Attempt to gain unauthorized access to our systems or other users' accounts.</li>
+                        <li class="cross">Interfere with or disrupt the integrity or performance of our Services.</li>
+                        <li class="cross">Use automated systems to scrape, collect, or harvest data without permission.</li>
+                        <li class="cross">Engage in any activity that is fraudulent, deceptive, or misleading.</li>
+                    </ul>
+                </div>
 
-                    <div class="fade-in policy-section">
-                        <h2 class="text-gray-900 text-xl font-bold mb-3">5. Intellectual Property</h2>
-                        <p>All content, features, and functionality of our Services — including text, graphics, logos, software, and design — are owned by Softroni or our licensors and are protected by copyright, trademark, and other intellectual property laws. You may not reproduce, distribute, modify, or create derivative works from our content without our express written permission.</p>
-                    </div>
+                <div class="policy-section fade-in">
+                    <h2>5. Intellectual Property</h2>
+                    <p>All content, features, and functionality of our Services — including text, graphics, logos, software, and design — are owned by Softroni or our licensors and are protected by copyright, trademark, and other intellectual property laws. You may not reproduce, distribute, modify, or create derivative works from our content without our express written permission.</p>
+                </div>
 
-                    <div class="fade-in policy-section">
-                        <h2 class="text-gray-900 text-xl font-bold mb-3">6. User Content</h2>
-                        <p>You retain ownership of any content you submit, post, or display through our Services. By submitting content, you grant Softroni a non-exclusive, worldwide, royalty-free license to use, reproduce, and display such content solely for the purpose of operating and improving our Services. You represent that you have the necessary rights to grant this license.</p>
-                    </div>
+                <div class="policy-section fade-in">
+                    <h2>6. User Content</h2>
+                    <p>You retain ownership of any content you submit, post, or display through our Services. By submitting content, you grant Softroni a non-exclusive, worldwide, royalty-free license to use, reproduce, and display such content solely for the purpose of operating and improving our Services. You represent that you have the necessary rights to grant this license.</p>
+                </div>
 
-                    <div class="fade-in policy-section">
-                        <h2 class="text-gray-900 text-xl font-bold mb-3">7. Payment Terms</h2>
-                        <p>If you purchase any paid features or services, you agree to pay all applicable fees. All payments are non-refundable unless otherwise stated or required by law. We reserve the right to change our pricing with reasonable notice. Continued use of paid Services after a price change constitutes acceptance of the new pricing.</p>
-                    </div>
+                <div class="policy-section fade-in">
+                    <h2>7. Payment Terms</h2>
+                    <p>If you purchase any paid features or services, you agree to pay all applicable fees. All payments are non-refundable unless otherwise stated or required by law. We reserve the right to change our pricing with reasonable notice. Continued use of paid Services after a price change constitutes acceptance of the new pricing.</p>
+                </div>
 
-                    <div class="fade-in policy-section">
-                        <h2 class="text-gray-900 text-xl font-bold mb-3">8. Limitation of Liability</h2>
-                        <p>To the maximum extent permitted by law, Softroni shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, data, use, or goodwill, arising out of or in connection with your use of our Services. Our total liability for any claim related to our Services shall not exceed the amount you paid to us in the twelve months preceding the claim.</p>
-                    </div>
+                <div class="policy-section fade-in">
+                    <h2>8. Limitation of Liability</h2>
+                    <p>To the maximum extent permitted by law, Softroni shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, data, use, or goodwill, arising out of or in connection with your use of our Services. Our total liability for any claim related to our Services shall not exceed the amount you paid to us in the twelve months preceding the claim.</p>
+                </div>
 
-                    <div class="fade-in policy-section">
-                        <h2 class="text-gray-900 text-xl font-bold mb-3">9. Disclaimer of Warranties</h2>
-                        <p>Our Services are provided "as is" and "as available" without warranties of any kind, whether express or implied. We disclaim all warranties, including implied warranties of merchantability, fitness for a particular purpose, and non-infringement. We do not guarantee that our Services will be uninterrupted, secure, or error-free.</p>
-                    </div>
+                <div class="policy-section fade-in">
+                    <h2>9. Disclaimer of Warranties</h2>
+                    <p>Our Services are provided "as is" and "as available" without warranties of any kind, whether express or implied. We disclaim all warranties, including implied warranties of merchantability, fitness for a particular purpose, and non-infringement. We do not guarantee that our Services will be uninterrupted, secure, or error-free.</p>
+                </div>
 
-                    <div class="fade-in policy-section">
-                        <h2 class="text-gray-900 text-xl font-bold mb-3">10. Indemnification</h2>
-                        <p>You agree to indemnify and hold harmless Softroni, its officers, directors, employees, and agents from any claims, damages, losses, liabilities, and expenses (including reasonable attorneys' fees) arising from your use of our Services or your violation of these Terms.</p>
-                    </div>
+                <div class="policy-section fade-in">
+                    <h2>10. Indemnification</h2>
+                    <p>You agree to indemnify and hold harmless Softroni, its officers, directors, employees, and agents from any claims, damages, losses, liabilities, and expenses (including reasonable attorneys' fees) arising from your use of our Services or your violation of these Terms.</p>
+                </div>
 
-                    <div class="fade-in policy-section">
-                        <h2 class="text-gray-900 text-xl font-bold mb-3">11. Termination</h2>
-                        <p>We may terminate or suspend your access to our Services immediately, without prior notice, for any reason, including if you breach these Terms. Upon termination, your right to use our Services will cease immediately. Provisions that by their nature should survive termination shall remain in effect.</p>
-                    </div>
+                <div class="policy-section fade-in">
+                    <h2>11. Termination</h2>
+                    <p>We may terminate or suspend your access to our Services immediately, without prior notice, for any reason, including if you breach these Terms. Upon termination, your right to use our Services will cease immediately. Provisions that by their nature should survive termination shall remain in effect.</p>
+                </div>
 
-                    <div class="fade-in policy-section">
-                        <h2 class="text-gray-900 text-xl font-bold mb-3">12. Governing Law</h2>
-                        <p>These Terms shall be governed by and construed in accordance with the laws of the United States, without regard to conflict of law principles. Any disputes arising from these Terms or your use of our Services shall be resolved in the courts of competent jurisdiction.</p>
-                    </div>
+                <div class="policy-section fade-in">
+                    <h2>12. Governing Law</h2>
+                    <p>These Terms shall be governed by and construed in accordance with the laws of the United States, without regard to conflict of law principles. Any disputes arising from these Terms or your use of our Services shall be resolved in the courts of competent jurisdiction.</p>
+                </div>
 
-                    <div class="fade-in policy-section">
-                        <h2 class="text-gray-900 text-xl font-bold mb-3">13. Changes to These Terms</h2>
-                        <p>We reserve the right to update these Terms at any time. We will notify you of material changes by posting the revised Terms on our website. Your continued use of our Services after changes are posted constitutes your acceptance of the updated Terms.</p>
-                    </div>
+                <div class="policy-section fade-in">
+                    <h2>13. Changes to These Terms</h2>
+                    <p>We reserve the right to update these Terms at any time. We will notify you of material changes by posting the revised Terms on our website. Your continued use of our Services after changes are posted constitutes your acceptance of the updated Terms.</p>
+                </div>
 
-                    <div class="fade-in policy-section">
-                        <h2 class="text-gray-900 text-xl font-bold mb-3">14. Contact Us</h2>
-                        <p>If you have any questions about these Terms of Service, please reach out through our <a href="/support.html" class="text-indigo-600 hover:underline font-medium">Support</a> page.</p>
-                    </div>
+                <div class="policy-section fade-in">
+                    <h2>14. Contact Us</h2>
+                    <p>If you have any questions about these Terms of Service, please reach out through our <a href="/support.html">Support</a> page.</p>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-50 border-t border-gray-100">
-        <div class="max-w-6xl mx-auto px-6 py-12">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-8">
-                <div class="flex items-center gap-2">
-                    <div class="w-7 h-7 rounded-lg gradient-bg flex items-center justify-center">
-                        <span class="text-white font-bold text-xs">S</span>
-                    </div>
-                    <span class="text-gray-900 font-bold tracking-tight">Softroni</span>
-                </div>
-                <nav class="flex flex-wrap gap-x-8 gap-y-3 text-sm">
-                    <a href="/about.html" class="text-gray-500 hover:text-indigo-600 transition-colors inline-flex items-center gap-1.5">
-                        <i data-lucide="users" class="w-3.5 h-3.5"></i> About
-                    </a>
-                    <a href="/privacy-policy.html" class="text-gray-500 hover:text-indigo-600 transition-colors inline-flex items-center gap-1.5">
-                        <i data-lucide="shield" class="w-3.5 h-3.5"></i> Privacy Policy
-                    </a>
-                    <a href="/terms-of-service.html" class="text-gray-500 hover:text-indigo-600 transition-colors inline-flex items-center gap-1.5">
-                        <i data-lucide="file-text" class="w-3.5 h-3.5"></i> Terms of Service
-                    </a>
-                    <a href="/support.html" class="text-gray-500 hover:text-indigo-600 transition-colors inline-flex items-center gap-1.5">
-                        <i data-lucide="life-buoy" class="w-3.5 h-3.5"></i> Support
-                    </a>
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-top">
+                <a href="/" class="footer-brand">
+                    <span class="nav-mark">&gt;S_</span>
+                    <span>Softroni</span>
+                </a>
+                <nav class="footer-links">
+                    <a href="/about.html">About</a>
+                    <a href="/privacy-policy.html">Privacy Policy</a>
+                    <a href="/terms-of-service.html">Terms of Service</a>
+                    <a href="/support.html">Support</a>
                 </nav>
             </div>
-            <div class="border-t border-gray-200 mt-8 pt-8">
-                <p class="text-gray-400 text-sm">&copy; <script>document.write(new Date().getFullYear())</script> Softroni LLC. All rights reserved.</p>
+            <div class="footer-bottom">
+                <p>&copy; <script>document.write(new Date().getFullYear())</script> Softroni LLC. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        lucide.createIcons();
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
         }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });

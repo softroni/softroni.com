@@ -4,167 +4,402 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Support — Softroni</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
-                }
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --color-bg: #FFFFFF;
+            --color-surface: #FFFFFF;
+            --color-elevated: #F9F9F9;
+            --color-text: #1A1A1A;
+            --color-text-secondary: #999999;
+            --color-text-tertiary: #CCCCCC;
+            --color-accent: #00B368;
+            --color-accent-subtle: rgba(0, 179, 104, 0.1);
+            --color-border: #F0F0F0;
+            --color-dot: #DDDDDD;
+            --shadow-subtle: 0 4px 20px rgba(0,0,0,0.05);
+            --shadow-medium: 0 4px 20px rgba(0,0,0,0.1);
+            --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif;
+            --radius-btn: 8px;
+            --radius-card: 12px;
+            --radius-input: 8px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-bg: #0A0A0A;
+                --color-surface: #141414;
+                --color-elevated: #1E1E1E;
+                --color-text: #E8E8E8;
+                --color-text-secondary: #888888;
+                --color-text-tertiary: #555555;
+                --color-accent: #00C878;
+                --color-accent-subtle: rgba(0, 200, 120, 0.12);
+                --color-border: #222222;
+                --color-dot: #444444;
+                --shadow-subtle: none;
+                --shadow-medium: 0 4px 20px rgba(0,0,0,0.4);
             }
         }
-    </script>
-    <style>
+
         html { scroll-behavior: smooth; }
-        @keyframes gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+        body {
+            background: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-sans);
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-        .gradient-text {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa, #6366f1);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradient-shift 6s ease infinite;
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; }
+
+        .wrap { max-width: 1024px; margin: 0 auto; padding: 0 24px; }
+
+        /* Navigation */
+        .site-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--color-border);
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
         }
-        .gradient-bg {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa);
-            background-size: 200% 200%;
-            animation: gradient-shift 6s ease infinite;
+        @media (prefers-color-scheme: dark) {
+            .site-nav { background: rgba(10,10,10,0.85); }
         }
-        .gradient-border { position: relative; }
-        .gradient-border::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #6366f1, #8b5cf6, #a78bfa);
-            border-radius: 999px 999px 0 0;
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
         }
-        .glass {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--color-text);
         }
+        .nav-mark {
+            font-family: var(--font-mono);
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--color-accent);
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--color-accent); }
+        @media (max-width: 639px) {
+            .nav-hide-mobile { display: none; }
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            border-radius: var(--radius-btn);
+            font-size: 14px;
+            font-weight: 600;
+            font-family: var(--font-sans);
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: var(--color-accent);
+            color: #fff;
+        }
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,179,104,0.3);
+        }
+
+        .card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-card);
+            padding: 28px;
+            box-shadow: var(--shadow-subtle);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+        .card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+        .card p { color: var(--color-text-secondary); font-size: 14px; line-height: 1.7; }
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-card);
+            background: var(--color-accent-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+        .card-green-top { border-top: 3px solid var(--color-accent); }
+        .card a { color: var(--color-accent); font-weight: 500; }
+        .card a:hover { text-decoration: underline; }
+
+        section { padding: 80px 0; }
+        .section-alt { background: var(--color-elevated); }
+
+        .page-hero { padding: 60px 0 40px; }
+        @media (min-width: 640px) { .page-hero { padding: 80px 0 48px; } }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-accent);
+            margin-bottom: 24px;
+            transition: gap 0.2s;
+        }
+        .back-link:hover { gap: 10px; }
+        .page-hero h1 {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+        @media (min-width: 640px) { .page-hero h1 { font-size: 48px; } }
+        .page-hero h1 .accent { color: var(--color-accent); }
+        .page-hero .subtitle {
+            font-size: 18px;
+            color: var(--color-text-secondary);
+        }
+
+        /* Form */
+        .form-section h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .form-section h2 .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-card);
+            background: var(--color-accent-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 640px) {
+            .form-grid-2 { grid-template-columns: 1fr 1fr; }
+        }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--color-text);
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-input);
+            font-size: 14px;
+            font-family: var(--font-sans);
+            color: var(--color-text);
+            background: var(--color-bg);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px var(--color-accent-subtle);
+        }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .form-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 8px;
+        }
+        @media (min-width: 640px) {
+            .form-actions { flex-direction: row; align-items: center; }
+        }
+        .form-note {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+        .success-msg {
+            text-align: center;
+            padding: 48px 0;
+        }
+        .success-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--color-accent-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin: 0 auto 16px;
+        }
+        .success-msg h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .success-msg p { color: var(--color-text-secondary); }
+
+        .grid-help {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 640px) { .grid-help { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .grid-help { grid-template-columns: repeat(3, 1fr); } }
+
+        /* Footer */
+        .site-footer {
+            border-top: 1px solid var(--color-border);
+            background: var(--color-surface);
+            padding: 48px 0;
+        }
+        .footer-top {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+        @media (min-width: 768px) {
+            .footer-top { flex-direction: row; align-items: center; justify-content: space-between; }
+        }
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--color-text);
+        }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 24px; }
+        .footer-links a {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--color-accent); }
+        .footer-bottom {
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 1px solid var(--color-border);
+        }
+        .footer-bottom p { font-size: 14px; color: var(--color-text-secondary); }
+
         .fade-in {
             opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
         .fade-in-delay-1 { transition-delay: 0.1s; }
         .fade-in-delay-2 { transition-delay: 0.2s; }
         .fade-in-delay-3 { transition-delay: 0.3s; }
-        .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(99,102,241,0.1); }
-        .btn-gradient {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            transition: all 0.3s ease;
-        }
-        .btn-gradient:hover {
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
-            box-shadow: 0 8px 24px rgba(99,102,241,0.3);
-            transform: translateY(-1px);
-        }
-        .hero-bg {
-            background: radial-gradient(ellipse at 30% 20%, rgba(99,102,241,0.08) 0%, transparent 50%),
-                        radial-gradient(ellipse at 70% 60%, rgba(139,92,246,0.06) 0%, transparent 50%);
-        }
-        .input-focus:focus {
-            border-color: #818cf8;
-            box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .fade-in { opacity: 1; transform: none; }
         }
     </style>
 </head>
-<body class="bg-white text-gray-600 font-sans antialiased">
-    <!-- Navigation -->
-    <nav class="sticky top-0 z-50 glass border-b border-gray-100/50">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-2 text-gray-900 font-bold text-xl tracking-tight">
-                <div class="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center">
-                    <span class="text-white font-bold text-sm">S</span>
-                </div>
-                Softroni
+<body>
+    <nav class="site-nav">
+        <div class="wrap nav-inner">
+            <a href="/" class="nav-brand">
+                <span class="nav-mark">&gt;S_</span>
+                <span>Softroni</span>
             </a>
-            <div class="flex items-center gap-6">
-                <a href="/" class="hidden sm:flex items-center gap-1.5 text-gray-500 hover:text-indigo-600 text-sm font-medium transition-colors">
-                    <i data-lucide="home" class="w-4 h-4"></i> Home
-                </a>
-                <a href="/about.html" class="hidden sm:flex items-center gap-1.5 text-gray-500 hover:text-indigo-600 text-sm font-medium transition-colors">
-                    <i data-lucide="users" class="w-4 h-4"></i> About
-                </a>
+            <div class="nav-links">
+                <a href="/about.html" class="nav-hide-mobile">About</a>
+                <a href="/support.html" class="nav-hide-mobile">Support</a>
             </div>
         </div>
     </nav>
 
     <main>
-        <!-- Hero -->
-        <section class="hero-bg pt-20 pb-16 sm:pt-28 sm:pb-20">
-            <div class="max-w-6xl mx-auto px-6">
-                <div class="max-w-3xl fade-in">
-                    <a href="/" class="inline-flex items-center gap-1.5 text-indigo-600 text-sm font-medium mb-6 hover:gap-2.5 transition-all">
-                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home
-                    </a>
-                    <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-3">
-                        <span class="gradient-text">Support</span>
-                    </h1>
-                    <p class="text-gray-400 text-lg">We're here to help</p>
+        <section class="page-hero">
+            <div class="wrap">
+                <div class="fade-in">
+                    <a href="/" class="back-link">&larr; Back to Home</a>
+                    <h1><span class="accent">Support</span></h1>
+                    <p class="subtitle">We're here to help</p>
                 </div>
             </div>
         </section>
 
         <!-- Contact Form -->
-        <section class="py-16 sm:py-20">
-            <div class="max-w-6xl mx-auto px-6">
-                <div class="max-w-2xl fade-in">
-                    <div class="flex items-center gap-3 mb-8">
-                        <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center">
-                            <i data-lucide="mail" class="w-5 h-5 text-indigo-600"></i>
-                        </div>
-                        <h2 class="text-gray-900 text-2xl font-bold">Contact Us</h2>
-                    </div>
-                    <form id="contactForm" class="space-y-6" onsubmit="return submitToGoogle(event)">
-                        <div class="grid sm:grid-cols-2 gap-5">
-                            <div>
-                                <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Name</label>
-                                <div class="relative">
-                                    <i data-lucide="user" class="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
-                                    <input type="text" id="name" name="name" required class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl text-gray-900 text-sm placeholder-gray-400 focus:outline-none input-focus transition-all">
-                                </div>
+        <section class="form-section">
+            <div class="wrap" style="max-width: 680px;">
+                <div class="fade-in">
+                    <h2><span class="icon">&#9993;</span> Contact Us</h2>
+                    <form id="contactForm" onsubmit="return submitToGoogle(event)">
+                        <div class="form-grid form-grid-2" style="margin-bottom: 20px;">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" required>
                             </div>
-                            <div>
-                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                                <div class="relative">
-                                    <i data-lucide="at-sign" class="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
-                                    <input type="email" id="email" name="email" required class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl text-gray-900 text-sm placeholder-gray-400 focus:outline-none input-focus transition-all">
-                                </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
                             </div>
                         </div>
-                        <div>
-                            <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
-                            <div class="relative">
-                                <i data-lucide="type" class="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
-                                <input type="text" id="subject" name="subject" required class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl text-gray-900 text-sm placeholder-gray-400 focus:outline-none input-focus transition-all">
+                        <div class="form-grid" style="margin-bottom: 20px;">
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" required>
                             </div>
                         </div>
-                        <div>
-                            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
-                            <div class="relative">
-                                <i data-lucide="message-square" class="w-4 h-4 text-gray-400 absolute left-4 top-4"></i>
-                                <textarea id="message" name="message" rows="5" required class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl text-gray-900 text-sm placeholder-gray-400 focus:outline-none input-focus transition-all resize-vertical"></textarea>
+                        <div class="form-grid" style="margin-bottom: 20px;">
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
                             </div>
                         </div>
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-                            <button type="submit" class="btn-gradient text-white font-semibold px-8 py-3.5 rounded-full inline-flex items-center gap-2 text-sm">
-                                <i data-lucide="send" class="w-4 h-4"></i> Send Message
-                            </button>
-                            <p class="text-gray-400 text-sm flex items-center gap-1.5">
-                                <i data-lucide="clock" class="w-3.5 h-3.5"></i> We typically respond within 24-48 business hours.
-                            </p>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Send Message &rarr;</button>
+                            <p class="form-note">We typically respond within 24-48 business hours.</p>
                         </div>
                     </form>
                 </div>
@@ -172,89 +407,66 @@
         </section>
 
         <!-- What We Can Help With -->
-        <section class="py-16 sm:py-20 bg-gradient-to-br from-gray-50 to-indigo-50/30">
-            <div class="max-w-6xl mx-auto px-6">
-                <div class="fade-in mb-10">
-                    <div class="flex items-center gap-3 mb-2">
-                        <div class="w-10 h-10 rounded-xl bg-violet-50 flex items-center justify-center">
-                            <i data-lucide="help-circle" class="w-5 h-5 text-violet-600"></i>
-                        </div>
-                        <h2 class="text-gray-900 text-2xl font-bold">What We Can Help With</h2>
-                    </div>
+        <section class="section-alt">
+            <div class="wrap">
+                <div class="fade-in" style="margin-bottom: 40px;">
+                    <h2 style="font-size: 24px; font-weight: 700; display: flex; align-items: center; gap: 12px;">
+                        <span style="width:40px;height:40px;border-radius:12px;background:var(--color-accent-subtle);display:flex;align-items:center;justify-content:center;font-size:18px;">&#10067;</span>
+                        What We Can Help With
+                    </h2>
                 </div>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="fade-in fade-in-delay-1 card-hover gradient-border bg-white rounded-2xl p-7 shadow-sm border border-gray-100">
-                        <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center mb-4">
-                            <i data-lucide="message-circle" class="w-5 h-5 text-indigo-600"></i>
-                        </div>
-                        <h3 class="text-gray-900 font-semibold mb-2">General Inquiries</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed">Questions about our company, services, or partnership opportunities.</p>
+                <div class="grid-help">
+                    <div class="card card-green-top fade-in fade-in-delay-1">
+                        <div class="card-icon">&#128172;</div>
+                        <h3>General Inquiries</h3>
+                        <p>Questions about our company, services, or partnership opportunities.</p>
                     </div>
-                    <div class="fade-in fade-in-delay-2 card-hover gradient-border bg-white rounded-2xl p-7 shadow-sm border border-gray-100">
-                        <div class="w-10 h-10 rounded-xl bg-violet-50 flex items-center justify-center mb-4">
-                            <i data-lucide="wrench" class="w-5 h-5 text-violet-600"></i>
-                        </div>
-                        <h3 class="text-gray-900 font-semibold mb-2">Technical Support</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed">Issues with our apps or services, bug reports, or troubleshooting assistance.</p>
+                    <div class="card card-green-top fade-in fade-in-delay-2">
+                        <div class="card-icon">&#128295;</div>
+                        <h3>Technical Support</h3>
+                        <p>Issues with our apps or services, bug reports, or troubleshooting assistance.</p>
                     </div>
-                    <div class="fade-in fade-in-delay-3 card-hover gradient-border bg-white rounded-2xl p-7 shadow-sm border border-gray-100">
-                        <div class="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center mb-4">
-                            <i data-lucide="lightbulb" class="w-5 h-5 text-purple-600"></i>
-                        </div>
-                        <h3 class="text-gray-900 font-semibold mb-2">Feature Requests</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed">Suggestions for new features or improvements to our products.</p>
+                    <div class="card card-green-top fade-in fade-in-delay-3">
+                        <div class="card-icon">&#128161;</div>
+                        <h3>Feature Requests</h3>
+                        <p>Suggestions for new features or improvements to our products.</p>
                     </div>
-                    <div class="fade-in fade-in-delay-1 card-hover gradient-border bg-white rounded-2xl p-7 shadow-sm border border-gray-100">
-                        <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center mb-4">
-                            <i data-lucide="shield" class="w-5 h-5 text-indigo-600"></i>
-                        </div>
-                        <h3 class="text-gray-900 font-semibold mb-2">Data & Privacy</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed">Questions about how we handle your data, or requests to access or delete your personal information. See our <a href="/privacy-policy.html" class="text-indigo-600 hover:underline font-medium">Privacy Policy</a>.</p>
+                    <div class="card card-green-top fade-in fade-in-delay-1">
+                        <div class="card-icon">&#128274;</div>
+                        <h3>Data &amp; Privacy</h3>
+                        <p>Questions about how we handle your data, or requests to access or delete your personal information. See our <a href="/privacy-policy.html">Privacy Policy</a>.</p>
                     </div>
-                    <div class="fade-in fade-in-delay-2 card-hover gradient-border bg-white rounded-2xl p-7 shadow-sm border border-gray-100">
-                        <div class="w-10 h-10 rounded-xl bg-violet-50 flex items-center justify-center mb-4">
-                            <i data-lucide="user-x" class="w-5 h-5 text-violet-600"></i>
-                        </div>
-                        <h3 class="text-gray-900 font-semibold mb-2">Account Deletion</h3>
+                    <div class="card card-green-top fade-in fade-in-delay-2">
+                        <div class="card-icon">&#128100;</div>
+                        <h3>Account Deletion</h3>
+                        <p>Requests to delete your account and associated data from our systems.</p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-50 border-t border-gray-100">
-        <div class="max-w-6xl mx-auto px-6 py-12">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-8">
-                <div class="flex items-center gap-2">
-                    <div class="w-7 h-7 rounded-lg gradient-bg flex items-center justify-center">
-                        <span class="text-white font-bold text-xs">S</span>
-                    </div>
-                    <span class="text-gray-900 font-bold tracking-tight">Softroni</span>
-                </div>
-                <nav class="flex flex-wrap gap-x-8 gap-y-3 text-sm">
-                    <a href="/about.html" class="text-gray-500 hover:text-indigo-600 transition-colors inline-flex items-center gap-1.5">
-                        <i data-lucide="users" class="w-3.5 h-3.5"></i> About
-                    </a>
-                    <a href="/privacy-policy.html" class="text-gray-500 hover:text-indigo-600 transition-colors inline-flex items-center gap-1.5">
-                        <i data-lucide="shield" class="w-3.5 h-3.5"></i> Privacy Policy
-                    </a>
-                    <a href="/terms-of-service.html" class="text-gray-500 hover:text-indigo-600 transition-colors inline-flex items-center gap-1.5">
-                        <i data-lucide="file-text" class="w-3.5 h-3.5"></i> Terms of Service
-                    </a>
-                    <a href="/support.html" class="text-gray-500 hover:text-indigo-600 transition-colors inline-flex items-center gap-1.5">
-                        <i data-lucide="life-buoy" class="w-3.5 h-3.5"></i> Support
-                    </a>
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-top">
+                <a href="/" class="footer-brand">
+                    <span class="nav-mark">&gt;S_</span>
+                    <span>Softroni</span>
+                </a>
+                <nav class="footer-links">
+                    <a href="/about.html">About</a>
+                    <a href="/privacy-policy.html">Privacy Policy</a>
+                    <a href="/terms-of-service.html">Terms of Service</a>
+                    <a href="/support.html">Support</a>
                 </nav>
             </div>
-            <div class="border-t border-gray-200 mt-8 pt-8">
-                <p class="text-gray-400 text-sm">&copy; <script>document.write(new Date().getFullYear())</script> Softroni LLC. All rights reserved.</p>
+            <div class="footer-bottom">
+                <p>&copy; <script>document.write(new Date().getFullYear())</script> Softroni LLC. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        lucide.createIcons();
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
         }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
@@ -265,7 +477,7 @@
             const form = document.getElementById('contactForm');
             const btn = form.querySelector('button[type="submit"]');
             const origHTML = btn.innerHTML;
-            btn.innerHTML = '<svg class="animate-spin w-4 h-4" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg> Sending...';
+            btn.textContent = 'Sending...';
             btn.disabled = true;
 
             const formData = new FormData();
@@ -279,7 +491,7 @@
                 body: formData,
                 mode: 'no-cors'
             }).then(() => {
-                form.innerHTML = '<div class="text-center py-12"><div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4"><svg class="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div><h3 class="text-gray-900 text-xl font-bold mb-2">Message Sent!</h3><p class="text-gray-500">Thank you for reaching out. We\'ll get back to you within 24-48 business hours.</p></div>';
+                form.innerHTML = '<div class="success-msg"><div class="success-icon">&#10003;</div><h3>Message Sent!</h3><p>Thank you for reaching out. We\'ll get back to you within 24-48 business hours.</p></div>';
             }).catch(() => {
                 btn.innerHTML = origHTML;
                 btn.disabled = false;

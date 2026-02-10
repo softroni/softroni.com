@@ -5,464 +5,795 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beside — Free Body Doubling for iOS | Softroni</title>
     <meta name="description" content="Beside is a free iOS body doubling app. Feel the presence of someone working beside you through ambient scenes — no camera, no strangers, no paywall.">
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
-                    colors: {
-                        sage: {
-                            50: '#f6f7f4',
-                            100: '#e8ebe3',
-                            200: '#d4d9c9',
-                            300: '#b5bda5',
-                            400: '#96a17e',
-                            500: '#7a8763',
-                            600: '#5f6b4d',
-                            700: '#4b543e',
-                            800: '#3e4534',
-                            900: '#353b2e',
-                        },
-                        cream: {
-                            50: '#fefdfb',
-                            100: '#fdf9f0',
-                            200: '#faf3e2',
-                        }
-                    }
-                }
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --color-bg: #FFFFFF;
+            --color-surface: #FFFFFF;
+            --color-elevated: #F9F9F9;
+            --color-text: #1A1A1A;
+            --color-text-secondary: #999999;
+            --color-text-tertiary: #CCCCCC;
+            --color-accent: #00B368;
+            --color-accent-subtle: rgba(0, 179, 104, 0.1);
+            --color-border: #F0F0F0;
+            --color-dot: #DDDDDD;
+            --shadow-subtle: 0 4px 20px rgba(0,0,0,0.05);
+            --shadow-medium: 0 4px 20px rgba(0,0,0,0.1);
+            --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif;
+            --radius-btn: 8px;
+            --radius-card: 12px;
+            --radius-input: 8px;
+            /* Beside product accent */
+            --sage-50: #f6f7f4;
+            --sage-100: #e8ebe3;
+            --sage-200: #d4d9c9;
+            --sage-400: #96a17e;
+            --sage-500: #7a8763;
+            --sage-600: #5f6b4d;
+            --sage-700: #4b543e;
+            --sage-800: #3e4534;
+            --sage-900: #353b2e;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-bg: #0A0A0A;
+                --color-surface: #141414;
+                --color-elevated: #1E1E1E;
+                --color-text: #E8E8E8;
+                --color-text-secondary: #888888;
+                --color-text-tertiary: #555555;
+                --color-accent: #00C878;
+                --color-accent-subtle: rgba(0, 200, 120, 0.12);
+                --color-border: #222222;
+                --color-dot: #444444;
+                --shadow-subtle: none;
+                --shadow-medium: 0 4px 20px rgba(0,0,0,0.4);
+                --sage-50: #1a1c17;
+                --sage-100: #252820;
+                --sage-200: #353b2e;
             }
         }
-    </script>
-    <style>
-        html { scroll-behavior: smooth; }
 
-        @keyframes gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-sans);
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-        .gradient-text-sage {
-            background: linear-gradient(135deg, #5f6b4d, #7a8763, #96a17e, #5f6b4d);
-            background-size: 200% 200%;
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; }
+
+        .wrap { max-width: 1024px; margin: 0 auto; padding: 0 24px; }
+        .text-center { text-align: center; }
+
+        /* Navigation — Softroni brand with green accent */
+        .site-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--color-border);
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        @media (prefers-color-scheme: dark) {
+            .site-nav { background: rgba(10,10,10,0.85); }
+        }
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--color-text);
+        }
+        .nav-mark {
+            font-family: var(--font-mono);
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--color-accent);
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--sage-600); }
+        .nav-links .btn-sage { color: #fff; }
+        .nav-links .btn-sage:hover { color: #fff; }
+        @media (max-width: 639px) {
+            .nav-hide-mobile { display: none; }
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            border-radius: var(--radius-btn);
+            font-size: 14px;
+            font-weight: 600;
+            font-family: var(--font-sans);
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-sage {
+            background: var(--sage-600);
+            color: #fff;
+        }
+        .btn-sage:hover {
+            background: var(--sage-700);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(95,107,77,0.3);
+        }
+
+        /* Section */
+        section { padding: 80px 0; }
+        .section-label {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--sage-600);
+            margin-bottom: 12px;
+        }
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+        @media (min-width: 640px) { .section-title { font-size: 40px; } }
+        .section-bg { background: var(--color-surface); }
+        @media (prefers-color-scheme: light) {
+            .section-bg { background: #fff; }
+        }
+
+        /* Hero */
+        .hero {
+            padding: 60px 0 80px;
+        }
+        @media (min-width: 640px) { .hero { padding: 80px 0 100px; } }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+        @media (min-width: 1024px) {
+            .hero-grid { grid-template-columns: 1fr 1fr; gap: 64px; }
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            background: var(--sage-100);
+            color: var(--sage-700);
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+        @media (min-width: 640px) { .hero h1 { font-size: 48px; } }
+        @media (min-width: 1024px) { .hero h1 { font-size: 56px; } }
+        .hero h1 .sage-text {
+            background: linear-gradient(135deg, var(--sage-600), var(--sage-400));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: gradient-shift 6s ease infinite;
         }
-        .gradient-bg {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa);
-            background-size: 200% 200%;
-            animation: gradient-shift 6s ease infinite;
+        .hero-desc {
+            font-size: 18px;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            margin-bottom: 28px;
+            max-width: 480px;
         }
-        .gradient-bg-sage {
-            background: linear-gradient(135deg, #5f6b4d, #7a8763, #96a17e);
-            background-size: 200% 200%;
-            animation: gradient-shift 6s ease infinite;
+        .hero-signup {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 400px;
         }
-        .glass {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+        @media (min-width: 640px) { .hero-signup { flex-direction: row; } }
+        .hero-signup input[type="email"] {
+            flex: 1;
+            padding: 12px 16px;
+            border-radius: var(--radius-input);
+            border: 1px solid var(--sage-200);
+            font-size: 14px;
+            font-family: var(--font-sans);
+            color: var(--color-text);
+            background: var(--color-bg);
+        }
+        .hero-signup input[type="email"]:focus {
+            outline: none;
+            border-color: var(--sage-400);
+            box-shadow: 0 0 0 3px rgba(122,135,99,0.15);
+        }
+        .hero-note {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            margin-top: 8px;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            margin-top: 12px;
+            transition: color 0.2s;
+        }
+        .github-link:hover { color: var(--color-text); }
+        .github-link svg { width: 20px; height: 20px; fill: currentColor; }
+
+        /* Phone mockup */
+        .phone-mockup {
+            border-radius: 2rem;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.15), 0 0 0 8px #1a1a1a, 0 0 0 10px #333;
+            overflow: hidden;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        @media (min-width: 1024px) { .phone-mockup { margin: 0 0 0 auto; } }
+
+        /* Problem cards */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+        @media (min-width: 640px) { .problem-grid { grid-template-columns: repeat(3, 1fr); } }
+        .problem-card {
+            text-align: center;
+            padding: 32px;
+            border-radius: var(--radius-card);
+            background: var(--color-elevated);
+            border: 1px solid var(--color-border);
+        }
+        .problem-card .emoji { font-size: 32px; margin-bottom: 16px; }
+        .problem-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .problem-card p { color: var(--color-text-secondary); font-size: 14px; line-height: 1.6; }
+
+        /* Solution text */
+        .solution-text {
+            max-width: 640px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .solution-text p {
+            font-size: 18px;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+        .solution-text p:last-child { margin-bottom: 0; }
+        .solution-text strong { color: var(--color-text); }
+
+        /* Scenes */
+        .scenes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        @media (min-width: 640px) { .scenes-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 1024px) { .scenes-grid { grid-template-columns: repeat(6, 1fr); } }
+        .scene-card {
+            text-align: center;
+            padding: 20px 12px;
+            border-radius: var(--radius-card);
+            background: var(--sage-50);
+            border: 1px solid var(--sage-100);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .scene-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(95,107,77,0.1);
+        }
+        .scene-card .emoji { font-size: 28px; margin-bottom: 8px; }
+        .scene-card p { font-size: 13px; font-weight: 500; }
+
+        /* Feature cards */
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+        @media (min-width: 1024px) { .features-grid { grid-template-columns: repeat(3, 1fr); } }
+        .feature-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            box-shadow: var(--shadow-subtle);
+            border-top: 3px solid var(--sage-500);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+        .feature-img {
+            background: var(--sage-50);
+            padding: 24px;
+            display: flex;
+            justify-content: center;
+        }
+        .feature-img img {
+            height: 256px;
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-medium);
+        }
+        .feature-body { padding: 24px; }
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-card);
+            background: var(--sage-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+        .feature-body h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .feature-body p { color: var(--color-text-secondary); font-size: 14px; line-height: 1.6; }
+
+        .dark-mode-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: 999px;
+            background: var(--color-text);
+            color: var(--color-bg);
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 48px;
         }
 
+        /* Free callout */
+        .free-section {
+            background: linear-gradient(135deg, var(--sage-600), var(--sage-800));
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .free-section::before,
+        .free-section::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            filter: blur(60px);
+        }
+        .free-section::before { width: 300px; height: 300px; top: -50px; left: -50px; }
+        .free-section::after { width: 400px; height: 400px; bottom: -80px; right: -80px; }
+        .free-content {
+            position: relative;
+            z-index: 1;
+            max-width: 560px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .free-content .big-emoji { font-size: 40px; margin-bottom: 20px; }
+        .free-content h2 {
+            color: #fff;
+            font-size: 40px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+        @media (min-width: 640px) { .free-content h2 { font-size: 48px; } }
+        .free-content .lead { color: rgba(255,255,255,0.9); font-size: 20px; font-weight: 500; margin-bottom: 12px; }
+        .free-content p { color: rgba(255,255,255,0.7); font-size: 16px; line-height: 1.7; }
+
+        /* Who it's for */
+        .audience-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+        @media (min-width: 640px) { .audience-grid { grid-template-columns: repeat(3, 1fr); } }
+        .audience-card { text-align: center; padding: 32px 16px; }
+        .audience-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: var(--sage-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin: 0 auto 20px;
+        }
+        .audience-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .audience-card p { color: var(--color-text-secondary); font-size: 14px; line-height: 1.6; }
+
+        /* Bottom signup */
+        .signup-section {
+            background: linear-gradient(135deg, var(--sage-700), var(--sage-900));
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .signup-section::before,
+        .signup-section::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+            filter: blur(60px);
+        }
+        .signup-section::before { width: 300px; height: 300px; top: 20px; left: 20px; }
+        .signup-section::after { width: 400px; height: 400px; bottom: 20px; right: 20px; }
+        .signup-content {
+            position: relative;
+            z-index: 1;
+            max-width: 560px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .signup-content h2 {
+            color: #fff;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        @media (min-width: 640px) { .signup-content h2 { font-size: 40px; } }
+        .signup-content .lead { color: rgba(255,255,255,0.8); font-size: 18px; margin-bottom: 32px; }
+        .signup-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 440px;
+            margin: 0 auto;
+        }
+        @media (min-width: 640px) { .signup-form { flex-direction: row; } }
+        .signup-form input[type="email"] {
+            flex: 1;
+            padding: 12px 16px;
+            border-radius: var(--radius-input);
+            border: none;
+            font-size: 14px;
+            font-family: var(--font-sans);
+            color: var(--color-text);
+            background: #fff;
+        }
+        .signup-form input[type="email"]:focus { outline: 2px solid rgba(255,255,255,0.5); }
+        .signup-form button {
+            padding: 12px 24px;
+            border-radius: var(--radius-btn);
+            border: none;
+            background: #fff;
+            color: var(--sage-700);
+            font-weight: 600;
+            font-size: 14px;
+            font-family: var(--font-sans);
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+        .signup-form button:hover { background: rgba(255,255,255,0.9); }
+        .signup-note { color: rgba(255,255,255,0.5); font-size: 13px; margin-top: 12px; }
+
+        /* Footer — Softroni brand with green accent */
+        .site-footer {
+            border-top: 1px solid var(--color-border);
+            background: var(--color-surface);
+            padding: 48px 0;
+        }
+        .footer-top {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+        @media (min-width: 768px) {
+            .footer-top { flex-direction: row; align-items: center; justify-content: space-between; }
+        }
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--color-text);
+        }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 24px; }
+        .footer-links a {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--color-accent); }
+        .footer-bottom {
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 1px solid var(--color-border);
+        }
+        .footer-bottom p { font-size: 14px; color: var(--color-text-secondary); }
+
+        /* Fade-in */
         .fade-in {
             opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
         .fade-in-delay-1 { transition-delay: 0.1s; }
         .fade-in-delay-2 { transition-delay: 0.2s; }
         .fade-in-delay-3 { transition-delay: 0.3s; }
         .fade-in-delay-4 { transition-delay: 0.4s; }
 
-        .hero-bg-sage {
-            background: radial-gradient(ellipse at 30% 20%, rgba(122,135,99,0.1) 0%, transparent 50%),
-                        radial-gradient(ellipse at 70% 60%, rgba(150,161,126,0.08) 0%, transparent 50%);
-        }
-
-        .card-hover {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .card-hover:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(95,107,77,0.1);
-        }
-
-        .btn-sage {
-            background: linear-gradient(135deg, #5f6b4d, #7a8763);
-            transition: all 0.3s ease;
-        }
-        .btn-sage:hover {
-            background: linear-gradient(135deg, #4b543e, #5f6b4d);
-            box-shadow: 0 8px 24px rgba(95,107,77,0.3);
-            transform: translateY(-1px);
-        }
-
-        .btn-gradient {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            transition: all 0.3s ease;
-        }
-        .btn-gradient:hover {
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
-            box-shadow: 0 8px 24px rgba(99,102,241,0.3);
-            transform: translateY(-1px);
-        }
-
-        .phone-mockup {
-            border-radius: 2rem;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.15), 0 0 0 8px #1a1a1a, 0 0 0 10px #333;
-            overflow: hidden;
-        }
-
-        .scene-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .scene-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(95,107,77,0.12);
-        }
-
-        .gradient-border-sage { position: relative; }
-        .gradient-border-sage::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #5f6b4d, #7a8763, #96a17e);
-            border-radius: 999px 999px 0 0;
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .fade-in { opacity: 1; transform: none; }
         }
     </style>
 </head>
-<body class="bg-cream-50 text-gray-600 font-sans antialiased">
-    <!-- Navigation -->
-    <nav class="sticky top-0 z-50 glass border-b border-gray-100/50">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-2 text-gray-900 font-bold text-xl tracking-tight">
-                <div class="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center">
-                    <span class="text-white font-bold text-sm">S</span>
-                </div>
-                Softroni
+<body>
+    <!-- Softroni brand nav with green accent per brand guidelines section 9 -->
+    <nav class="site-nav">
+        <div class="wrap nav-inner">
+            <a href="/" class="nav-brand">
+                <span class="nav-mark">&gt;S_</span>
+                <span>Softroni</span>
             </a>
-            <div class="flex items-center gap-6">
-                <a href="/about.html" class="hidden sm:flex items-center gap-1.5 text-gray-500 hover:text-sage-600 text-sm font-medium transition-colors">
-                    <i data-lucide="users" class="w-4 h-4"></i> About
-                </a>
-                <a href="/support.html" class="hidden sm:flex items-center gap-1.5 text-gray-500 hover:text-sage-600 text-sm font-medium transition-colors">
-                    <i data-lucide="life-buoy" class="w-4 h-4"></i> Support
-                </a>
-                <a href="#notify" class="btn-sage text-white text-sm font-medium px-5 py-2.5 rounded-full inline-flex items-center gap-2">
-                    <i data-lucide="bell" class="w-4 h-4"></i> Get Notified
-                </a>
+            <div class="nav-links">
+                <a href="/about.html" class="nav-hide-mobile">About</a>
+                <a href="/support.html" class="nav-hide-mobile">Support</a>
+                <a href="#notify" class="btn btn-sage">Get Notified</a>
             </div>
         </div>
     </nav>
 
     <main>
-        <!-- Hero Section -->
-        <section class="hero-bg-sage pt-20 pb-16 sm:pt-28 sm:pb-24">
-            <div class="max-w-6xl mx-auto px-6">
-                <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <!-- Hero -->
+        <section class="hero">
+            <div class="wrap">
+                <div class="hero-grid">
                     <div>
-                        <div class="fade-in inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sage-100 text-sage-700 text-sm font-medium mb-8">
-                            <i data-lucide="leaf" class="w-4 h-4"></i>
-                            Free for iOS — Coming Soon
-                        </div>
-                        <h1 class="fade-in fade-in-delay-1 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] mb-4 text-gray-900">
-                            Someone's here.<br><span class="gradient-text-sage">Let's focus.</span>
-                        </h1>
-                        <p class="fade-in fade-in-delay-2 text-gray-500 text-lg sm:text-xl leading-relaxed max-w-lg mb-8">
-                            Free body doubling for iOS. No camera. No strangers. No paywall.
-                        </p>
-                        <form id="heroSignup" class="fade-in fade-in-delay-3 flex flex-col sm:flex-row gap-3 max-w-md" onsubmit="return submitSignup(event, 'heroSignup')">
-                            <div class="flex-1 relative">
-                                <i data-lucide="at-sign" class="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
-                                <input type="email" placeholder="Enter your email" required class="w-full pl-11 pr-4 py-3.5 rounded-full text-gray-900 text-sm bg-white border border-sage-200 focus:outline-none focus:ring-2 focus:ring-sage-400/50 focus:border-sage-400 placeholder-gray-400">
-                            </div>
-                            <button type="submit" class="btn-sage text-white font-semibold px-7 py-3.5 rounded-full text-sm inline-flex items-center justify-center gap-2 whitespace-nowrap">
-                                Get Notified <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </button>
+                        <div class="fade-in hero-badge">&#127807; Free for iOS — Coming Soon</div>
+                        <h1 class="fade-in fade-in-delay-1">Someone's here.<br><span class="sage-text">Let's focus.</span></h1>
+                        <p class="fade-in fade-in-delay-2 hero-desc">Free body doubling for iOS. No camera. No strangers. No paywall.</p>
+                        <form id="heroSignup" class="fade-in fade-in-delay-3 hero-signup" onsubmit="return submitSignup(event, 'heroSignup')">
+                            <input type="email" placeholder="Enter your email" required>
+                            <button type="submit" class="btn btn-sage">Get Notified &rarr;</button>
                         </form>
-                        <p class="fade-in fade-in-delay-4 text-gray-400 text-xs mt-3">Get notified when we launch. No spam, ever.</p>
-                        <a href="https://github.com/softroni/Beside" target="_blank" class="fade-in fade-in-delay-4 inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-900 mt-4 transition-colors">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        <p class="fade-in fade-in-delay-4 hero-note">Get notified when we launch. No spam, ever.</p>
+                        <a href="https://github.com/softroni/Beside" target="_blank" class="fade-in fade-in-delay-4 github-link">
+                            <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                             Open Source — Star us on GitHub
                         </a>
                     </div>
-                    <div class="fade-in fade-in-delay-2 flex justify-center lg:justify-end">
-                        <div class="phone-mockup w-[280px] sm:w-[300px]">
-                            <img src="images/03-ScenePicker.png" alt="Beside app — Scene picker showing ambient focus environments" class="w-full block">
+                    <div class="fade-in fade-in-delay-2">
+                        <div class="phone-mockup">
+                            <img src="images/03-ScenePicker.png" alt="Beside app — Scene picker showing ambient focus environments">
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Problem Section -->
-        <section class="py-20 sm:py-28 bg-white">
-            <div class="max-w-6xl mx-auto px-6">
-                <div class="max-w-3xl mx-auto text-center fade-in">
-                    <p class="text-sage-600 text-sm font-semibold uppercase tracking-widest mb-3">The Problem</p>
-                    <h2 class="text-gray-900 text-3xl sm:text-4xl font-bold tracking-tight mb-6">Focusing alone is hard</h2>
-                    <p class="text-gray-500 text-lg leading-relaxed mb-12">
-                        Body doubling — having someone present while you work — is a proven ADHD and productivity technique. But current solutions make it harder than it needs to be.
-                    </p>
+        <!-- Problem -->
+        <section class="section-bg">
+            <div class="wrap">
+                <div class="text-center fade-in" style="max-width: 640px; margin: 0 auto 48px;">
+                    <p class="section-label">The Problem</p>
+                    <h2 class="section-title">Focusing alone is hard</h2>
+                    <p style="color: var(--color-text-secondary); font-size: 17px; line-height: 1.7;">Body doubling — having someone present while you work — is a proven ADHD and productivity technique. But current solutions make it harder than it needs to be.</p>
                 </div>
-                <div class="grid sm:grid-cols-3 gap-8">
-                    <div class="fade-in fade-in-delay-1 text-center p-8 rounded-2xl bg-red-50/50 border border-red-100/50">
-                        <div class="text-3xl mb-4">💸</div>
-                        <h3 class="text-gray-900 font-semibold text-lg mb-2">Expensive</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed">Competitors charge $7–40/month for what should be a simple experience.</p>
+                <div class="problem-grid">
+                    <div class="problem-card fade-in fade-in-delay-1">
+                        <div class="emoji">&#128184;</div>
+                        <h3>Expensive</h3>
+                        <p>Competitors charge $7–40/month for what should be a simple experience.</p>
                     </div>
-                    <div class="fade-in fade-in-delay-2 text-center p-8 rounded-2xl bg-red-50/50 border border-red-100/50">
-                        <div class="text-3xl mb-4">📹</div>
-                        <h3 class="text-gray-900 font-semibold text-lg mb-2">Camera Required</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed">Most apps force you on camera with strangers — adding pressure instead of reducing it.</p>
+                    <div class="problem-card fade-in fade-in-delay-2">
+                        <div class="emoji">&#128249;</div>
+                        <h3>Camera Required</h3>
+                        <p>Most apps force you on camera with strangers — adding pressure instead of reducing it.</p>
                     </div>
-                    <div class="fade-in fade-in-delay-3 text-center p-8 rounded-2xl bg-red-50/50 border border-red-100/50">
-                        <div class="text-3xl mb-4">📅</div>
-                        <h3 class="text-gray-900 font-semibold text-lg mb-2">Scheduling Hassles</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed">Coordinating sessions with real people means you can't just focus when you need to.</p>
+                    <div class="problem-card fade-in fade-in-delay-3">
+                        <div class="emoji">&#128197;</div>
+                        <h3>Scheduling Hassles</h3>
+                        <p>Coordinating sessions with real people means you can't just focus when you need to.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Solution Section -->
-        <section class="py-20 sm:py-28">
-            <div class="max-w-6xl mx-auto px-6">
-                <div class="max-w-3xl mx-auto text-center fade-in">
-                    <p class="text-sage-600 text-sm font-semibold uppercase tracking-widest mb-3">The Solution</p>
-                    <h2 class="text-gray-900 text-3xl sm:text-4xl font-bold tracking-tight mb-6">Feel the presence.<br>Skip the pressure.</h2>
-                    <p class="text-gray-500 text-lg leading-relaxed mb-4">
-                        Beside creates the <strong class="text-gray-700">feeling</strong> of someone working next to you through ambient scenes with visual and audio presence cues — no real people needed.
-                    </p>
-                    <p class="text-gray-500 text-lg leading-relaxed">
-                        Open the app, pick a scene, start your timer, and focus. It's that simple.
-                    </p>
+        <!-- Solution -->
+        <section>
+            <div class="wrap">
+                <div class="solution-text fade-in">
+                    <p class="section-label">The Solution</p>
+                    <h2 class="section-title">Feel the presence.<br>Skip the pressure.</h2>
+                    <p>Beside creates the <strong>feeling</strong> of someone working next to you through ambient scenes with visual and audio presence cues — no real people needed.</p>
+                    <p>Open the app, pick a scene, start your timer, and focus. It's that simple.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Features Section -->
-        <section class="py-20 sm:py-28 bg-white">
-            <div class="max-w-6xl mx-auto px-6">
-                <div class="text-center mb-16 fade-in">
-                    <p class="text-sage-600 text-sm font-semibold uppercase tracking-widest mb-3">Features</p>
-                    <h2 class="text-gray-900 text-3xl sm:text-4xl font-bold tracking-tight">Everything you need to focus</h2>
+        <!-- Features -->
+        <section class="section-bg">
+            <div class="wrap">
+                <div class="text-center fade-in" style="margin-bottom: 48px;">
+                    <p class="section-label">Features</p>
+                    <h2 class="section-title">Everything you need to focus</h2>
                 </div>
 
-                <!-- 6 Scenes -->
-                <div class="mb-16 fade-in">
-                    <h3 class="text-gray-900 font-semibold text-xl mb-2 text-center">6 Ambient Scenes</h3>
-                    <p class="text-gray-500 text-sm text-center mb-8 max-w-lg mx-auto">Each scene is crafted with visual and audio presence cues to make you feel like someone's right there with you.</p>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-                        <div class="scene-card bg-cream-50 rounded-2xl p-5 text-center border border-sage-100">
-                            <div class="text-3xl mb-2">☁️</div>
-                            <p class="text-gray-900 font-medium text-sm">Cozy Room</p>
-                        </div>
-                        <div class="scene-card bg-cream-50 rounded-2xl p-5 text-center border border-sage-100">
-                            <div class="text-3xl mb-2">☕</div>
-                            <p class="text-gray-900 font-medium text-sm">Coffee Shop</p>
-                        </div>
-                        <div class="scene-card bg-cream-50 rounded-2xl p-5 text-center border border-sage-100">
-                            <div class="text-3xl mb-2">📚</div>
-                            <p class="text-gray-900 font-medium text-sm">Library</p>
-                        </div>
-                        <div class="scene-card bg-cream-50 rounded-2xl p-5 text-center border border-sage-100">
-                            <div class="text-3xl mb-2">🎧</div>
-                            <p class="text-gray-900 font-medium text-sm">Lo-fi Room</p>
-                        </div>
-                        <div class="scene-card bg-cream-50 rounded-2xl p-5 text-center border border-sage-100">
-                            <div class="text-3xl mb-2">🌙</div>
-                            <p class="text-gray-900 font-medium text-sm">Night Owl</p>
-                        </div>
-                        <div class="scene-card bg-cream-50 rounded-2xl p-5 text-center border border-sage-100">
-                            <div class="text-3xl mb-2">🌿</div>
-                            <p class="text-gray-900 font-medium text-sm">Garden Morning</p>
-                        </div>
+                <!-- Scenes -->
+                <div class="fade-in" style="margin-bottom: 48px;">
+                    <h3 class="text-center" style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">6 Ambient Scenes</h3>
+                    <p class="text-center" style="color: var(--color-text-secondary); font-size: 14px; max-width: 480px; margin: 0 auto 24px;">Each scene is crafted with visual and audio presence cues to make you feel like someone's right there with you.</p>
+                    <div class="scenes-grid">
+                        <div class="scene-card"><div class="emoji">&#9729;&#65039;</div><p>Cozy Room</p></div>
+                        <div class="scene-card"><div class="emoji">&#9749;</div><p>Coffee Shop</p></div>
+                        <div class="scene-card"><div class="emoji">&#128218;</div><p>Library</p></div>
+                        <div class="scene-card"><div class="emoji">&#127911;</div><p>Lo-fi Room</p></div>
+                        <div class="scene-card"><div class="emoji">&#127769;</div><p>Night Owl</p></div>
+                        <div class="scene-card"><div class="emoji">&#127807;</div><p>Garden Morning</p></div>
                     </div>
                 </div>
 
-                <!-- Feature Cards with Screenshots -->
-                <div class="grid lg:grid-cols-3 gap-8">
-                    <div class="fade-in fade-in-delay-1 card-hover gradient-border-sage bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
-                        <div class="bg-sage-50 p-6 flex justify-center">
-                            <img src="images/01-Onboarding-Welcome.png" alt="Beside onboarding screen" class="h-64 rounded-xl shadow-md">
+                <!-- Feature cards -->
+                <div class="features-grid">
+                    <div class="feature-card fade-in fade-in-delay-1">
+                        <div class="feature-img">
+                            <img src="images/01-Onboarding-Welcome.png" alt="Beside onboarding screen">
                         </div>
-                        <div class="p-6">
-                            <div class="w-10 h-10 rounded-xl bg-sage-100 flex items-center justify-center mb-4">
-                                <i data-lucide="timer" class="w-5 h-5 text-sage-700"></i>
-                            </div>
-                            <h3 class="text-gray-900 font-semibold text-lg mb-2">Focus Timer</h3>
-                            <p class="text-gray-500 text-sm leading-relaxed">Customizable session durations to match your flow. Set it, start it, focus.</p>
+                        <div class="feature-body">
+                            <div class="feature-icon">&#9201;</div>
+                            <h3>Focus Timer</h3>
+                            <p>Customizable session durations to match your flow. Set it, start it, focus.</p>
                         </div>
                     </div>
-                    <div class="fade-in fade-in-delay-2 card-hover gradient-border-sage bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
-                        <div class="bg-sage-50 p-6 flex justify-center">
-                            <img src="images/03-ScenePicker.png" alt="Beside scene picker" class="h-64 rounded-xl shadow-md">
+                    <div class="feature-card fade-in fade-in-delay-2">
+                        <div class="feature-img">
+                            <img src="images/03-ScenePicker.png" alt="Beside scene picker">
                         </div>
-                        <div class="p-6">
-                            <div class="w-10 h-10 rounded-xl bg-sage-100 flex items-center justify-center mb-4">
-                                <i data-lucide="image" class="w-5 h-5 text-sage-700"></i>
-                            </div>
-                            <h3 class="text-gray-900 font-semibold text-lg mb-2">Ambient Scenes</h3>
-                            <p class="text-gray-500 text-sm leading-relaxed">Six handcrafted environments with visual and audio presence cues that feel natural.</p>
+                        <div class="feature-body">
+                            <div class="feature-icon">&#127912;</div>
+                            <h3>Ambient Scenes</h3>
+                            <p>Six handcrafted environments with visual and audio presence cues that feel natural.</p>
                         </div>
                     </div>
-                    <div class="fade-in fade-in-delay-3 card-hover gradient-border-sage bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
-                        <div class="bg-sage-50 p-6 flex justify-center">
-                            <img src="images/04-History.png" alt="Beside session history" class="h-64 rounded-xl shadow-md">
+                    <div class="feature-card fade-in fade-in-delay-3">
+                        <div class="feature-img">
+                            <img src="images/04-History.png" alt="Beside session history">
                         </div>
-                        <div class="p-6">
-                            <div class="w-10 h-10 rounded-xl bg-sage-100 flex items-center justify-center mb-4">
-                                <i data-lucide="bar-chart-3" class="w-5 h-5 text-sage-700"></i>
-                            </div>
-                            <h3 class="text-gray-900 font-semibold text-lg mb-2">Session History</h3>
-                            <p class="text-gray-500 text-sm leading-relaxed">Track your focus sessions and build streaks. See your progress over time.</p>
+                        <div class="feature-body">
+                            <div class="feature-icon">&#128200;</div>
+                            <h3>Session History</h3>
+                            <p>Track your focus sessions and build streaks. See your progress over time.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Dark Mode mention -->
-                <div class="fade-in mt-12 text-center">
-                    <div class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gray-900 text-white text-sm font-medium">
-                        <i data-lucide="moon" class="w-4 h-4"></i>
-                        Dark Mode supported — easy on the eyes, day or night
-                    </div>
+                <div class="fade-in text-center">
+                    <div class="dark-mode-badge">&#127769; Dark Mode supported — easy on the eyes, day or night</div>
                 </div>
             </div>
         </section>
 
-        <!-- 100% Free Callout -->
-        <section class="py-20 sm:py-28 bg-gradient-to-br from-sage-600 to-sage-800 relative overflow-hidden">
-            <div class="absolute inset-0 opacity-10">
-                <div class="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
-                <div class="absolute bottom-10 right-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-            </div>
-            <div class="max-w-6xl mx-auto px-6 relative z-10">
-                <div class="max-w-2xl mx-auto text-center fade-in">
-                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/20 mb-6">
-                        <i data-lucide="heart" class="w-8 h-8 text-white"></i>
-                    </div>
-                    <h2 class="text-white text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">100% Free</h2>
-                    <p class="text-sage-100 text-xl sm:text-2xl font-medium mb-3">No ads. No subscriptions. No paywall. Ever.</p>
-                    <p class="text-sage-200 text-base leading-relaxed max-w-lg mx-auto">
-                        We believe focus tools should be accessible to everyone — especially the ADHD community that needs them most. Beside will always be free.
-                    </p>
-                </div>
+        <!-- 100% Free -->
+        <section class="free-section">
+            <div class="free-content fade-in">
+                <div class="big-emoji">&#10084;&#65039;</div>
+                <h2>100% Free</h2>
+                <p class="lead">No ads. No subscriptions. No paywall. Ever.</p>
+                <p>We believe focus tools should be accessible to everyone — especially the ADHD community that needs them most. Beside will always be free.</p>
             </div>
         </section>
 
         <!-- Who It's For -->
-        <section class="py-20 sm:py-28 bg-white">
-            <div class="max-w-6xl mx-auto px-6">
-                <div class="text-center mb-12 fade-in">
-                    <p class="text-sage-600 text-sm font-semibold uppercase tracking-widest mb-3">Built For</p>
-                    <h2 class="text-gray-900 text-3xl sm:text-4xl font-bold tracking-tight">People who get it</h2>
+        <section class="section-bg">
+            <div class="wrap">
+                <div class="text-center fade-in" style="margin-bottom: 48px;">
+                    <p class="section-label">Built For</p>
+                    <h2 class="section-title">People who get it</h2>
                 </div>
-                <div class="grid sm:grid-cols-3 gap-8">
-                    <div class="fade-in fade-in-delay-1 text-center p-8">
-                        <div class="w-14 h-14 rounded-2xl bg-sage-100 flex items-center justify-center mx-auto mb-5">
-                            <i data-lucide="brain" class="w-7 h-7 text-sage-700"></i>
-                        </div>
-                        <h3 class="text-gray-900 font-semibold text-lg mb-2">ADHD Adults</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed">Body doubling is one of the most effective ADHD strategies. Now it's always available.</p>
+                <div class="audience-grid">
+                    <div class="audience-card fade-in fade-in-delay-1">
+                        <div class="audience-icon">&#129504;</div>
+                        <h3>ADHD Adults</h3>
+                        <p>Body doubling is one of the most effective ADHD strategies. Now it's always available.</p>
                     </div>
-                    <div class="fade-in fade-in-delay-2 text-center p-8">
-                        <div class="w-14 h-14 rounded-2xl bg-sage-100 flex items-center justify-center mx-auto mb-5">
-                            <i data-lucide="graduation-cap" class="w-7 h-7 text-sage-700"></i>
-                        </div>
-                        <h3 class="text-gray-900 font-semibold text-lg mb-2">Students</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed">Studying alone in your room? Beside makes it feel like the library — without leaving home.</p>
+                    <div class="audience-card fade-in fade-in-delay-2">
+                        <div class="audience-icon">&#127891;</div>
+                        <h3>Students</h3>
+                        <p>Studying alone in your room? Beside makes it feel like the library — without leaving home.</p>
                     </div>
-                    <div class="fade-in fade-in-delay-3 text-center p-8">
-                        <div class="w-14 h-14 rounded-2xl bg-sage-100 flex items-center justify-center mx-auto mb-5">
-                            <i data-lucide="home" class="w-7 h-7 text-sage-700"></i>
-                        </div>
-                        <h3 class="text-gray-900 font-semibold text-lg mb-2">Remote Workers</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed">Working from home can feel isolating. Add the presence you're missing to your workspace.</p>
+                    <div class="audience-card fade-in fade-in-delay-3">
+                        <div class="audience-icon">&#127968;</div>
+                        <h3>Remote Workers</h3>
+                        <p>Working from home can feel isolating. Add the presence you're missing to your workspace.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Bottom Email Signup -->
-        <section id="notify" class="py-20 sm:py-28 bg-gradient-to-br from-sage-700 to-sage-900 relative overflow-hidden">
-            <div class="absolute inset-0 opacity-10">
-                <div class="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
-                <div class="absolute bottom-10 right-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-            </div>
-            <div class="max-w-6xl mx-auto px-6 relative z-10">
-                <div class="max-w-2xl mx-auto text-center fade-in">
-                    <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white/20 mb-6">
-                        <i data-lucide="bell" class="w-7 h-7 text-white"></i>
-                    </div>
-                    <h2 class="text-white text-3xl sm:text-4xl font-bold tracking-tight mb-4">Get notified when we launch</h2>
-                    <p class="text-sage-200 text-lg mb-8">Be the first to know when Beside is available on the App Store.</p>
-                    <form id="bottomSignup" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onsubmit="return submitSignup(event, 'bottomSignup')">
-                        <div class="flex-1 relative">
-                            <i data-lucide="at-sign" class="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
-                            <input type="email" placeholder="Enter your email" required class="w-full pl-11 pr-4 py-3.5 rounded-full text-gray-900 text-sm bg-white border-0 focus:outline-none focus:ring-2 focus:ring-white/50 placeholder-gray-400">
-                        </div>
-                        <button type="submit" class="bg-white text-sage-700 font-semibold px-8 py-3.5 rounded-full text-sm hover:bg-sage-50 transition-colors inline-flex items-center justify-center gap-2">
-                            Get Notified <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </button>
-                    </form>
-                    <p class="text-sage-300 text-xs mt-4">No spam, ever. We respect your privacy.</p>
-                </div>
+        <!-- Bottom Signup -->
+        <section id="notify" class="signup-section">
+            <div class="signup-content fade-in">
+                <h2>Get notified when we launch</h2>
+                <p class="lead">Be the first to know when Beside is available on the App Store.</p>
+                <form id="bottomSignup" class="signup-form" onsubmit="return submitSignup(event, 'bottomSignup')">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Get Notified &rarr;</button>
+                </form>
+                <p class="signup-note">No spam, ever. We respect your privacy.</p>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-50 border-t border-gray-100">
-        <div class="max-w-6xl mx-auto px-6 py-12">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-8">
-                <div class="flex items-center gap-2">
-                    <div class="w-7 h-7 rounded-lg gradient-bg flex items-center justify-center">
-                        <span class="text-white font-bold text-xs">S</span>
-                    </div>
-                    <span class="text-gray-900 font-bold tracking-tight">Softroni</span>
-                </div>
-                <nav class="flex flex-wrap gap-x-8 gap-y-3 text-sm">
-                    <a href="/about.html" class="text-gray-500 hover:text-sage-600 transition-colors inline-flex items-center gap-1.5">
-                        <i data-lucide="users" class="w-3.5 h-3.5"></i> About
-                    </a>
-                    <a href="/privacy-policy.html" class="text-gray-500 hover:text-sage-600 transition-colors inline-flex items-center gap-1.5">
-                        <i data-lucide="shield" class="w-3.5 h-3.5"></i> Privacy Policy
-                    </a>
-                    <a href="/terms-of-service.html" class="text-gray-500 hover:text-sage-600 transition-colors inline-flex items-center gap-1.5">
-                        <i data-lucide="file-text" class="w-3.5 h-3.5"></i> Terms of Service
-                    </a>
-                    <a href="/support.html" class="text-gray-500 hover:text-sage-600 transition-colors inline-flex items-center gap-1.5">
-                        <i data-lucide="life-buoy" class="w-3.5 h-3.5"></i> Support
-                    </a>
+    <!-- Softroni brand footer with green accent per brand guidelines section 9 -->
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-top">
+                <a href="/" class="footer-brand">
+                    <span class="nav-mark">&gt;S_</span>
+                    <span>Softroni</span>
+                </a>
+                <nav class="footer-links">
+                    <a href="/about.html">About</a>
+                    <a href="/privacy-policy.html">Privacy Policy</a>
+                    <a href="/terms-of-service.html">Terms of Service</a>
+                    <a href="/support.html">Support</a>
                 </nav>
             </div>
-            <div class="border-t border-gray-200 mt-8 pt-8">
-                <p class="text-gray-400 text-sm">&copy; <script>document.write(new Date().getFullYear())</script> Softroni LLC. All rights reserved.</p>
+            <div class="footer-bottom">
+                <p>&copy; <script>document.write(new Date().getFullYear())</script> Softroni LLC. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        lucide.createIcons();
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
         }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
         function submitSignup(e, formId) {
@@ -473,7 +804,7 @@
             const email = emailInput.value;
 
             btn.disabled = true;
-            btn.innerHTML = '<svg class="animate-spin w-4 h-4" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg> Sending...';
+            btn.textContent = 'Sending...';
 
             const formData = new FormData();
             formData.append('entry.1799011564', email);
@@ -483,10 +814,10 @@
                 body: formData,
                 mode: 'no-cors'
             }).then(() => {
-                form.innerHTML = '<p class="text-white text-lg font-medium flex items-center justify-center gap-2"><svg class="w-5 h-5 text-green-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> You\'re on the list!</p>';
+                form.innerHTML = '<p style="color:#fff;font-size:18px;font-weight:500;">&#10003; You\'re on the list!</p>';
             }).catch(() => {
                 btn.disabled = false;
-                btn.innerHTML = 'Get Notified <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+                btn.textContent = 'Get Notified \u2192';
                 alert('Something went wrong. Please try again.');
             });
             return false;
