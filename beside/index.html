@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beside — Free Body Doubling for iOS | Softroni</title>
-    <meta name="description" content="Beside is a free iOS body doubling app. Feel the presence of someone working beside you through ambient scenes — no camera, no strangers, no paywall.">
+    <meta name="description" content="Beside — the free body doubling app for ADHD. Ambient focus scenes with lofi sounds, no camera required. Coming to iOS.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
@@ -270,6 +270,99 @@
         }
         .github-link:hover { color: var(--color-text); }
         .github-link svg { width: 20px; height: 20px; fill: currentColor; }
+
+        /* No Camera badge */
+        .no-camera-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            color: #991b1b;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        @media (prefers-color-scheme: dark) {
+            .no-camera-badge { background: linear-gradient(135deg, #451a1a, #5c1e1e); color: #fca5a5; }
+        }
+
+        /* App Store badge */
+        .appstore-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: 12px;
+            background: #000;
+            color: #fff;
+            font-size: 14px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 8px;
+        }
+        .appstore-badge:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+        .appstore-badge svg { width: 24px; height: 24px; fill: #fff; }
+        .appstore-badge .badge-text { display: flex; flex-direction: column; line-height: 1.2; }
+        .appstore-badge .badge-text small { font-size: 10px; font-weight: 400; opacity: 0.8; }
+        .appstore-badge .badge-text span { font-size: 16px; font-weight: 600; }
+
+        /* Screenshot preview section */
+        .screenshots-scroll {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 0 32px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .screenshots-scroll::-webkit-scrollbar { display: none; }
+        .screenshot-frame {
+            flex: 0 0 260px;
+            scroll-snap-align: center;
+            border-radius: 2rem;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12), 0 0 0 6px #1a1a1a, 0 0 0 8px #333;
+            overflow: hidden;
+            background: var(--sage-50);
+            aspect-ratio: 9/19.5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 24px;
+        }
+        .screenshot-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .screenshot-frame.placeholder .scene-emoji { font-size: 48px; margin-bottom: 16px; }
+        .screenshot-frame.placeholder .scene-name { font-size: 18px; font-weight: 700; color: var(--sage-700); margin-bottom: 8px; }
+        .screenshot-frame.placeholder .scene-desc { font-size: 13px; color: var(--color-text-secondary); line-height: 1.5; }
+
+        /* FAQ section */
+        .faq-list {
+            max-width: 680px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            border-bottom: 1px solid var(--color-border);
+            padding: 24px 0;
+        }
+        .faq-item:first-child { border-top: 1px solid var(--color-border); }
+        .faq-q {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--color-text);
+        }
+        .faq-a {
+            font-size: 15px;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+        }
 
         /* Phone mockup */
         .phone-mockup {
@@ -602,7 +695,8 @@
             <div class="wrap">
                 <div class="hero-grid">
                     <div>
-                        <div class="fade-in hero-badge">&#127807; Free for iOS — Coming Soon</div>
+                        <div class="fade-in no-camera-badge">&#128683; No Camera Required</div>
+                        <div class="fade-in hero-badge">&#127807; Free for iOS — Coming Spring 2026</div>
                         <h1 class="fade-in fade-in-delay-1">Someone's here.<br><span class="sage-text">Let's focus.</span></h1>
                         <p class="fade-in fade-in-delay-2 hero-desc">Free body doubling for iOS. No camera. No strangers. No paywall.</p>
                         <form id="heroSignup" class="fade-in fade-in-delay-3 hero-signup" onsubmit="return submitSignup(event, 'heroSignup')">
@@ -610,6 +704,10 @@
                             <button type="submit" class="btn btn-sage">Get Notified &rarr;</button>
                         </form>
                         <p class="fade-in fade-in-delay-4 hero-note">Get notified when we launch. No spam, ever.</p>
+                        <a href="#notify" class="fade-in fade-in-delay-4 appstore-badge">
+                            <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                            <div class="badge-text"><small>Coming Spring 2026 to the</small><span>App Store</span></div>
+                        </a>
                         <a href="https://github.com/softroni/Beside" target="_blank" class="fade-in fade-in-delay-4 github-link">
                             <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                             Open Source — Star us on GitHub
@@ -660,6 +758,24 @@
                     <h2 class="section-title">Feel the presence.<br>Skip the pressure.</h2>
                     <p>Beside creates the <strong>feeling</strong> of someone working next to you through ambient scenes with visual and audio presence cues — no real people needed.</p>
                     <p>Open the app, pick a scene, start your timer, and focus. It's that simple.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- App Preview Screenshots -->
+        <section>
+            <div class="wrap">
+                <div class="text-center fade-in" style="margin-bottom: 16px;">
+                    <p class="section-label">App Preview</p>
+                    <h2 class="section-title">A glimpse inside Beside</h2>
+                    <p style="color: var(--color-text-secondary); font-size: 17px;">Swipe through ambient scenes and the focus timer.</p>
+                </div>
+                <div class="screenshots-scroll fade-in">
+                    <div class="screenshot-frame"><img src="images/01-Onboarding-Welcome.png" alt="Welcome screen"></div>
+                    <div class="screenshot-frame"><img src="images/03-ScenePicker.png" alt="Scene picker"></div>
+                    <div class="screenshot-frame"><img src="images/06-SceneSelected.png" alt="Active scene"></div>
+                    <div class="screenshot-frame"><img src="images/04-History.png" alt="Session history"></div>
+                    <div class="screenshot-frame"><img src="images/05-Settings.png" alt="Settings"></div>
                 </div>
             </div>
         </section>
@@ -758,6 +874,34 @@
                         <div class="audience-icon">&#127968;</div>
                         <h3>Remote Workers</h3>
                         <p>Working from home can feel isolating. Add the presence you're missing to your workspace.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section>
+            <div class="wrap">
+                <div class="text-center fade-in" style="margin-bottom: 48px;">
+                    <p class="section-label">FAQ</p>
+                    <h2 class="section-title">Common questions</h2>
+                </div>
+                <div class="faq-list fade-in">
+                    <div class="faq-item">
+                        <p class="faq-q">Is it really free?</p>
+                        <p class="faq-a">Yes — 100% free, forever. No paywall, no trial, no in-app purchases. We believe focus tools should be accessible to everyone.</p>
+                    </div>
+                    <div class="faq-item">
+                        <p class="faq-q">Do I need to be on camera?</p>
+                        <p class="faq-a">No. Beside uses ambient scenes — animated environments with presence cues — not real people. Your camera is never used.</p>
+                    </div>
+                    <div class="faq-item">
+                        <p class="faq-q">What is body doubling?</p>
+                        <p class="faq-a">Body doubling is a focus technique especially popular in the ADHD community. It's the simple idea that having another person present — even silently — makes it easier to start and sustain tasks. Beside recreates that feeling through ambient scenes.</p>
+                    </div>
+                    <div class="faq-item">
+                        <p class="faq-q">Is my data private?</p>
+                        <p class="faq-a">Yes. No account required. Everything stays on your device. We don't collect usage data, and there are no analytics or trackers in the app.</p>
                     </div>
                 </div>
             </div>
