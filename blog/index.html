@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Softroni</title>
+    <meta name="description" content="Insights on ADHD, focus techniques, body doubling, and building apps that help people get things done.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --color-bg: #FFFFFF;
+            --color-surface: #FFFFFF;
+            --color-elevated: #F9F9F9;
+            --color-text: #1A1A1A;
+            --color-text-secondary: #999999;
+            --color-text-tertiary: #CCCCCC;
+            --color-accent: #00B368;
+            --color-accent-subtle: rgba(0, 179, 104, 0.1);
+            --color-border: #F0F0F0;
+            --shadow-subtle: 0 4px 20px rgba(0,0,0,0.05);
+            --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif;
+            --radius-btn: 8px;
+            --radius-card: 12px;
+            --sage-50: #f6f7f4;
+            --sage-100: #e8ebe3;
+            --sage-200: #d4d9c9;
+            --sage-400: #96a17e;
+            --sage-500: #7a8763;
+            --sage-600: #5f6b4d;
+            --sage-700: #4b543e;
+            --sage-800: #3e4534;
+            --sage-900: #353b2e;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-bg: #0A0A0A;
+                --color-surface: #141414;
+                --color-elevated: #1E1E1E;
+                --color-text: #E8E8E8;
+                --color-text-secondary: #888888;
+                --color-text-tertiary: #555555;
+                --color-accent: #00C878;
+                --color-accent-subtle: rgba(0, 200, 120, 0.12);
+                --color-border: #222222;
+                --shadow-subtle: none;
+                --sage-50: #1a1c17;
+                --sage-100: #252820;
+                --sage-200: #353b2e;
+            }
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-sans);
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: inherit; text-decoration: none; }
+
+        .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+        /* Nav */
+        .site-nav { position: sticky; top: 0; z-index: 100; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); background: rgba(255,255,255,0.85); border-bottom: 1px solid var(--color-border); }
+        @media (prefers-color-scheme: dark) { .site-nav { background: rgba(10,10,10,0.85); } }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; height: 56px; }
+        .nav-brand { font-family: var(--font-mono); font-size: 18px; font-weight: 800; letter-spacing: -0.5px; }
+        .brand-s { color: var(--color-accent); font-size: 22px; }
+        .brand-text { color: var(--color-text); }
+        .brand-us { color: var(--color-accent); animation: blink 1s step-end infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        .nav-links { display: flex; align-items: center; gap: 24px; }
+        .nav-links a { font-size: 14px; color: var(--color-text-secondary); transition: color 0.2s; }
+        .nav-links a:hover { color: var(--sage-600); }
+        @media (max-width: 640px) { .nav-hide-mobile { display: none; } }
+
+        .btn { display: inline-block; padding: 8px 20px; border-radius: var(--radius-btn); font-size: 14px; font-weight: 600; transition: all 0.2s; cursor: pointer; border: none; }
+        .btn-sage { background: var(--sage-600); color: #fff !important; }
+        .btn-sage:hover { background: var(--sage-700); transform: translateY(-1px); }
+
+        /* Blog Header */
+        .blog-header { padding: 64px 0 48px; }
+        .blog-header h1 { font-family: var(--font-mono); font-size: clamp(32px, 5vw, 48px); font-weight: 800; letter-spacing: -1.5px; margin-bottom: 8px; }
+        .blog-header p { font-size: 18px; color: var(--color-text-secondary); }
+
+        /* Post Cards */
+        .post-list { display: flex; flex-direction: column; gap: 32px; padding-bottom: 64px; }
+        .post-card { display: block; padding: 32px; background: var(--color-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-card); transition: all 0.2s; }
+        .post-card:hover { border-color: var(--sage-400); transform: translateY(-2px); box-shadow: var(--shadow-subtle); }
+        .post-card h2 { font-family: var(--font-mono); font-size: 22px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.5px; }
+        .post-card .post-excerpt { font-size: 16px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 12px; }
+        .post-card .post-meta { font-size: 13px; color: var(--color-text-tertiary); font-family: var(--font-mono); }
+        .post-card .read-more { color: var(--sage-600); font-size: 14px; font-weight: 600; }
+
+        /* Footer */
+        .site-footer { border-top: 1px solid var(--color-border); padding: 40px 0; }
+        .footer-top { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; }
+        @media (min-width: 640px) { .footer-top { flex-direction: row; align-items: center; justify-content: space-between; } }
+        .footer-brand { font-family: var(--font-mono); font-size: 18px; font-weight: 800; letter-spacing: -0.5px; }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 24px; }
+        .footer-links a { font-size: 14px; color: var(--color-text-secondary); transition: color 0.2s; }
+        .footer-links a:hover { color: var(--color-accent); }
+        .footer-bottom { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--color-border); }
+        .footer-bottom p { font-size: 14px; color: var(--color-text-secondary); }
+    </style>
+</head>
+<body>
+    <nav class="site-nav">
+        <div class="wrap nav-inner">
+            <a href="/" class="nav-brand"><span class="brand-s">S</span><span class="brand-text">oftroni</span><span class="brand-us">_</span></a>
+            <div class="nav-links">
+                <a href="/blog/" class="nav-hide-mobile" style="color: var(--color-text); font-weight: 600;">Blog</a>
+                <a href="/about.html" class="nav-hide-mobile">About</a>
+                <a href="/beside/" class="btn btn-sage">Try Beside</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="wrap">
+            <header class="blog-header">
+                <h1>Blog</h1>
+                <p>Focus, ADHD, and building better tools.</p>
+            </header>
+
+            <div class="post-list">
+                <a href="/blog/what-is-body-doubling/" class="post-card">
+                    <h2>What Is Body Doubling? The Free Focus Technique for ADHD</h2>
+                    <p class="post-excerpt">Have you ever noticed you get more done at a coffee shop than at home? That's body doubling — the simplest productivity hack you've never heard of. Learn how it works and why it's especially effective for ADHD.</p>
+                    <div class="post-meta">February 14, 2026 · 8 min read</div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-top">
+                <a href="/" class="footer-brand"><span class="brand-s">S</span><span class="brand-text">oftroni</span><span class="brand-us">_</span></a>
+                <nav class="footer-links">
+                    <a href="/about.html">About</a>
+                    <a href="/blog/">Blog</a>
+                    <a href="/privacy-policy.html">Privacy Policy</a>
+                    <a href="/terms-of-service.html">Terms of Service</a>
+                    <a href="/support.html">Support</a>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <script>document.write(new Date().getFullYear())</script> Softroni LLC. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
