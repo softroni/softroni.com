@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brown Noise: Why It's Better Than White Noise for Focus, Sleep & ADHD | Softroni</title>
+    <meta name="description" content="Brown noise is deeper and more soothing than white noise. Learn why it works better for focus, sleep, and ADHD — and try MuteWave, the free brown noise app for iOS.">
+    <meta name="keywords" content="brown noise, brown noise for sleep, brown noise ADHD, brown noise vs white noise, pink noise, focus sounds, sleep sounds, noise app, MuteWave, ambient sounds">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Brown Noise: Why It's Better Than White Noise for Focus, Sleep & ADHD">
+    <meta property="og:description" content="Brown noise is deeper and more soothing than white noise. Learn why it works for focus, sleep, and ADHD — plus a free app to try it.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://softroni.com/blog/brown-noise-focus-sleep/">
+    <meta property="og:site_name" content="Softroni">
+    <meta property="article:published_time" content="2026-02-23T12:00:00Z">
+    <meta property="article:author" content="Softroni">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Brown Noise: Why It's Better Than White Noise for Focus, Sleep & ADHD">
+    <meta name="twitter:description" content="Brown noise is deeper and more soothing than white noise. Learn why it works for focus, sleep, and ADHD — plus a free app to try it.">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Brown Noise: Why It's Better Than White Noise for Focus, Sleep & ADHD",
+        "description": "Brown noise is deeper and more soothing than white noise. Learn why it works better for focus, sleep, and ADHD.",
+        "datePublished": "2026-02-23",
+        "dateModified": "2026-02-23",
+        "author": {
+            "@type": "Organization",
+            "name": "Softroni",
+            "url": "https://softroni.com"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Softroni",
+            "url": "https://softroni.com"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://softroni.com/blog/brown-noise-focus-sleep/"
+        }
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --color-bg: #FFFFFF;
+            --color-surface: #FFFFFF;
+            --color-elevated: #F9F9F9;
+            --color-text: #1A1A1A;
+            --color-text-secondary: #999999;
+            --color-text-tertiary: #CCCCCC;
+            --color-accent: #00B368;
+            --color-accent-subtle: rgba(0, 179, 104, 0.1);
+            --color-border: #F0F0F0;
+            --shadow-subtle: 0 4px 20px rgba(0,0,0,0.05);
+            --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif;
+            --radius-btn: 8px;
+            --radius-card: 12px;
+            --sage-50: #f6f7f4;
+            --sage-100: #e8ebe3;
+            --sage-200: #d4d9c9;
+            --sage-400: #96a17e;
+            --sage-500: #7a8763;
+            --sage-600: #5f6b4d;
+            --sage-700: #4b543e;
+            --sage-800: #3e4534;
+            --sage-900: #353b2e;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-bg: #0A0A0A;
+                --color-surface: #141414;
+                --color-elevated: #1E1E1E;
+                --color-text: #E8E8E8;
+                --color-text-secondary: #888888;
+                --color-text-tertiary: #555555;
+                --color-accent: #00C878;
+                --color-accent-subtle: rgba(0, 200, 120, 0.12);
+                --color-border: #222222;
+                --shadow-subtle: none;
+                --sage-50: #1a1c17;
+                --sage-100: #252820;
+                --sage-200: #353b2e;
+            }
+        }
+
+        html { scroll-behavior: smooth; }
+        body { background: var(--color-bg); color: var(--color-text); font-family: var(--font-sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        a { color: inherit; text-decoration: none; }
+        .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+        /* Nav */
+        .site-nav { position: sticky; top: 0; z-index: 100; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); background: rgba(255,255,255,0.85); border-bottom: 1px solid var(--color-border); }
+        @media (prefers-color-scheme: dark) { .site-nav { background: rgba(10,10,10,0.85); } }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; height: 56px; }
+        .nav-brand { font-family: var(--font-mono); font-size: 18px; font-weight: 800; letter-spacing: -0.5px; }
+        .brand-s { color: var(--color-accent); font-size: 22px; }
+        .brand-text { color: var(--color-text); }
+        .brand-us { color: var(--color-accent); animation: blink 1s step-end infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        .nav-links { display: flex; align-items: center; gap: 24px; }
+        .nav-links a { font-size: 14px; color: var(--color-text-secondary); transition: color 0.2s; }
+        .nav-links a:hover { color: var(--sage-600); }
+        @media (max-width: 640px) { .nav-hide-mobile { display: none; } }
+
+        .btn { display: inline-block; padding: 8px 20px; border-radius: var(--radius-btn); font-size: 14px; font-weight: 600; transition: all 0.2s; cursor: pointer; border: none; }
+        .btn-sage { background: var(--sage-600); color: #fff !important; }
+        .btn-sage:hover { background: var(--sage-700); transform: translateY(-1px); }
+
+        .breadcrumbs { padding: 16px 0; font-size: 14px; color: var(--color-text-secondary); }
+        .breadcrumbs a { color: var(--color-text-secondary); text-decoration: underline; text-underline-offset: 3px; }
+        .breadcrumbs a:hover { color: var(--sage-600); }
+        .breadcrumbs .sep { margin: 0 8px; }
+
+        .article-header { padding: 48px 0 32px; max-width: 720px; }
+        .article-header h1 { font-family: var(--font-mono); font-size: clamp(28px, 5vw, 40px); font-weight: 800; line-height: 1.2; letter-spacing: -1px; margin-bottom: 16px; }
+        .article-meta { font-size: 14px; color: var(--color-text-secondary); }
+        .article-meta time { font-weight: 500; }
+
+        .article-body { max-width: 720px; padding-bottom: 64px; }
+        .article-body p { margin-bottom: 20px; font-size: 17px; line-height: 1.75; color: var(--color-text); }
+        .article-body h2 { font-family: var(--font-mono); font-size: 26px; font-weight: 700; margin: 48px 0 16px; letter-spacing: -0.5px; }
+        .article-body h3 { font-family: var(--font-mono); font-size: 20px; font-weight: 600; margin: 32px 0 12px; }
+        .article-body ul, .article-body ol { margin: 0 0 20px 24px; }
+        .article-body li { margin-bottom: 8px; font-size: 17px; line-height: 1.75; }
+        .article-body strong { font-weight: 600; }
+        .article-body em { font-style: italic; }
+        .article-body a { color: var(--sage-600); text-decoration: underline; text-underline-offset: 3px; }
+        .article-body a:hover { color: var(--sage-700); }
+        .article-body blockquote { border-left: 3px solid var(--sage-400); padding: 12px 20px; margin: 24px 0; background: var(--sage-50); border-radius: 0 var(--radius-card) var(--radius-card) 0; }
+        .article-body blockquote p { margin-bottom: 0; color: var(--color-text-secondary); }
+        .article-body hr { border: none; border-top: 1px solid var(--color-border); margin: 48px 0; }
+
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 24px 0 32px; font-size: 15px; overflow-x: auto; display: block; }
+        .comparison-table thead th { font-family: var(--font-mono); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; padding: 12px 16px; text-align: left; border-bottom: 2px solid var(--sage-400); color: var(--color-text-secondary); white-space: nowrap; }
+        .comparison-table thead th:last-child { color: var(--sage-600); }
+        .comparison-table tbody td { padding: 12px 16px; border-bottom: 1px solid var(--color-border); white-space: nowrap; }
+        .comparison-table tbody tr:last-child td { border-bottom: none; }
+        .comparison-table .highlight { color: var(--sage-600); font-weight: 600; }
+        @media (max-width: 640px) { .comparison-table { font-size: 13px; } .comparison-table thead th, .comparison-table tbody td { padding: 8px 10px; } }
+
+        .cta-box { background: var(--sage-50); border: 1px solid var(--sage-200); border-radius: var(--radius-card); padding: 32px; margin: 48px 0; text-align: center; }
+        .cta-box h2 { font-family: var(--font-mono); font-size: 24px; margin-bottom: 12px; }
+        .cta-box p { color: var(--color-text-secondary); margin-bottom: 20px; font-size: 16px; }
+        .cta-box .btn { font-size: 16px; padding: 12px 32px; }
+
+        .tips-list { counter-reset: tip; list-style: none; margin-left: 0 !important; padding: 0; }
+        .tips-list li { counter-increment: tip; position: relative; padding-left: 40px; margin-bottom: 16px !important; }
+        .tips-list li::before { content: counter(tip); position: absolute; left: 0; top: 2px; width: 28px; height: 28px; background: var(--sage-600); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 14px; font-weight: 600; }
+
+        .site-footer { border-top: 1px solid var(--color-border); padding: 40px 0; }
+        .footer-top { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; }
+        @media (min-width: 640px) { .footer-top { flex-direction: row; align-items: center; justify-content: space-between; } }
+        .footer-brand { font-family: var(--font-mono); font-size: 18px; font-weight: 800; letter-spacing: -0.5px; }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 24px; }
+        .footer-links a { font-size: 14px; color: var(--color-text-secondary); transition: color 0.2s; }
+        .footer-links a:hover { color: var(--color-accent); }
+        .footer-bottom { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--color-border); }
+        .footer-bottom p { font-size: 14px; color: var(--color-text-secondary); }
+    </style>
+</head>
+<body>
+    <nav class="site-nav">
+        <div class="wrap nav-inner">
+            <a href="/" class="nav-brand"><span class="brand-s">S</span><span class="brand-text">oftroni</span><span class="brand-us">_</span></a>
+            <div class="nav-links">
+                <a href="/apps.html" class="nav-hide-mobile">Apps</a>
+                <a href="/blog/">Blog</a>
+                <a href="/about.html" class="nav-hide-mobile">About</a>
+                <a href="/support.html" class="nav-hide-mobile">Support</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="wrap">
+            <nav class="breadcrumbs" aria-label="Breadcrumb">
+                <a href="/">Home</a><span class="sep">/</span>
+                <a href="/blog/">Blog</a><span class="sep">/</span>
+                <span>Brown Noise for Focus & Sleep</span>
+            </nav>
+
+            <header class="article-header">
+                <h1>Brown Noise: Why It's Better Than White Noise for Focus, Sleep & ADHD</h1>
+                <p class="article-meta">Published <time datetime="2026-02-23">February 23, 2026</time> · 7 min read</p>
+            </header>
+
+            <article class="article-body">
+                <p>You've probably heard of white noise. Maybe you've even tried a white noise machine or app. But there's a good chance it felt harsh — like static on a TV, or wind hissing through a gap in the window.</p>
+
+                <p>That's because white noise contains equal energy at every frequency. It's the acoustic equivalent of staring at a bright fluorescent light. Technically "even," but not exactly pleasant.</p>
+
+                <p>Brown noise is different. And once you hear it, you'll probably never go back.</p>
+
+                <h2>What Is Brown Noise?</h2>
+
+                <p>Brown noise (also called Brownian noise or red noise) emphasizes lower frequencies. It sounds deep, warm, and rumbling — like a distant thunderstorm, a rushing waterfall, or the low hum of a jet engine from inside the cabin.</p>
+
+                <p>The name comes from Robert Brown, the botanist who discovered Brownian motion — the random movement of particles. Brown noise follows this same random-walk pattern in its frequency structure, which is why it sounds so natural and organic.</p>
+
+                <p>Here's the technical difference:</p>
+
+                <ul>
+                    <li><strong>White noise</strong> — Equal energy across all frequencies. Bright, hissy, can feel aggressive.</li>
+                    <li><strong>Pink noise</strong> — Energy decreases as frequency increases. Softer than white, like steady rain.</li>
+                    <li><strong>Brown noise</strong> — Even more low-frequency emphasis. Deep, warm, enveloping. Like ocean waves or a distant storm.</li>
+                </ul>
+
+                <p>Most people who try all three prefer brown noise for both focus and sleep. There's a reason it went viral on TikTok in 2023 — the ADHD community discovered what audio engineers had known for years.</p>
+
+                <h2>Why Brown Noise Works for Focus</h2>
+
+                <p>Your brain doesn't do well with silence. In a quiet room, every small sound — a car outside, a neighbor's footstep, your fridge cycling — grabs your attention. Your brain is wired to notice changes in your environment.</p>
+
+                <p>Brown noise creates a consistent sonic blanket that masks these distractions. But unlike white noise, it does this without adding its own harshness. The deep frequencies feel natural, almost invisible.</p>
+
+                <h3>The Science</h3>
+
+                <p>A 2021 study published in <em>Scientific Reports</em> found that continuous background noise improved sustained attention in adults with ADHD. The key finding: <strong>lower-frequency noise was more effective</strong> than higher-frequency noise at maintaining focus.</p>
+
+                <p>Another study from the University of Chicago found that moderate ambient noise (around 70 dB — think coffee shop level) enhanced creative thinking. Brown noise naturally sits in this sweet spot.</p>
+
+                <p>The mechanism is called <strong>stochastic resonance</strong>: a moderate amount of background noise actually helps the brain process signals more efficiently. Too little noise and you're distracted by every interruption. Too much and you're overwhelmed. Brown noise hits the Goldilocks zone.</p>
+
+                <h2>Why Brown Noise Works for Sleep</h2>
+
+                <p>If you've ever slept better during a rainstorm, you've already experienced why brown noise helps sleep. The deep, steady frequencies do three things:</p>
+
+                <ul>
+                    <li><strong>Mask disruptive sounds</strong> — Traffic, snoring partners, barking dogs, apartment noise. Brown noise covers them without being jarring itself.</li>
+                    <li><strong>Slow your brainwaves</strong> — The low frequencies encourage your brain to shift from alert beta waves to relaxed alpha and theta waves, the precursors to sleep.</li>
+                    <li><strong>Create a sleep association</strong> — Over time, your brain learns that brown noise = sleep time. This Pavlovian response makes falling asleep faster each night.</li>
+                </ul>
+
+                <blockquote>
+                    <p><em>"I've tried every sleep app. White noise was too harsh. Rain sounds had too much variation. Brown noise is the only thing that actually knocks me out."</em> — r/sleep</p>
+                </blockquote>
+
+                <h2>Brown Noise and ADHD</h2>
+
+                <p>The ADHD community's embrace of brown noise isn't a trend — it's backed by neuroscience.</p>
+
+                <p>ADHD brains are chronically understimulated. The prefrontal cortex (responsible for focus, planning, and impulse control) needs a baseline level of dopamine to function. In ADHD, that baseline is lower than average.</p>
+
+                <p>Brown noise provides gentle, non-distracting stimulation that raises this baseline — similar to how medication works, but through environmental input instead of chemistry. It's not a replacement for treatment, but it's a powerful complement.</p>
+
+                <p>Common reports from the ADHD community:</p>
+
+                <ul>
+                    <li>Easier to start tasks (the biggest ADHD challenge)</li>
+                    <li>Longer sustained focus sessions</li>
+                    <li>Reduced racing thoughts at bedtime</li>
+                    <li>Less sensory overwhelm in noisy environments</li>
+                    <li>Better reading comprehension</li>
+                </ul>
+
+                <h2>Beyond Brown Noise: The Full Spectrum</h2>
+
+                <p>Brown noise is the most popular, but it's not the only option. Different noise colors work better for different situations:</p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Noise Color</th>
+                            <th>Sound</th>
+                            <th>Best For</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>White</td>
+                            <td>TV static, hissing</td>
+                            <td>Masking loud environments</td>
+                        </tr>
+                        <tr>
+                            <td>Pink</td>
+                            <td>Steady rain, rustling leaves</td>
+                            <td>Light sleep, studying</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">Brown</td>
+                            <td class="highlight">Thunder, waterfall, jet cabin</td>
+                            <td class="highlight">Deep focus, deep sleep, ADHD</td>
+                        </tr>
+                        <tr>
+                            <td>Blue</td>
+                            <td>High-pitched hiss, like a spray</td>
+                            <td>Alertness, detail-oriented work</td>
+                        </tr>
+                        <tr>
+                            <td>Green</td>
+                            <td>Nature-like mid-range</td>
+                            <td>Relaxation, meditation</td>
+                        </tr>
+                        <tr>
+                            <td>Gray</td>
+                            <td>Balanced across frequencies</td>
+                            <td>Tinnitus masking</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>The best approach is to experiment. Your brain's preference might surprise you — some people focus better with blue noise, others need the deep warmth of brown.</p>
+
+                <h2>The Problem with Most Noise Apps</h2>
+
+                <p>There's no shortage of noise apps on the App Store. But most of them share the same problems:</p>
+
+                <ul>
+                    <li><strong>Aggressive subscriptions</strong> — Endel charges $312/year. For ambient noise. Some apps lock individual noise colors behind a paywall.</li>
+                    <li><strong>Streaming required</strong> — Many apps stream audio from servers, meaning no offline support and battery drain. Brown noise is mathematically generated — there's no reason it needs the internet.</li>
+                    <li><strong>Cluttered interfaces</strong> — You just want to press play. You don't need social features, meditation courses, or AI coaches.</li>
+                    <li><strong>Tracking and ads</strong> — Free apps often track your usage and serve ads. In a sleep app. While you're trying to sleep.</li>
+                </ul>
+
+                <h2>A Better Approach: MuteWave</h2>
+
+                <p>We built <a href="/mutewave/">MuteWave</a> because we wanted a noise app that respected its users. Here's how it works:</p>
+
+                <ul>
+                    <li><strong>9 noise colors</strong> — White, pink, brown, blue, violet, gray, green, orange, and black. All generated locally on your device.</li>
+                    <li><strong>15 nature sounds</strong> — Rain, ocean waves, thunder, forest, campfire, wind, creek, birds, and more.</li>
+                    <li><strong>5-layer mixer</strong> — Combine any sounds together. Brown noise + rain + distant thunder? Done. Pink noise + ocean waves? Done.</li>
+                    <li><strong>Quick Start presets</strong> — One-tap presets for common scenarios: Deep Focus, Sleep, Calm, Study.</li>
+                    <li><strong>Sleep timer</strong> — Set it and forget it. Audio fades out naturally.</li>
+                    <li><strong>100% offline</strong> — All audio is generated on-device. No internet needed, no streaming, no tracking.</li>
+                    <li><strong>No ads. Ever.</strong> — Not in the free version, not anywhere.</li>
+                </ul>
+
+                <h3>Free vs. Premium</h3>
+
+                <p>MuteWave's free tier includes all 9 noise colors and basic nature sounds. Premium ($1.99/month, $14.99/year, or $29.99 lifetime) unlocks the full sound library, the 5-layer mixer, and advanced presets.</p>
+
+                <p>Even the free version is more capable than most paid noise apps.</p>
+
+                <h2>Tips for Using Brown Noise Effectively</h2>
+
+                <ol class="tips-list">
+                    <li><strong>Start at low volume</strong> — Brown noise should be a background presence, not the foreground. If you can clearly hear it, it's probably too loud. Aim for "barely noticeable."</li>
+                    <li><strong>Use headphones for focus, speakers for sleep</strong> — Headphones create a more immersive cocoon for work. But for sleep, speakers avoid discomfort and let you move naturally.</li>
+                    <li><strong>Layer with nature sounds</strong> — Pure brown noise is great, but adding a layer of rain or ocean waves makes it feel more organic. This is where a mixer really shines.</li>
+                    <li><strong>Be consistent</strong> — Use the same sound for the same activity. Your brain will build associations: this sound = focus time. This sound = sleep time.</li>
+                    <li><strong>Give it a week</strong> — Some people love brown noise immediately. Others need a few days for their brain to adjust. Don't judge it after one try.</li>
+                </ol>
+
+                <div class="cta-box">
+                    <h2>Try Brown Noise for Free</h2>
+                    <p>MuteWave has 9 noise colors, 15 nature sounds, and a 5-layer mixer.<br>100% offline. No ads. No tracking. No account required.</p>
+                    <a href="https://apps.apple.com/us/app/mutewave/id6759266304" class="btn btn-sage">Download MuteWave →</a>
+                </div>
+
+                <hr>
+
+                <p><em>MuteWave is made by <a href="/">Softroni</a>. We build simple, useful apps that respect your privacy and your wallet. No ads, no tracking, no nonsense.</em></p>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-top">
+                <a href="/" class="footer-brand"><span class="brand-s">S</span><span class="brand-text">oftroni</span><span class="brand-us">_</span></a>
+                <nav class="footer-links">
+                    <a href="/apps.html">Apps</a>
+                    <a href="/about.html">About</a>
+                    <a href="/blog/">Blog</a>
+                    <a href="/privacy-policy.html">Privacy Policy</a>
+                    <a href="/terms-of-service.html">Terms of Service</a>
+                    <a href="/support.html">Support</a>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <script>document.write(new Date().getFullYear())</script> Softroni LLC. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
