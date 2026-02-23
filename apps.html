@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Apps — Softroni</title>
+    <meta name="description" content="Apps built by Softroni. Simple, useful tools for iOS — no ads, no bloat, just software that works.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --color-bg: #FFFFFF;
+            --color-surface: #FFFFFF;
+            --color-elevated: #F9F9F9;
+            --color-text: #1A1A1A;
+            --color-text-secondary: #999999;
+            --color-accent: #00B368;
+            --color-accent-subtle: rgba(0, 179, 104, 0.1);
+            --color-border: #F0F0F0;
+            --shadow-medium: 0 4px 20px rgba(0,0,0,0.1);
+            --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif;
+            --radius-card: 12px;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-bg: #0A0A0A;
+                --color-surface: #141414;
+                --color-elevated: #1E1E1E;
+                --color-text: #E8E8E8;
+                --color-text-secondary: #888888;
+                --color-accent: #00C878;
+                --color-accent-subtle: rgba(0, 200, 120, 0.12);
+                --color-border: #222222;
+                --shadow-medium: 0 4px 20px rgba(0,0,0,0.4);
+            }
+        }
+        html { scroll-behavior: smooth; }
+        body { background: var(--color-bg); color: var(--color-text); font-family: var(--font-sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; }
+        .wrap { max-width: 1024px; margin: 0 auto; padding: 0 24px; }
+        .text-center { text-align: center; }
+
+        /* Nav */
+        .site-nav { position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--color-border); background: var(--color-bg); }
+        .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+        .nav-brand { font-family: var(--font-mono); font-weight: 700; font-size: 18px; }
+        .brand-s { color: var(--color-accent); font-weight: 800; }
+        .brand-text { font-weight: 600; }
+        .brand-us { color: var(--color-accent); font-weight: 800; }
+        .nav-links { display: flex; align-items: center; gap: 24px; }
+        .nav-links a { font-size: 14px; font-weight: 500; color: var(--color-text-secondary); transition: color 0.2s; }
+        .nav-links a:hover { color: var(--color-accent); }
+        .nav-links a.active { color: var(--color-text); font-weight: 600; }
+        @media (max-width: 639px) { .nav-hide-mobile { display: none; } }
+
+        /* Hero */
+        .page-hero { padding: 80px 0 60px; }
+        .page-hero h1 { font-size: 48px; font-weight: 800; letter-spacing: -1px; margin-bottom: 16px; }
+        @media (max-width: 639px) { .page-hero h1 { font-size: 32px; } }
+        .page-hero p { font-size: 18px; color: var(--color-text-secondary); max-width: 560px; }
+
+        /* App cards */
+        .apps-grid { display: grid; grid-template-columns: 1fr; gap: 32px; padding-bottom: 80px; }
+
+        .app-card {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            background: var(--color-elevated);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 40px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .app-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-medium); }
+        @media (min-width: 768px) {
+            .app-card { grid-template-columns: 100px 1fr auto; align-items: center; }
+        }
+
+        .app-icon { width: 80px; height: 80px; border-radius: 20px; }
+        .app-info h2 { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+        .app-tagline { font-size: 15px; color: var(--color-accent); font-weight: 500; margin-bottom: 8px; }
+        .app-desc { font-size: 15px; color: var(--color-text-secondary); line-height: 1.6; }
+        .app-meta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+        .app-badge {
+            display: inline-flex; align-items: center; gap: 4px;
+            padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;
+            background: var(--color-accent-subtle); color: var(--color-accent);
+        }
+
+        .app-cta {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 24px; border-radius: 8px;
+            font-size: 14px; font-weight: 600;
+            background: var(--color-text); color: var(--color-bg);
+            transition: opacity 0.2s;
+            white-space: nowrap;
+        }
+        .app-cta:hover { opacity: 0.85; }
+
+        /* Screenshots strip */
+        .app-screenshots {
+            display: flex; gap: 12px; overflow-x: auto; padding: 12px 0;
+            scroll-snap-type: x mandatory; scrollbar-width: none;
+        }
+        .app-screenshots::-webkit-scrollbar { display: none; }
+        .app-screenshots img {
+            height: 280px; width: auto; border-radius: 12px;
+            scroll-snap-align: start; flex-shrink: 0;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        /* Stats */
+        .portfolio-stats {
+            display: flex; justify-content: center; gap: 48px; padding: 40px 0;
+            border-bottom: 1px solid var(--color-border); margin-bottom: 48px;
+        }
+        .stat-item { text-align: center; }
+        .stat-number { font-size: 36px; font-weight: 800; color: var(--color-accent); }
+        .stat-label { font-size: 13px; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Footer */
+        .site-footer { border-top: 1px solid var(--color-border); background: var(--color-surface); padding: 48px 0; }
+        .footer-top { display: flex; flex-direction: column; gap: 32px; }
+        @media (min-width: 768px) { .footer-top { flex-direction: row; align-items: center; justify-content: space-between; } }
+        .footer-brand { font-family: var(--font-mono); font-weight: 700; font-size: 16px; }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 24px; }
+        .footer-links a { font-size: 14px; color: var(--color-text-secondary); transition: color 0.2s; }
+        .footer-links a:hover { color: var(--color-accent); }
+        .footer-bottom { margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--color-border); }
+        .footer-bottom p { font-size: 14px; color: var(--color-text-secondary); }
+
+        /* Fade */
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) { .fade-in { opacity: 1; transform: none; } }
+    </style>
+</head>
+<body>
+    <nav class="site-nav">
+        <div class="wrap nav-inner">
+            <a href="/" class="nav-brand"><span class="brand-s">S</span><span class="brand-text">oftroni</span><span class="brand-us">_</span></a>
+            <div class="nav-links">
+                <a href="/apps.html" class="active">Apps</a>
+                <a href="/blog/" class="nav-hide-mobile">Blog</a>
+                <a href="/about.html" class="nav-hide-mobile">About</a>
+                <a href="/support.html" class="nav-hide-mobile">Support</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="page-hero">
+            <div class="wrap">
+                <h1 class="fade-in">Our Apps</h1>
+                <p class="fade-in">Simple, useful tools for iOS. No ads, no bloat, no tracking — just software that works.</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="wrap">
+                <div class="portfolio-stats fade-in">
+                    <div class="stat-item">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Apps</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Ads</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Privacy</div>
+                    </div>
+                </div>
+
+                <div class="apps-grid">
+
+                    <!-- TorqueLog -->
+                    <a href="/torquelog/" class="app-card fade-in">
+                        <img src="/torquelog/images/icon.png" alt="TorqueLog" class="app-icon">
+                        <div class="app-info">
+                            <h2>TorqueLog</h2>
+                            <p class="app-tagline" style="color: #FF8C00;">Vehicle Maintenance & Fuel Tracker</p>
+                            <p class="app-desc">Track every service, log fuel fill-ups, get smart reminders, and see exactly where your car money goes. PDF export, cost analytics, and CloudKit sync.</p>
+                            <div class="app-meta">
+                                <span class="app-badge" style="background: rgba(255,140,0,0.12); color: #FF8C00;">New</span>
+                                <span class="app-badge">Free + Pro</span>
+                                <span class="app-badge">iOS</span>
+                            </div>
+                        </div>
+                        <span class="app-cta">View App →</span>
+                    </a>
+
+                    <!-- MuteWave -->
+                    <a href="/mutewave/" class="app-card fade-in">
+                        <img src="/mutewave/images/appicon.png" alt="MuteWave" class="app-icon">
+                        <div class="app-info">
+                            <h2>MuteWave</h2>
+                            <p class="app-tagline" style="color: #4CAF50;">Brown Noise & Sounds</p>
+                            <p class="app-desc">9 noise colors, 15 nature sounds, and a 5-layer mixer. Built for focus, sleep, and ADHD relief. No ads, no account required.</p>
+                            <div class="app-meta">
+                                <span class="app-badge">Available Now</span>
+                                <span class="app-badge">Free + Premium</span>
+                                <span class="app-badge">iOS</span>
+                            </div>
+                        </div>
+                        <span class="app-cta">View App →</span>
+                    </a>
+
+                    <!-- Beside -->
+                    <a href="/beside/" class="app-card fade-in">
+                        <img src="/beside/images/appicon.png" alt="Beside" class="app-icon">
+                        <div class="app-info">
+                            <h2>Beside</h2>
+                            <p class="app-tagline">Body Doubling Focus</p>
+                            <p class="app-desc">Focus with virtual presence. Cozy animated rooms, ambient sounds, and a Pomodoro timer. No camera, no strangers, no pressure. Free forever.</p>
+                            <div class="app-meta">
+                                <span class="app-badge">Free Forever</span>
+                                <span class="app-badge">iOS</span>
+                            </div>
+                        </div>
+                        <span class="app-cta">View App →</span>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-top">
+                <a href="/" class="footer-brand"><span class="brand-s">S</span><span class="brand-text">oftroni</span><span class="brand-us">_</span></a>
+                <nav class="footer-links">
+                    <a href="/apps.html">Apps</a>
+                    <a href="/about.html">About</a>
+                    <a href="/blog/">Blog</a>
+                    <a href="/privacy-policy.html">Privacy Policy</a>
+                    <a href="/terms-of-service.html">Terms of Service</a>
+                    <a href="/support.html">Support</a>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <script>document.write(new Date().getFullYear())</script> Softroni LLC. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const fadeEls = document.querySelectorAll('.fade-in');
+        if ('IntersectionObserver' in window) {
+            fadeEls.forEach(el => el.classList.add('hidden'));
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) { entry.target.classList.remove('hidden'); entry.target.classList.add('visible'); }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+            fadeEls.forEach(el => observer.observe(el));
+        }
+    </script>
+</body>
+</html>
