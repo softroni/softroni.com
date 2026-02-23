@@ -111,13 +111,14 @@
         .hero-desc { font-size: 18px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 28px; max-width: 480px; }
         .hero-actions { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
 
-        /* App icon placeholder */
+        /* App icon */
         .app-icon-small {
             width: 64px; height: 64px; border-radius: 16px; margin-bottom: 20px;
             box-shadow: 0 4px 20px rgba(255,140,0,0.3);
-            background: linear-gradient(135deg, #FF8C00, #FF6600);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 32px;
+            overflow: hidden;
+        }
+        .app-icon-small img {
+            width: 100%; height: 100%; object-fit: cover;
         }
 
         /* App Store badge */
@@ -135,17 +136,35 @@
 
         /* Hero illustration */
         .hero-visual {
-            background: var(--color-elevated);
-            border: 1px solid var(--color-border);
-            border-radius: 24px;
-            padding: 48px 32px;
-            text-align: center;
             max-width: 400px;
             margin: 0 auto;
         }
         @media (min-width: 1024px) { .hero-visual { margin: 0 0 0 auto; } }
-        .hero-visual .big-icon { font-size: 80px; margin-bottom: 16px; }
-        .hero-visual p { color: var(--color-text-secondary); font-size: 14px; }
+        .hero-screenshot {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        .hero-screenshot img {
+            width: 100%; height: auto; display: block;
+        }
+
+        /* Screenshot gallery */
+        .screenshots-scroll {
+            display: flex; gap: 20px; overflow-x: auto; padding: 20px 0;
+            scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .screenshots-scroll::-webkit-scrollbar { display: none; }
+        .screenshots-scroll .screenshot-item {
+            flex: 0 0 auto; width: 220px; scroll-snap-align: center;
+            border-radius: 20px; overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            transition: transform 0.3s;
+        }
+        .screenshots-scroll .screenshot-item:hover { transform: scale(1.03); }
+        .screenshots-scroll .screenshot-item img { width: 100%; height: auto; display: block; }
+        @media (min-width: 640px) { .screenshots-scroll .screenshot-item { width: 260px; } }
 
         /* Feature grid */
         .features-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
@@ -267,7 +286,7 @@
             <div class="wrap">
                 <div class="hero-grid">
                     <div>
-                        <div class="fade-in app-icon-small">🔧</div>
+                        <div class="fade-in app-icon-small"><img src="images/icon.png" alt="TorqueLog icon"></div>
                         <div class="fade-in hero-badge">🚗 Free on iOS</div>
                         <h1 class="fade-in fade-in-delay-1">Know what your car<br><span class="accent-text">really costs you</span></h1>
                         <p class="fade-in fade-in-delay-2 hero-desc">Track every service, log fuel fill-ups, get smart reminders, and see exactly where your money goes. Your car's complete service history, in your pocket.</p>
@@ -280,9 +299,9 @@
                     </div>
                     <div class="fade-in fade-in-delay-2">
                         <div class="hero-visual">
-                            <div class="big-icon">🚗</div>
-                            <p style="font-size: 20px; font-weight: 700; color: var(--color-text); margin-bottom: 8px;">TorqueLog</p>
-                            <p>Vehicle Maintenance & Fuel Tracker</p>
+                            <div class="hero-screenshot">
+                                <img src="images/screenshot-garage.png" alt="TorqueLog garage view" loading="lazy">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -337,6 +356,24 @@
                         <h3>No Ads, No Account</h3>
                         <p>No ads, no sign-ups, no tracking. Just open the app and start logging. Your data stays on your device.</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screenshots -->
+        <section>
+            <div class="wrap">
+                <div class="text-center fade-in" style="margin-bottom: 24px;">
+                    <p class="section-label">Screenshots</p>
+                    <h2 class="section-title">See it in action</h2>
+                </div>
+                <div class="screenshots-scroll fade-in">
+                    <div class="screenshot-item"><img src="images/screenshot-garage.png" alt="Garage view" loading="lazy"></div>
+                    <div class="screenshot-item"><img src="images/screenshot-service.png" alt="Service logging" loading="lazy"></div>
+                    <div class="screenshot-item"><img src="images/screenshot-fuel.png" alt="Fuel tracking" loading="lazy"></div>
+                    <div class="screenshot-item"><img src="images/screenshot-costs.png" alt="Cost breakdown" loading="lazy"></div>
+                    <div class="screenshot-item"><img src="images/screenshot-receipt.png" alt="Receipt photos" loading="lazy"></div>
+                    <div class="screenshot-item"><img src="images/screenshot-paywall.png" alt="Pro features" loading="lazy"></div>
                 </div>
             </div>
         </section>
