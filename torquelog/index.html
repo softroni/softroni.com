@@ -16,10 +16,10 @@
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --color-bg: #0D0D12;
-            --color-surface: #141419;
-            --color-elevated: #1C1C24;
-            --color-text: #E8E8F0;
+            --color-bg: #FFFFFF;
+            --color-surface: #FFFFFF;
+            --color-elevated: #F9F9F9;
+            --color-text: #1A1A1A;
             --color-text-secondary: #8888A0;
             --color-text-tertiary: #555566;
             --color-accent: #FF8C00;
@@ -28,7 +28,7 @@
             --color-amber-glow: rgba(255, 179, 71, 0.2);
             --color-border: #222233;
             --shadow-subtle: 0 4px 20px rgba(0,0,0,0.3);
-            --shadow-medium: 0 8px 32px rgba(0,0,0,0.5);
+            --shadow-medium: 0 4px 20px rgba(0,0,0,0.1);
             --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
             --font-sans: -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif;
             --radius-btn: 10px;
@@ -54,7 +54,7 @@
         .site-nav {
             position: sticky; top: 0; z-index: 100;
             border-bottom: 1px solid var(--color-border);
-            background: rgba(13,13,18,0.88);
+            background: rgba(255,255,255,0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
             backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
         }
         .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
@@ -238,7 +238,7 @@
 
         /* CTA bottom */
         .cta-section {
-            background: linear-gradient(135deg, #1C1C24, var(--color-bg));
+            background: linear-gradient(135deg, #F9F9F9, var(--color-bg));
             padding: 80px 0; text-align: center;
         }
         .cta-section h2 { font-size: 36px; font-weight: 800; margin-bottom: 12px; }
