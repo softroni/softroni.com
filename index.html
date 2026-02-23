@@ -79,6 +79,7 @@
         }
         @media (prefers-color-scheme: dark) {
             .site-nav { background: rgba(10,10,10,0.85); }
+            .nav-brand, .footer-brand { color: #E8E8E8; }
         }
         .nav-inner {
             display: flex;
@@ -90,10 +91,16 @@
             font-family: var(--font-mono);
             display: flex;
             align-items: center;
-            
+            gap: 8px;
             font-weight: 700;
             font-size: 18px;
-            color: var(--color-text);
+            color: #1A1A1A;
+            text-decoration: none;
+        }
+        .nav-brand img {
+            height: 32px;
+            width: 32px;
+            object-fit: contain;
         }
         .nav-mark {
             font-family: var(--font-mono);
@@ -241,10 +248,16 @@
             font-family: var(--font-mono);
             display: flex;
             align-items: center;
-            
+            gap: 8px;
             font-weight: 700;
             font-size: 16px;
-            color: var(--color-text);
+            color: #1A1A1A;
+            text-decoration: none;
+        }
+        .footer-brand img {
+            height: 28px;
+            width: 28px;
+            object-fit: contain;
         }
         .footer-links { display: flex; flex-wrap: wrap; gap: 24px; }
         .footer-links a {
@@ -538,7 +551,7 @@
 <body>
     <nav class="site-nav">
         <div class="wrap nav-inner">
-            <a href="/" class="nav-brand"><span class="brand-s">S</span><span class="brand-text">oftroni</span><span class="brand-us">_</span></a>
+            <a href="/" class="nav-brand"><img src="/logo.png" alt="Softroni logo">Softroni</a>
             <div class="nav-links">
                 <a href="/apps.html" class="nav-hide-mobile">Apps</a>
                 <a href="/blog/" class="nav-hide-mobile">Blog</a>
@@ -698,7 +711,7 @@
     <footer class="site-footer">
         <div class="wrap">
             <div class="footer-top">
-                <a href="/" class="footer-brand"><span class="brand-s">S</span><span class="brand-text">oftroni</span><span class="brand-us">_</span></a>
+                <a href="/" class="footer-brand"><img src="/logo.png" alt="Softroni logo">Softroni</a>
                 <nav class="footer-links">
                     <a href="/about.html">About</a>
                     <a href="/blog/">Blog</a>
