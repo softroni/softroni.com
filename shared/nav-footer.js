@@ -103,30 +103,32 @@
 
     /* Mobile menu overlay */
     .nav-mobile-menu {
-      display: none;
       position: fixed;
       top: 0;
       left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(255,255,255,0.98);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      width: 100%;
+      height: 100%;
+      background: #FFFFFF;
       z-index: 101;
+      display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 0;
+      gap: 8px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
     }
     .nav-mobile-menu.open {
-      display: flex;
+      opacity: 1;
+      visibility: visible;
     }
     .nav-mobile-menu a {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 600;
       color: #1A1A1A;
       text-decoration: none;
-      padding: 16px 32px;
+      padding: 14px 32px;
       transition: color 0.2s;
       font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, sans-serif);
     }
@@ -134,9 +136,9 @@
       color: var(--color-accent, #3B6BF5);
     }
     .nav-mobile-menu .btn {
-      margin-top: 16px;
+      margin-top: 24px;
       font-size: 16px;
-      padding: 14px 32px;
+      padding: 14px 40px;
     }
     .nav-mobile-menu .btn-primary,
     .nav-mobile-menu .btn-accent,
@@ -254,25 +256,27 @@
           <a href="/support.html">Support</a>
           <a href="${ctaHref}" class="${ctaClass}">${ctaText}</a>
         </div>
-        <div class="nav-right">
-          <a href="${ctaHref}" class="${ctaClass} nav-cta-mobile">${ctaText}</a>
-          <button class="nav-hamburger" aria-label="Menu">
-            <span></span><span></span><span></span>
-          </button>
-        </div>
-      </div>
-      <div class="nav-mobile-menu">
-        <a href="/apps.html">Apps</a>
-        <a href="/blog/">Blog</a>
-        <a href="/about.html">About</a>
-        <a href="/support.html">Support</a>
-        <a href="${ctaHref}" class="${ctaClass}">${ctaText}</a>
+        <button class="nav-hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     `;
 
+    // Create mobile menu as sibling of nav (not inside)
+    const mobileMenu = document.createElement('div');
+    mobileMenu.className = 'nav-mobile-menu';
+    mobileMenu.innerHTML = \`
+      <a href="/">Home</a>
+      <a href="/apps.html">Apps</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about.html">About</a>
+      <a href="/support.html">Support</a>
+      <a href="\${ctaHref}" class="\${ctaClass}">\${ctaText}</a>
+    \`;
+    document.body.appendChild(mobileMenu);
+
     // Hamburger toggle
     const hamburger = nav.querySelector('.nav-hamburger');
-    const mobileMenu = nav.querySelector('.nav-mobile-menu');
     hamburger.addEventListener('click', function () {
       hamburger.classList.toggle('active');
       mobileMenu.classList.toggle('open');
@@ -309,15 +313,5 @@
     `;
   }
 
-  // Hide mobile-only CTA on desktop, hide desktop nav on mobile
-  const mobileCSS = document.createElement('style');
-  mobileCSS.textContent = `
-    .nav-cta-mobile { display: none; }
-    .nav-right { display: none; }
-    @media (max-width: 639px) {
-      .nav-right { display: flex; }
-      .nav-cta-mobile { display: inline-flex; }
-    }
-  `;
-  document.head.appendChild(mobileCSS);
+  // end
 })();
