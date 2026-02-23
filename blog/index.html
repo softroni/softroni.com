@@ -21,8 +21,9 @@
             --color-text: #1A1A1A;
             --color-text-secondary: #999999;
             --color-text-tertiary: #CCCCCC;
-            --color-accent: #00B368;
-            --color-accent-subtle: rgba(0, 179, 104, 0.1);
+            --color-accent: #3B6BF5;
+            --color-accent-subtle: rgba(59, 107, 245, 0.1);
+            --gradient-brand: linear-gradient(135deg, #1E3A8A, #3B82F6, #60A5FA);
             --color-border: #F0F0F0;
             --shadow-subtle: 0 4px 20px rgba(0,0,0,0.05);
             --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
@@ -40,23 +41,7 @@
             --sage-900: #353b2e;
         }
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --color-bg: #0A0A0A;
-                --color-surface: #141414;
-                --color-elevated: #1E1E1E;
-                --color-text: #E8E8E8;
-                --color-text-secondary: #888888;
-                --color-text-tertiary: #555555;
-                --color-accent: #00C878;
-                --color-accent-subtle: rgba(0, 200, 120, 0.12);
-                --color-border: #222222;
-                --shadow-subtle: none;
-                --sage-50: #1a1c17;
-                --sage-100: #252820;
-                --sage-200: #353b2e;
-            }
-        }
+        /* Dark mode removed — light only */
 
         html { scroll-behavior: smooth; }
         body {
@@ -73,9 +58,10 @@
 
         /* Nav */
         .site-nav { position: sticky; top: 0; z-index: 100; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); background: rgba(255,255,255,0.85); border-bottom: 1px solid var(--color-border); }
-        @media (prefers-color-scheme: dark) { .site-nav { background: rgba(10,10,10,0.85); } }
+        
         .nav-inner { display: flex; justify-content: space-between; align-items: center; height: 56px; }
-        .nav-brand { font-family: var(--font-mono); font-size: 18px; font-weight: 800; letter-spacing: -0.5px; }
+        .nav-brand {  font-family: var(--font-mono); font-size: 18px; font-weight: 800; letter-spacing: -0.5px; }
+        .nav-brand img { height: 32px; width: 32px; object-fit: contain; }
         .brand-s { color: var(--color-accent); font-size: 22px; }
         .brand-text { color: var(--color-text); }
         .brand-us { color: var(--color-accent); animation: blink 1s step-end infinite; }
@@ -108,6 +94,7 @@
         .footer-top { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; }
         @media (min-width: 640px) { .footer-top { flex-direction: row; align-items: center; justify-content: space-between; } }
         .footer-brand { font-family: var(--font-mono); font-size: 18px; font-weight: 800; letter-spacing: -0.5px; }
+        .footer-brand img { height: 28px; width: 28px; object-fit: contain; }
         .footer-links { display: flex; flex-wrap: wrap; gap: 24px; }
         .footer-links a { font-size: 14px; color: var(--color-text-secondary); transition: color 0.2s; }
         .footer-links a:hover { color: var(--color-accent); }
@@ -118,7 +105,7 @@
 <body>
     <nav class="site-nav">
         <div class="wrap nav-inner">
-            <a href="/" class="nav-brand"><span class="brand-s">S</span><span class="brand-text">oftroni</span><span class="brand-us">_</span></a>
+            <a href="/" class="nav-brand"><img src="/logo.png" alt="Softroni logo">Softroni</a>
             <div class="nav-links">
                 <a href="/blog/" class="nav-hide-mobile" style="color: var(--color-text); font-weight: 600;">Blog</a>
                 <a href="/about.html" class="nav-hide-mobile">About</a>
@@ -147,7 +134,7 @@
     <footer class="site-footer">
         <div class="wrap">
             <div class="footer-top">
-                <a href="/" class="footer-brand"><span class="brand-s">S</span><span class="brand-text">oftroni</span><span class="brand-us">_</span></a>
+                <a href="/" class="footer-brand"><img src="/logo.png" alt="Softroni logo">Softroni</a>
                 <nav class="footer-links">
                     <a href="/about.html">About</a>
                     <a href="/blog/">Blog</a>

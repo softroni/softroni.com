@@ -20,8 +20,9 @@
             --color-text: #1A1A1A;
             --color-text-secondary: #999999;
             --color-text-tertiary: #CCCCCC;
-            --color-accent: #00B368;
-            --color-accent-subtle: rgba(0, 179, 104, 0.1);
+            --color-accent: #3B6BF5;
+            --color-accent-subtle: rgba(59, 107, 245, 0.1);
+            --gradient-brand: linear-gradient(135deg, #1E3A8A, #3B82F6, #60A5FA);
             --color-border: #F0F0F0;
             --color-dot: #DDDDDD;
             --shadow-subtle: 0 4px 20px rgba(0,0,0,0.05);
@@ -33,22 +34,7 @@
             --radius-input: 8px;
         }
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --color-bg: #0A0A0A;
-                --color-surface: #141414;
-                --color-elevated: #1E1E1E;
-                --color-text: #E8E8E8;
-                --color-text-secondary: #888888;
-                --color-text-tertiary: #555555;
-                --color-accent: #00C878;
-                --color-accent-subtle: rgba(0, 200, 120, 0.12);
-                --color-border: #222222;
-                --color-dot: #444444;
-                --shadow-subtle: none;
-                --shadow-medium: 0 4px 20px rgba(0,0,0,0.4);
-            }
-        }
+        /* Dark mode removed — light only */
 
         html { scroll-behavior: smooth; }
         body {
@@ -75,9 +61,7 @@
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
         }
-        @media (prefers-color-scheme: dark) {
-            .site-nav { background: rgba(10,10,10,0.85); }
-        }
+        
         .nav-inner {
             display: flex;
             align-items: center;
@@ -91,8 +75,9 @@
             
             font-weight: 700;
             font-size: 18px;
-            color: var(--color-text);
+            color: #1A1A1A;
         }
+        .nav-brand img { height: 32px; width: 32px; object-fit: contain; }
         .nav-mark {
             font-family: var(--font-mono);
             font-weight: 800;
@@ -312,13 +297,13 @@
         }
         .footer-brand {
             font-family: var(--font-mono);
-            display: flex;
-            align-items: center;
+            display: flex; align-items: center; gap: 8px;
             
             font-weight: 700;
             font-size: 16px;
-            color: var(--color-text);
+            color: #1A1A1A;
         }
+        .footer-brand img { height: 28px; width: 28px; object-fit: contain; }
         .footer-links { display: flex; flex-wrap: wrap; gap: 24px; }
         .footer-links a {
             font-size: 14px;
@@ -360,7 +345,7 @@
 <body>
     <nav class="site-nav">
         <div class="wrap nav-inner">
-            <a href="/" class="nav-brand"><span class="brand-s">S</span><span class="brand-text">oftroni</span><span class="brand-us">_</span></a>
+            <a href="/" class="nav-brand"><img src="/logo.png" alt="Softroni logo">Softroni</a>
             <div class="nav-links">
                 <a href="/blog/" class="nav-hide-mobile">Blog</a>
                 <a href="/about.html" class="nav-hide-mobile">About</a>
@@ -460,7 +445,7 @@
     <footer class="site-footer">
         <div class="wrap">
             <div class="footer-top">
-                <a href="/" class="footer-brand"><span class="brand-s">S</span><span class="brand-text">oftroni</span><span class="brand-us">_</span></a>
+                <a href="/" class="footer-brand"><img src="/logo.png" alt="Softroni logo">Softroni</a>
                 <nav class="footer-links">
                     <a href="/about.html">About</a>
                     <a href="/blog/">Blog</a>
