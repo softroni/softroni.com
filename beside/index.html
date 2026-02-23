@@ -648,18 +648,7 @@
 </head>
 <body>
     <!-- Softroni brand nav with green accent per brand guidelines section 9 -->
-    <nav class="site-nav">
-        <div class="wrap nav-inner">
-            <a href="/" class="nav-brand"><img src="/logo.png" alt="Softroni logo">Softroni</a>
-                        <div class="nav-links">
-                <a href="/apps.html" class="nav-hide-mobile">Apps</a>
-                <a href="/blog/" class="nav-hide-mobile">Blog</a>
-                <a href="/about.html" class="nav-hide-mobile">About</a>
-                <a href="/support.html" class="nav-hide-mobile">Support</a>
-                <a href="#notify" class="btn btn-sage">Get Notified</a>
-            </div>
-        </div>
-    </nav>
+    <nav class="site-nav" data-cta-text="Get Notified" data-cta-href="#notify" data-cta-class="btn btn-sage"></nav>
 
     <main>
         <!-- Hero -->
@@ -898,23 +887,7 @@
     </main>
 
     <!-- Softroni brand footer with green accent per brand guidelines section 9 -->
-    <footer class="site-footer">
-        <div class="wrap">
-            <div class="footer-top">
-                <a href="/" class="footer-brand"><img src="/logo.png" alt="Softroni logo">Softroni</a>
-                <nav class="footer-links">
-                    <a href="/about.html">About</a>
-                    <a href="/blog/">Blog</a>
-                    <a href="/privacy-policy.html">Privacy Policy</a>
-                    <a href="/terms-of-service.html">Terms of Service</a>
-                    <a href="/support.html">Support</a>
-                </nav>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; <script>document.write(new Date().getFullYear())</script> Softroni LLC. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <footer class="site-footer"></footer>
 
     <script>
         const fadeEls = document.querySelectorAll('.fade-in');
@@ -958,5 +931,6 @@
             return false;
         }
     </script>
+<script src="/shared/nav-footer.js"></script>
 </body>
 </html>
