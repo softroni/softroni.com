@@ -21,8 +21,10 @@
             --color-text: #1A1A1A;
             --color-text-secondary: #999999;
             --color-text-tertiary: #CCCCCC;
-            --color-accent: #00B368;
-            --color-accent-subtle: rgba(0, 179, 104, 0.1);
+            --color-accent: #3B6BF5;
+            --color-accent-hover: #2952CC;
+            --color-accent-subtle: rgba(59, 107, 245, 0.1);
+            --gradient-brand: linear-gradient(135deg, #1E3A8A, #3B82F6, #60A5FA);
             --color-border: #F0F0F0;
             --color-dot: #DDDDDD;
             --shadow-subtle: 0 4px 20px rgba(0,0,0,0.05);
@@ -42,8 +44,10 @@
                 --color-text: #E8E8E8;
                 --color-text-secondary: #888888;
                 --color-text-tertiary: #555555;
-                --color-accent: #00C878;
-                --color-accent-subtle: rgba(0, 200, 120, 0.12);
+                --color-accent: #60A5FA;
+                --color-accent-hover: #93C5FD;
+                --color-accent-subtle: rgba(96, 165, 250, 0.12);
+                --gradient-brand: linear-gradient(135deg, #2563EB, #60A5FA, #93C5FD);
                 --color-border: #222222;
                 --color-dot: #444444;
                 --shadow-subtle: none;
@@ -145,13 +149,13 @@
             transition: all 0.2s;
         }
         .btn-primary {
-            background: var(--color-accent);
+            background: var(--gradient-brand);
             color: #fff;
         }
         .btn-primary:hover {
             opacity: 0.9;
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0,179,104,0.3);
+            box-shadow: 0 4px 12px rgba(59, 107, 245, 0.35);
         }
         .btn-outline {
             background: transparent;
@@ -314,7 +318,7 @@
             font-family: var(--font-mono);
             animation: typeAll 1s steps(8) 0.3s forwards;
         }
-        .s-letter { color: var(--color-accent); font-weight: 800; }
+        .s-letter { background: var(--gradient-brand); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800; }
         .oftroni-text { font-weight: 600; letter-spacing: -1px; }
         .underscore {
             color: var(--color-accent);
@@ -480,7 +484,7 @@
 
         /* Newsletter */
         .newsletter-section {
-            background: var(--color-accent);
+            background: var(--gradient-brand);
             padding: 80px 0;
         }
         .newsletter-section h2 {
