@@ -265,14 +265,12 @@
     // Create mobile menu as sibling of nav (not inside)
     const mobileMenu = document.createElement('div');
     mobileMenu.className = 'nav-mobile-menu';
-    mobileMenu.innerHTML = \`
-      <a href="/">Home</a>
-      <a href="/apps.html">Apps</a>
-      <a href="/blog/">Blog</a>
-      <a href="/about.html">About</a>
-      <a href="/support.html">Support</a>
-      <a href="\${ctaHref}" class="\${ctaClass}">\${ctaText}</a>
-    \`;
+    mobileMenu.innerHTML = '<a href="/">Home</a>'
+      + '<a href="/apps.html">Apps</a>'
+      + '<a href="/blog/">Blog</a>'
+      + '<a href="/about.html">About</a>'
+      + '<a href="/support.html">Support</a>'
+      + '<a href="' + ctaHref + '" class="' + ctaClass + '">' + ctaText + '</a>';
     document.body.appendChild(mobileMenu);
 
     // Hamburger toggle
