@@ -60,8 +60,8 @@
       text-decoration: none;
     }
     .nav-links a:hover { color: var(--color-accent, #3B6BF5); }
-    .nav-links .btn-primary { color: #fff !important; }
-    .nav-links .btn-primary:hover { color: #fff !important; }
+    .nav-links .btn-primary, .nav-links .btn-accent, .nav-links .btn-sage { color: #fff !important; }
+    .nav-links .btn-primary:hover, .nav-links .btn-accent:hover, .nav-links .btn-sage:hover { color: #fff !important; }
     @media (max-width: 639px) {
       .nav-hide-mobile { display: none; }
     }
