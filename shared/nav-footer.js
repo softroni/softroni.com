@@ -90,6 +90,14 @@
       transform: translateY(-1px);
       box-shadow: 0 4px 12px rgba(59, 107, 245, 0.35);
     }
+    .btn-accent {
+      background: var(--color-accent, #3B6BF5);
+      color: #fff;
+    }
+    .btn-accent:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
 
     /* Footer */
     .site-footer {
