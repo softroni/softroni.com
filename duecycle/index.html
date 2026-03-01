@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DueCycle — Recurring Task Reminders for iOS</title>
+    <meta name="description" content="DueCycle: Track every recurring task — bills, chores, maintenance, health, and more. Set it once, never forget again. Free for iOS.">
+    <meta name="keywords" content="recurring task, task reminder, chore tracker, bill reminder, maintenance tracker, habit tracker, schedule app, routine planner, household tasks, iOS app">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --color-bg: #FFFFFF;
+            --color-surface: #FFFFFF;
+            --color-elevated: #F9F9F9;
+            --color-text: #1A1A1A;
+            --color-text-secondary: #999999;
+            --color-text-tertiary: #CCCCCC;
+            --color-accent: #00BCD4;
+            --color-accent-glow: rgba(0, 188, 212, 0.25);
+            --color-amber: #26C6DA;
+            --color-amber-glow: rgba(38, 198, 218, 0.2);
+            --color-border: #F0F0F0;
+            --color-dot: #DDDDDD;
+            --gradient-brand: linear-gradient(135deg, #1E3A8A, #3B82F6, #60A5FA);
+            --shadow-subtle: 0 4px 20px rgba(0,0,0,0.05);
+            --shadow-medium: 0 4px 20px rgba(0,0,0,0.1);
+            --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif;
+            --radius-btn: 10px;
+            --radius-card: 14px;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-sans);
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; }
+
+        .wrap { max-width: 1024px; margin: 0 auto; padding: 0 24px; }
+        .text-center { text-align: center; }
+
+        /* Nav */
+        .site-nav {
+            position: sticky; top: 0; z-index: 100;
+            border-bottom: 1px solid var(--color-border);
+            background: rgba(255,255,255,0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+        }
+        .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+        .nav-brand { font-family: var(--font-mono); font-weight: 700; font-size: 18px; color: #1A1A1A; display: flex; align-items: center; gap: 8px; }
+        .nav-brand img { height: 32px; width: 32px; object-fit: contain; }
+        .brand-s, .brand-us { color: var(--color-accent); font-weight: 800; }
+        .brand-text { font-weight: 600; }
+        .nav-links { display: flex; align-items: center; gap: 24px; }
+        .nav-links a { font-size: 14px; font-weight: 500; color: var(--color-text-secondary); transition: color 0.2s; }
+        .nav-links .btn-accent { color: #fff !important; }
+        .nav-links a:hover { color: var(--color-accent); }
+        @media (max-width: 639px) { .nav-hide-mobile { display: none; } }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 24px; border-radius: var(--radius-btn);
+            font-size: 14px; font-weight: 600; border: none; cursor: pointer; transition: all 0.2s;
+        }
+        .btn-accent { background: var(--color-accent); color: #fff; }
+        .btn-accent:hover { background: #0097A7; transform: translateY(-1px); box-shadow: 0 4px 16px var(--color-accent-glow); }
+
+        /* Section */
+        section { padding: 80px 0; }
+        .section-label {
+            font-size: 13px; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 2px; color: var(--color-accent); margin-bottom: 12px;
+        }
+        .section-title {
+            font-size: 32px; font-weight: 700; color: var(--color-text);
+            margin-bottom: 16px; letter-spacing: -0.5px;
+        }
+        @media (min-width: 640px) { .section-title { font-size: 40px; } }
+        .section-alt { background: var(--color-surface); }
+
+        /* Hero */
+        .hero { padding: 60px 0 80px; }
+        @media (min-width: 640px) { .hero { padding: 80px 0 100px; } }
+        .hero-grid { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; }
+        @media (min-width: 1024px) { .hero-grid { grid-template-columns: 1fr 1fr; gap: 64px; } }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 6px 16px; border-radius: 20px;
+            background: var(--color-accent-glow); color: var(--color-accent);
+            font-size: 14px; font-weight: 500; margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-size: 36px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.1; margin-bottom: 16px;
+        }
+        @media (min-width: 640px) { .hero h1 { font-size: 48px; } }
+        @media (min-width: 1024px) { .hero h1 { font-size: 56px; } }
+        .hero h1 .accent-text {
+            background: linear-gradient(135deg, var(--color-accent), var(--color-amber));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hero-desc { font-size: 18px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 28px; max-width: 480px; }
+        .hero-actions { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+
+        /* App icon */
+        .app-icon-small {
+            width: 64px; height: 64px; border-radius: 16px; margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,188,212,0.3);
+            overflow: hidden;
+        }
+        .app-icon-small img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* App Store badge */
+        .appstore-badge {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 12px 24px; border-radius: 12px;
+            background: #000; color: #fff; font-size: 14px; text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .appstore-badge:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+        .appstore-badge svg { width: 24px; height: 24px; fill: #fff; }
+        .appstore-badge .badge-text { display: flex; flex-direction: column; line-height: 1.2; }
+        .appstore-badge .badge-text small { font-size: 10px; font-weight: 400; opacity: 0.7; }
+        .appstore-badge .badge-text span { font-size: 16px; font-weight: 600; }
+
+        /* Hero illustration */
+        .hero-visual { max-width: 400px; margin: 0 auto; }
+        @media (min-width: 1024px) { .hero-visual { margin: 0 0 0 auto; } }
+        .hero-screenshot { border-radius: 24px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+        .hero-screenshot img { width: 100%; height: auto; display: block; }
+
+        /* Screenshot gallery */
+        .screenshots-scroll {
+            display: flex; gap: 20px; overflow-x: auto; padding: 20px 0;
+            scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+        }
+        .screenshots-scroll::-webkit-scrollbar { display: none; }
+        .screenshots-scroll .screenshot-item {
+            flex: 0 0 auto; width: 220px; scroll-snap-align: center;
+            border-radius: 20px; overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4); transition: transform 0.3s;
+        }
+        .screenshots-scroll .screenshot-item:hover { transform: scale(1.03); }
+        .screenshots-scroll .screenshot-item img { width: 100%; height: auto; display: block; }
+        @media (min-width: 640px) { .screenshots-scroll .screenshot-item { width: 260px; } }
+
+        /* Feature grid */
+        .features-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+        @media (min-width: 640px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .features-grid { grid-template-columns: repeat(3, 1fr); } }
+        .feature-card {
+            background: var(--color-elevated); border: 1px solid var(--color-border);
+            border-radius: var(--radius-card); padding: 32px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-medium); }
+        .feature-icon {
+            width: 48px; height: 48px; border-radius: 12px;
+            background: var(--color-accent-glow); display: flex; align-items: center;
+            justify-content: center; font-size: 22px; margin-bottom: 16px;
+        }
+        .feature-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .feature-card p { color: var(--color-text-secondary); font-size: 14px; line-height: 1.6; }
+
+        /* Use cases */
+        .usecases-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 600px; margin: 0 auto; }
+        @media (min-width: 640px) { .usecases-grid { grid-template-columns: repeat(4, 1fr); } }
+        .usecase-item { text-align: center; padding: 20px 12px; }
+        .usecase-item .emoji { font-size: 32px; margin-bottom: 8px; }
+        .usecase-item p { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); }
+
+        /* Pricing */
+        .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 24px; max-width: 800px; margin: 0 auto; }
+        @media (min-width: 640px) { .pricing-grid { grid-template-columns: 1fr 1fr; } }
+        .pricing-card {
+            background: var(--color-elevated); border: 1px solid var(--color-border);
+            border-radius: var(--radius-card); padding: 36px; position: relative;
+        }
+        .pricing-card.featured { border-color: var(--color-accent); box-shadow: 0 0 40px var(--color-accent-glow); }
+        .pricing-card .badge-popular {
+            position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+            background: var(--color-accent); color: #fff; font-size: 12px; font-weight: 600;
+            padding: 4px 16px; border-radius: 20px;
+        }
+        .pricing-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+        .pricing-card .price { font-size: 14px; color: var(--color-text-secondary); margin-bottom: 20px; }
+        .pricing-card ul { list-style: none; margin-bottom: 24px; }
+        .pricing-card li {
+            font-size: 14px; color: var(--color-text-secondary); padding: 6px 0;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .pricing-card li::before { content: '✓'; color: var(--color-accent); font-weight: 700; }
+
+        /* Privacy banner */
+        .privacy-banner {
+            background: linear-gradient(135deg, #00BCD4, #0097A7);
+            padding: 80px 0; position: relative; overflow: hidden;
+        }
+        .privacy-banner::before {
+            content: ''; position: absolute; width: 400px; height: 400px;
+            border-radius: 50%; background: rgba(255,255,255,0.06);
+            filter: blur(80px); top: -100px; right: -100px;
+        }
+        .privacy-content {
+            position: relative; z-index: 1; max-width: 600px; margin: 0 auto; text-align: center;
+        }
+        .privacy-content .big-emoji { font-size: 40px; margin-bottom: 20px; }
+        .privacy-content h2 { color: #fff; font-size: 40px; font-weight: 800; margin-bottom: 12px; }
+        @media (min-width: 640px) { .privacy-content h2 { font-size: 48px; } }
+        .privacy-content .lead { color: rgba(255,255,255,0.9); font-size: 20px; font-weight: 500; margin-bottom: 12px; }
+        .privacy-content p { color: rgba(255,255,255,0.7); font-size: 16px; line-height: 1.7; }
+
+        /* FAQ */
+        .faq-list { max-width: 680px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid var(--color-border); padding: 24px 0; }
+        .faq-item:first-child { border-top: 1px solid var(--color-border); }
+        .faq-q { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+        .faq-a { font-size: 15px; color: var(--color-text-secondary); line-height: 1.7; }
+
+        /* CTA bottom */
+        .cta-section {
+            background: linear-gradient(135deg, #F9F9F9, var(--color-bg));
+            padding: 80px 0; text-align: center;
+        }
+        .cta-section h2 { font-size: 36px; font-weight: 800; margin-bottom: 12px; }
+        @media (min-width: 640px) { .cta-section h2 { font-size: 44px; } }
+        .cta-section .lead { color: var(--color-text-secondary); font-size: 18px; margin-bottom: 32px; }
+
+        /* Footer */
+        .site-footer { border-top: 1px solid var(--color-border); background: var(--color-surface); padding: 48px 0; }
+        .footer-top { display: flex; flex-direction: column; gap: 32px; }
+        @media (min-width: 768px) { .footer-top { flex-direction: row; align-items: center; justify-content: space-between; } }
+        .footer-brand { font-family: var(--font-mono); font-weight: 700; font-size: 16px; color: #1A1A1A; display: flex; align-items: center; gap: 8px; }
+        .footer-brand img { height: 28px; width: 28px; object-fit: contain; }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 24px; }
+        .footer-links a { font-size: 14px; color: var(--color-text-secondary); transition: color 0.2s; }
+        .footer-links a:hover { color: var(--color-accent); }
+        .footer-bottom { margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--color-border); }
+        .footer-bottom p { font-size: 14px; color: var(--color-text-secondary); }
+
+        /* Fade in */
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .fade-in.hidden { opacity: 0; transform: translateY(20px); }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .fade-in-delay-1 { transition-delay: 0.1s; }
+        .fade-in-delay-2 { transition-delay: 0.2s; }
+        .fade-in-delay-3 { transition-delay: 0.3s; }
+        @media (prefers-reduced-motion: reduce) { .fade-in { opacity: 1; transform: none; } }
+    </style>
+</head>
+<body>
+    <nav class="site-nav" data-cta-text="Download" data-cta-href="#download" data-cta-class="btn btn-accent"></nav>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="wrap">
+                <div class="hero-grid">
+                    <div>
+                        <div class="fade-in app-icon-small"><img src="images/icon.png" alt="DueCycle icon"></div>
+                        <div class="fade-in hero-badge">🔄 Free on iOS</div>
+                        <h1 class="fade-in fade-in-delay-1">Never forget <span class="accent-text">what repeats</span></h1>
+                        <p class="fade-in fade-in-delay-2 hero-desc">Track every recurring task in your life — bills, chores, maintenance, health, and more. Set it once, get reminded forever. Dead simple.</p>
+                        <div class="fade-in fade-in-delay-3 hero-actions">
+                            <a href="https://apps.apple.com/us/app/duecycle/id6759850863" class="appstore-badge" id="download">
+                                <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                                <div class="badge-text"><small>Download on the</small><span>App Store</span></div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="fade-in fade-in-delay-2">
+                        <div class="hero-visual">
+                            <div class="hero-screenshot">
+                                <img src="images/screenshot-today.png" alt="DueCycle today dashboard" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Cases -->
+        <section class="section-alt">
+            <div class="wrap">
+                <div class="text-center fade-in" style="margin-bottom: 32px;">
+                    <p class="section-label">What to track</p>
+                    <h2 class="section-title">Everything that repeats</h2>
+                </div>
+                <div class="usecases-grid fade-in">
+                    <div class="usecase-item"><div class="emoji">💰</div><p>Bills & Payments</p></div>
+                    <div class="usecase-item"><div class="emoji">🏠</div><p>Home Maintenance</p></div>
+                    <div class="usecase-item"><div class="emoji">🚗</div><p>Car Care</p></div>
+                    <div class="usecase-item"><div class="emoji">💊</div><p>Health & Meds</p></div>
+                    <div class="usecase-item"><div class="emoji">🐾</div><p>Pet Care</p></div>
+                    <div class="usecase-item"><div class="emoji">💼</div><p>Work Tasks</p></div>
+                    <div class="usecase-item"><div class="emoji">🌱</div><p>Garden & Plants</p></div>
+                    <div class="usecase-item"><div class="emoji">🧹</div><p>Chores</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section>
+            <div class="wrap">
+                <div class="text-center fade-in" style="margin-bottom: 48px;">
+                    <p class="section-label">Features</p>
+                    <h2 class="section-title">Simple by design, powerful where it counts</h2>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Create in Seconds</h3>
+                        <p>Add a recurring task in under 5 seconds. Pick a schedule, set reminders, done. No overthinking required.</p>
+                    </div>
+                    <div class="feature-card fade-in fade-in-delay-1">
+                        <div class="feature-icon">📅</div>
+                        <h3>Flexible Scheduling</h3>
+                        <p>Daily, weekly, monthly, quarterly, yearly, or custom intervals. Fixed dates or flexible "X days after last done" mode.</p>
+                    </div>
+                    <div class="feature-card fade-in fade-in-delay-2">
+                        <div class="feature-icon">🔔</div>
+                        <h3>Nag Until Done</h3>
+                        <p>Persistent reminders that escalate when tasks are overdue. DueCycle won't let you forget — even if you try.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">🔥</div>
+                        <h3>Streaks & Stats</h3>
+                        <p>Track your completion streaks and on-time percentage. Stay motivated with visual proof that you're on top of things.</p>
+                    </div>
+                    <div class="feature-card fade-in fade-in-delay-1">
+                        <div class="feature-icon">📱</div>
+                        <h3>Widgets</h3>
+                        <p>Home screen and lock screen widgets show what's due today at a glance. No need to open the app.</p>
+                    </div>
+                    <div class="feature-card fade-in fade-in-delay-2">
+                        <div class="feature-icon">🗂️</div>
+                        <h3>Smart Categories</h3>
+                        <p>7 built-in categories plus custom ones with your own colors and icons. Organize tasks the way your brain works.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screenshots -->
+        <section class="section-alt">
+            <div class="wrap">
+                <div class="text-center fade-in" style="margin-bottom: 24px;">
+                    <p class="section-label">Screenshots</p>
+                    <h2 class="section-title">See it in action</h2>
+                </div>
+                <div class="screenshots-scroll fade-in">
+                    <div class="screenshot-item"><img src="images/screenshot-today.png" alt="Today dashboard" loading="lazy"></div>
+                    <div class="screenshot-item"><img src="images/screenshot-alltasks.png" alt="All tasks view" loading="lazy"></div>
+                    <div class="screenshot-item"><img src="images/screenshot-calendar.png" alt="Calendar view" loading="lazy"></div>
+                    <div class="screenshot-item"><img src="images/screenshot-addtask.png" alt="Add a task" loading="lazy"></div>
+                    <div class="screenshot-item"><img src="images/screenshot-detail.png" alt="Task detail" loading="lazy"></div>
+                    <div class="screenshot-item"><img src="images/screenshot-settings.png" alt="Settings" loading="lazy"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Privacy -->
+        <section class="privacy-banner">
+            <div class="privacy-content fade-in">
+                <div class="big-emoji">🔒</div>
+                <h2>Your Data, Your Device</h2>
+                <p class="lead">No accounts. No tracking. No ads.</p>
+                <p>DueCycle stores everything locally on your device with optional iCloud sync. We never see your data, never sell your data, and never show you ads. Your tasks are yours alone.</p>
+            </div>
+        </section>
+
+        <!-- Pricing -->
+        <section>
+            <div class="wrap">
+                <div class="text-center fade-in" style="margin-bottom: 48px;">
+                    <p class="section-label">Pricing</p>
+                    <h2 class="section-title">Start free, upgrade when you're ready</h2>
+                </div>
+                <div class="pricing-grid fade-in">
+                    <div class="pricing-card">
+                        <h3>Free</h3>
+                        <p class="price">$0 forever — no ads</p>
+                        <ul>
+                            <li>Up to 15 tasks</li>
+                            <li>All frequencies & modes</li>
+                            <li>Smart reminders</li>
+                            <li>Nag until done</li>
+                            <li>Streaks & statistics</li>
+                            <li>Widgets</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-card featured">
+                        <div class="badge-popular">7-Day Free Trial</div>
+                        <h3>Premium</h3>
+                        <p class="price">$1.99/mo · $14.99/yr · $29.99 lifetime</p>
+                        <ul>
+                            <li>Unlimited tasks</li>
+                            <li>Calendar view</li>
+                            <li>Custom categories</li>
+                            <li>iCloud sync</li>
+                            <li>Everything in Free</li>
+                            <li>Priority support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section-alt">
+            <div class="wrap">
+                <div class="text-center fade-in" style="margin-bottom: 48px;">
+                    <p class="section-label">FAQ</p>
+                    <h2 class="section-title">Common questions</h2>
+                </div>
+                <div class="faq-list fade-in">
+                    <div class="faq-item">
+                        <p class="faq-q">Is DueCycle really free?</p>
+                        <p class="faq-a">Yes. The free version includes up to 15 tasks with all scheduling modes, smart reminders, streaks, and widgets — with no ads. Premium unlocks unlimited tasks, calendar view, custom categories, and iCloud sync.</p>
+                    </div>
+                    <div class="faq-item">
+                        <p class="faq-q">What's the difference between fixed and flexible scheduling?</p>
+                        <p class="faq-a">Fixed scheduling repeats on exact dates (e.g., the 1st of every month). Flexible scheduling repeats based on when you last completed the task (e.g., every 14 days from last done). Perfect for tasks that shift based on when you actually do them.</p>
+                    </div>
+                    <div class="faq-item">
+                        <p class="faq-q">What does "Nag Until Done" do?</p>
+                        <p class="faq-a">When enabled, DueCycle sends you daily reminder notifications for overdue tasks until you mark them complete. It won't let you forget — even if you try to ignore it.</p>
+                    </div>
+                    <div class="faq-item">
+                        <p class="faq-q">Does my data sync across devices?</p>
+                        <p class="faq-a">With Premium, your tasks sync across all your iCloud-connected devices automatically via CloudKit. No account or sign-up needed — it just works.</p>
+                    </div>
+                    <div class="faq-item">
+                        <p class="faq-q">Is my data private?</p>
+                        <p class="faq-a">Completely. No accounts, no tracking, no analytics. Your data is stored on-device and in your personal iCloud. We never see it. <a href="/privacy-policy.html" style="color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px;">Read our privacy policy →</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom CTA -->
+        <section class="cta-section" id="download-bottom">
+            <div class="wrap fade-in">
+                <h2>Set it once.<br><span style="color: var(--color-accent);">Never forget again.</span></h2>
+                <p class="lead">Download DueCycle free on the App Store.</p>
+                <a href="https://apps.apple.com/us/app/duecycle/id6759850863" class="appstore-badge">
+                    <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    <div class="badge-text"><small>Download on the</small><span>App Store</span></div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer"></footer>
+
+    <script>
+        const fadeEls = document.querySelectorAll('.fade-in');
+        if ('IntersectionObserver' in window) {
+            fadeEls.forEach(el => el.classList.add('hidden'));
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.remove('hidden');
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+            fadeEls.forEach(el => observer.observe(el));
+        }
+    </script>
+    <script src="/shared/nav-footer.js"></script>
+</body>
+</html>
