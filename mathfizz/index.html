@@ -94,6 +94,14 @@
         .hero-screenshot { border-radius: 24px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
         .hero-screenshot img { width: 100%; height: auto; display: block; }
 
+        /* Screenshot gallery */
+        .screenshots-scroll { display: flex; gap: 20px; overflow-x: auto; padding: 20px 0; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+        .screenshots-scroll::-webkit-scrollbar { display: none; }
+        .screenshots-scroll .screenshot-item { flex: 0 0 auto; width: 220px; scroll-snap-align: center; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.4); transition: transform 0.3s; }
+        .screenshots-scroll .screenshot-item:hover { transform: scale(1.03); }
+        .screenshots-scroll .screenshot-item img { width: 100%; height: auto; display: block; }
+        @media (min-width: 640px) { .screenshots-scroll .screenshot-item { width: 260px; } }
+
         /* Features */
         .features-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
         @media (min-width: 640px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -241,6 +249,23 @@
                         <h3>ADHD-Friendly</h3>
                         <p>Designed for neurodivergent brains. Sensory feedback keeps you engaged. Short sessions. Stim rewards prevent burnout. No punishment for wrong answers.</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screenshots -->
+        <section>
+            <div class="wrap">
+                <div class="text-center fade-in" style="margin-bottom: 24px;">
+                    <p class="section-label">Screenshots</p>
+                    <h2 class="section-title">See it in action</h2>
+                </div>
+                <div class="screenshots-scroll fade-in">
+                    <div class="screenshot-item"><img src="images/screenshot-home.png" alt="Home screen" loading="lazy"></div>
+                    <div class="screenshot-item"><img src="images/screenshot-gameplay.png" alt="Gameplay" loading="lazy"></div>
+                    <div class="screenshot-item"><img src="images/screenshot-stats.png" alt="Stats tracking" loading="lazy"></div>
+                    <div class="screenshot-item"><img src="images/screenshot-stim.png" alt="Stim rewards gallery" loading="lazy"></div>
+                    <div class="screenshot-item"><img src="images/screenshot-paywall.png" alt="Premium" loading="lazy"></div>
                 </div>
             </div>
         </section>
