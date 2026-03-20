@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoBlitz — Geography Speed Quiz for iOS</title>
+    <meta name="description" content="GeoBlitz: 8 quiz modes, 220 countries, daily challenges, adaptive learning. Master world geography with arcade-style speed quizzes. Free for iOS.">
+    <meta name="keywords" content="geography quiz, flags quiz, world capitals, country quiz, map quiz, geography game, learn geography, trivia, daily challenge">
+    <meta property="og:title" content="GeoBlitz — Geography Speed Quiz">
+    <meta property="og:description" content="8 quiz modes. 220 countries. One daily challenge. Master the world.">
+    <meta property="og:image" content="https://softroni.com/geoblitz/images/appicon.png">
+    <meta property="og:url" content="https://softroni.com/geoblitz/">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --color-bg: #FFFFFF;
+            --color-surface: #FFFFFF;
+            --color-elevated: #F9F9F9;
+            --color-text: #1A1A1A;
+            --color-text-secondary: #999999;
+            --color-text-tertiary: #CCCCCC;
+            --color-accent: #FF8A00;
+            --color-accent-glow: rgba(255, 138, 0, 0.25);
+            --color-accent-subtle: rgba(255, 138, 0, 0.1);
+            --color-secondary: #4CAF50;
+            --color-border: #F0F0F0;
+            --shadow-subtle: 0 4px 20px rgba(0,0,0,0.05);
+            --shadow-medium: 0 4px 20px rgba(0,0,0,0.1);
+            --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif;
+            --radius-btn: 10px;
+            --radius-card: 14px;
+        }
+
+        html { scroll-behavior: smooth; }
+        body { background: var(--color-bg); color: var(--color-text); font-family: var(--font-sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; }
+
+        .wrap { max-width: 1024px; margin: 0 auto; padding: 0 24px; }
+        .text-center { text-align: center; }
+
+        /* Nav */
+        .site-nav { position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--color-border); background: rgba(255,255,255,0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+        .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+        .nav-brand { font-family: var(--font-mono); font-weight: 700; font-size: 18px; display: flex; align-items: center; gap: 8px; }
+        .nav-brand img { height: 32px; width: 32px; object-fit: contain; }
+        .nav-links { display: flex; align-items: center; gap: 24px; }
+        .nav-links a { font-size: 14px; font-weight: 500; color: var(--color-text-secondary); transition: color 0.2s; }
+        .nav-links a:hover { color: var(--color-accent); }
+        @media (max-width: 639px) { .nav-hide-mobile { display: none; } }
+
+        /* Buttons */
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; border-radius: var(--radius-btn); font-size: 15px; font-weight: 600; border: none; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+        .btn-accent { background: var(--color-accent); color: #fff; }
+        .btn-accent:hover { background: #E07800; transform: translateY(-1px); box-shadow: 0 4px 16px var(--color-accent-glow); }
+        .btn-outline { background: transparent; color: var(--color-text); border: 1.5px solid var(--color-border); }
+        .btn-outline:hover { border-color: var(--color-accent); color: var(--color-accent); }
+
+        /* Hero */
+        .hero { padding: 80px 0 60px; }
+        .hero-grid { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; }
+        @media (min-width: 768px) { .hero-grid { grid-template-columns: 1fr 1fr; } }
+        .hero-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; background: var(--color-accent-subtle); color: var(--color-accent); margin-bottom: 16px; }
+        .hero h1 { font-size: 48px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 16px; }
+        .hero h1 span { color: var(--color-accent); }
+        @media (max-width: 639px) { .hero h1 { font-size: 36px; } }
+        .hero p { font-size: 18px; color: var(--color-text-secondary); margin-bottom: 32px; max-width: 480px; }
+        .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+        .hero-icon { width: 160px; height: 160px; border-radius: 36px; box-shadow: var(--shadow-medium); }
+        .hero-visual { display: flex; justify-content: center; }
+
+        /* Stats bar */
+        .stats-bar { display: flex; justify-content: center; gap: 48px; padding: 40px 0; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+        .stat { text-align: center; }
+        .stat-num { font-size: 36px; font-weight: 800; color: var(--color-accent); }
+        .stat-label { font-size: 13px; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 1px; }
+        @media (max-width: 639px) { .stats-bar { gap: 24px; } .stat-num { font-size: 28px; } }
+
+        /* Features */
+        .features { padding: 80px 0; }
+        .features h2 { font-size: 36px; font-weight: 800; letter-spacing: -1px; margin-bottom: 12px; }
+        .features .subtitle { font-size: 18px; color: var(--color-text-secondary); margin-bottom: 48px; }
+        .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        @media (max-width: 639px) { .features-grid { grid-template-columns: 1fr; } }
+        .feature-card { padding: 28px; border-radius: var(--radius-card); border: 1px solid var(--color-border); background: var(--color-elevated); transition: transform 0.2s, box-shadow 0.2s; }
+        .feature-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-subtle); }
+        .feature-emoji { font-size: 28px; margin-bottom: 12px; }
+        .feature-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+        .feature-card p { font-size: 14px; color: var(--color-text-secondary); line-height: 1.5; }
+
+        /* Screenshots */
+        .screenshots { padding: 60px 0 80px; }
+        .screenshots h2 { font-size: 36px; font-weight: 800; letter-spacing: -1px; margin-bottom: 12px; }
+        .screenshots .subtitle { font-size: 18px; color: var(--color-text-secondary); margin-bottom: 32px; }
+        .screenshot-strip { display: flex; gap: 16px; overflow-x: auto; padding: 8px 0 24px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+        .screenshot-strip::-webkit-scrollbar { display: none; }
+        .screenshot-strip img { height: 480px; width: auto; border-radius: 16px; scroll-snap-align: start; flex-shrink: 0; box-shadow: 0 8px 32px rgba(0,0,0,0.15); }
+        @media (max-width: 639px) { .screenshot-strip img { height: 360px; } }
+
+        /* Pricing */
+        .pricing { padding: 80px 0; background: var(--color-elevated); }
+        .pricing h2 { font-size: 36px; font-weight: 800; letter-spacing: -1px; margin-bottom: 12px; }
+        .pricing .subtitle { font-size: 18px; color: var(--color-text-secondary); margin-bottom: 48px; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        @media (max-width: 639px) { .pricing-grid { grid-template-columns: 1fr; } }
+        .price-card { padding: 32px 24px; border-radius: var(--radius-card); border: 1px solid var(--color-border); background: var(--color-surface); text-align: center; position: relative; }
+        .price-card.featured { border-color: var(--color-accent); box-shadow: 0 0 0 1px var(--color-accent); }
+        .price-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); padding: 4px 16px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; background: var(--color-accent); color: #fff; }
+        .price-name { font-size: 18px; font-weight: 700; margin-bottom: 8px; margin-top: 8px; }
+        .price-amount { font-size: 36px; font-weight: 800; color: var(--color-accent); }
+        .price-period { font-size: 14px; color: var(--color-text-secondary); }
+        .price-note { font-size: 13px; color: var(--color-text-secondary); margin-top: 8px; }
+        .price-features { list-style: none; margin-top: 20px; text-align: left; }
+        .price-features li { font-size: 14px; padding: 6px 0; color: var(--color-text-secondary); display: flex; align-items: center; gap: 8px; }
+        .price-features li::before { content: "✓"; color: var(--color-secondary); font-weight: 700; }
+
+        /* CTA */
+        .cta-section { padding: 80px 0; }
+        .cta-box { padding: 60px 40px; border-radius: 20px; background: linear-gradient(135deg, #0D0D12, #1a1a2e); color: #fff; }
+        .cta-box h2 { font-size: 36px; font-weight: 800; margin-bottom: 12px; }
+        .cta-box p { font-size: 18px; opacity: 0.7; margin-bottom: 32px; }
+        .cta-box .btn-accent { background: var(--color-accent); }
+
+        /* Footer */
+        .site-footer { border-top: 1px solid var(--color-border); background: var(--color-surface); padding: 48px 0; }
+        .footer-top { display: flex; flex-direction: column; gap: 32px; }
+        @media (min-width: 768px) { .footer-top { flex-direction: row; align-items: center; justify-content: space-between; } }
+        .footer-brand { font-family: var(--font-mono); font-weight: 700; font-size: 16px; }
+        .footer-brand img { height: 28px; width: 28px; object-fit: contain; }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 24px; }
+        .footer-links a { font-size: 14px; color: var(--color-text-secondary); transition: color 0.2s; }
+        .footer-links a:hover { color: var(--color-accent); }
+        .footer-bottom { margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--color-border); }
+        .footer-bottom p { font-size: 14px; color: var(--color-text-secondary); }
+
+        /* Fade */
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) { .fade-in { opacity: 1; transform: none; } }
+    </style>
+</head>
+<body>
+    <nav class="site-nav"></nav>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="wrap">
+                <div class="hero-grid">
+                    <div class="fade-in">
+                        <div class="hero-badge">🌍 Geography Speed Quiz</div>
+                        <h1>Master every country <span>on Earth.</span></h1>
+                        <p>8 quiz modes, 220 countries, daily challenges, and adaptive learning that gets smarter as you play. Geography has never been this fun.</p>
+                        <div class="hero-buttons">
+                            <a href="https://apps.apple.com/us/app/geoblitz/id6760672757" class="btn btn-accent">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                                Download Free
+                            </a>
+                            <a href="#features" class="btn btn-outline">See Features</a>
+                        </div>
+                    </div>
+                    <div class="hero-visual fade-in">
+                        <img src="images/appicon.png" alt="GeoBlitz App Icon" class="hero-icon">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section>
+            <div class="wrap">
+                <div class="stats-bar fade-in">
+                    <div class="stat">
+                        <div class="stat-num">220</div>
+                        <div class="stat-label">Countries</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-num">8</div>
+                        <div class="stat-label">Quiz Modes</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-num">0</div>
+                        <div class="stat-label">Ads</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-num">∞</div>
+                        <div class="stat-label">Fun Facts</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="features" id="features">
+            <div class="wrap">
+                <h2 class="text-center fade-in">Everything you need to<br>master geography.</h2>
+                <p class="subtitle text-center fade-in">Speed quizzes meet smart learning — the more you play, the smarter it gets.</p>
+                <div class="features-grid">
+                    <div class="feature-card fade-in">
+                        <div class="feature-emoji">🎮</div>
+                        <h3>8 Quiz Modes</h3>
+                        <p>Flags, capitals, maps, borders, population, fun facts, and more. Each mode tests a different aspect of your geography knowledge.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-emoji">🧠</div>
+                        <h3>Adaptive Learning</h3>
+                        <p>Built on spaced repetition science. Miss a question? It comes back. Nail it? Move on to harder countries. The app learns what you need to practice.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-emoji">📅</div>
+                        <h3>Daily Challenge</h3>
+                        <p>A new themed puzzle every day — timed, scored, and shareable. Build your streak and compare with friends.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-emoji">🌍</div>
+                        <h3>220 Countries to Explore</h3>
+                        <p>Browse every nation — fun facts, Wikipedia photos, national anthems, local greetings, and world rankings by population and area.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-emoji">⭐</div>
+                        <h3>Stars & Personal Bests</h3>
+                        <p>Earn 1-3 stars per round. Track personal records per category. Beat your high score and get XP bonuses for accuracy.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-emoji">🔥</div>
+                        <h3>Streaks & Levels</h3>
+                        <p>Level up from Geography Newbie to World Master. Build daily streaks with a 7-day calendar. Every correct answer earns XP.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-emoji">✨</div>
+                        <h3>Satisfying Gameplay</h3>
+                        <p>Combo multipliers, particle explosions, haptic feedback, and speed scoring. Fast answers earn more points — how quick can you go?</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-emoji">❤️</div>
+                        <h3>Favorites</h3>
+                        <p>Save your favorite countries for quick access. Quiz yourself on just your favorites for focused study sessions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screenshots -->
+        <section class="screenshots">
+            <div class="wrap">
+                <h2 class="text-center fade-in">See it in action.</h2>
+                <p class="subtitle text-center fade-in">Dark, beautiful, and built for focus.</p>
+            </div>
+            <div class="wrap">
+                <div class="screenshot-strip fade-in">
+                    <img src="images/screenshot_quiz.png" alt="GeoBlitz Quiz Gameplay">
+                    <img src="images/screenshot_home.png" alt="GeoBlitz Home Screen">
+                    <img src="images/screenshot_daily.png" alt="GeoBlitz Daily Challenge Results">
+                    <img src="images/screenshot_explorer.png" alt="GeoBlitz Country Explorer">
+                    <img src="images/screenshot_detail.png" alt="GeoBlitz Country Detail">
+                    <img src="images/screenshot_stats.png" alt="GeoBlitz Statistics">
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing -->
+        <section class="pricing" id="pricing">
+            <div class="wrap">
+                <h2 class="text-center fade-in">Simple pricing.</h2>
+                <p class="subtitle text-center fade-in">Play free forever. Go premium for the full experience.</p>
+                <div class="pricing-grid">
+                    <div class="price-card fade-in">
+                        <div class="price-name">Free</div>
+                        <div class="price-amount">$0</div>
+                        <div class="price-period">forever</div>
+                        <ul class="price-features">
+                            <li>3 rounds per day</li>
+                            <li>3 quiz categories</li>
+                            <li>Daily challenge</li>
+                            <li>Full country explorer</li>
+                            <li>Streaks & XP</li>
+                        </ul>
+                    </div>
+                    <div class="price-card featured fade-in">
+                        <div class="price-badge">Best Value</div>
+                        <div class="price-name">Annual</div>
+                        <div class="price-amount">$14.99</div>
+                        <div class="price-period">per year</div>
+                        <div class="price-note">7-day free trial · ~$1.25/mo</div>
+                        <ul class="price-features">
+                            <li>Unlimited rounds</li>
+                            <li>All 8 quiz categories</li>
+                            <li>Answer review</li>
+                            <li>Test Yourself mode</li>
+                            <li>Streak calendar</li>
+                            <li>Richer daily challenges</li>
+                        </ul>
+                    </div>
+                    <div class="price-card fade-in">
+                        <div class="price-name">Lifetime</div>
+                        <div class="price-amount">$29.99</div>
+                        <div class="price-period">one time</div>
+                        <div class="price-note">Pay once, own forever</div>
+                        <ul class="price-features">
+                            <li>Everything in Premium</li>
+                            <li>No recurring charges</li>
+                            <li>All future updates</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <div class="wrap">
+                <div class="cta-box text-center fade-in">
+                    <h2>How well do you know the world?</h2>
+                    <p>220 countries. 8 quiz modes. One daily challenge. Find out.</p>
+                    <a href="https://apps.apple.com/us/app/geoblitz/id6760672757" class="btn btn-accent">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                        Download for Free
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer"></footer>
+
+    <script>
+        const fadeEls = document.querySelectorAll('.fade-in');
+        if ('IntersectionObserver' in window) {
+            fadeEls.forEach(el => el.classList.add('hidden'));
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) { entry.target.classList.remove('hidden'); entry.target.classList.add('visible'); }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+            fadeEls.forEach(el => observer.observe(el));
+        }
+    </script>
+    <script src="/shared/nav-footer.js"></script>
+</body>
+</html>
