@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Never Forget a Recurring Task Again: The Complete System | Softroni</title>
+    <meta name="description" content="Stop forgetting bills, chores, and maintenance tasks. Learn why recurring tasks are different from todos, what makes a good tracking system, and how to build habits that stick.">
+    <meta name="keywords" content="recurring task reminder, chore tracker, bill reminder, task management system, recurring tasks app, household chores, maintenance reminders, habit tracker">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Never Forget a Recurring Task Again: The Complete System">
+    <meta property="og:description" content="Stop forgetting bills, chores, and maintenance tasks. Learn what makes a good recurring task system and how to build habits that stick.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://softroni.com/blog/never-forget-recurring-tasks/">
+    <meta property="og:site_name" content="Softroni">
+    <meta property="article:published_time" content="2026-03-20T12:00:00Z">
+    <meta property="article:author" content="Softroni">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Never Forget a Recurring Task Again: The Complete System">
+    <meta name="twitter:description" content="Stop forgetting bills, chores, and maintenance tasks. Learn what makes a good recurring task system and how to build habits that stick.">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Never Forget a Recurring Task Again: The Complete System",
+        "description": "Learn why recurring tasks are different from todos, what makes a good tracking system, and how to build habits that stick.",
+        "datePublished": "2026-03-20",
+        "dateModified": "2026-03-20",
+        "author": {
+            "@type": "Organization",
+            "name": "Softroni",
+            "url": "https://softroni.com"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Softroni",
+            "url": "https://softroni.com"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://softroni.com/blog/never-forget-recurring-tasks/"
+        }
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --color-bg: #FFFFFF;
+            --color-surface: #FFFFFF;
+            --color-elevated: #F9F9F9;
+            --color-text: #1A1A1A;
+            --color-text-secondary: #999999;
+            --color-text-tertiary: #CCCCCC;
+            --color-accent: #00BCD4;
+            --color-accent-subtle: rgba(0, 188, 212, 0.1);
+            --color-border: #F0F0F0;
+            --shadow-subtle: 0 4px 20px rgba(0,0,0,0.05);
+            --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif;
+            --radius-btn: 8px;
+            --radius-card: 12px;
+            --sage-50: #f6f7f4;
+            --sage-100: #e8ebe3;
+            --sage-200: #d4d9c9;
+            --sage-400: #96a17e;
+            --sage-500: #7a8763;
+            --sage-600: #5f6b4d;
+            --sage-700: #4b543e;
+            --sage-800: #3e4534;
+            --sage-900: #353b2e;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-bg: #0A0A0A;
+                --color-surface: #141414;
+                --color-elevated: #1E1E1E;
+                --color-text: #E8E8E8;
+                --color-text-secondary: #888888;
+                --color-text-tertiary: #555555;
+                --color-accent: #00D4EE;
+                --color-accent-subtle: rgba(0, 212, 238, 0.12);
+                --color-border: #222222;
+                --shadow-subtle: none;
+                --sage-50: #1a1c17;
+                --sage-100: #252820;
+                --sage-200: #353b2e;
+            }
+        }
+
+        html { scroll-behavior: smooth; }
+        body { background: var(--color-bg); color: var(--color-text); font-family: var(--font-sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        a { color: inherit; text-decoration: none; }
+        .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+        /* Nav */
+        .site-nav { position: sticky; top: 0; z-index: 100; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); background: rgba(255,255,255,0.85); border-bottom: 1px solid var(--color-border); }
+        @media (prefers-color-scheme: dark) { .site-nav { background: rgba(10,10,10,0.85); } }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; height: 56px; }
+        .nav-brand { font-family: var(--font-mono); font-size: 18px; font-weight: 800; letter-spacing: -0.5px; }
+        .brand-s { color: var(--color-accent); font-size: 22px; }
+        .brand-text { color: var(--color-text); }
+        .brand-us { color: var(--color-accent); animation: blink 1s step-end infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        .nav-links { display: flex; align-items: center; gap: 24px; }
+        .nav-links a { font-size: 14px; color: var(--color-text-secondary); transition: color 0.2s; }
+        .nav-links a:hover { color: var(--sage-600); }
+        @media (max-width: 640px) { .nav-hide-mobile { display: none; } }
+
+        .btn { display: inline-block; padding: 8px 20px; border-radius: var(--radius-btn); font-size: 14px; font-weight: 600; transition: all 0.2s; cursor: pointer; border: none; }
+        .btn-sage { background: var(--sage-600); color: #fff !important; }
+        .btn-sage:hover { background: var(--sage-700); transform: translateY(-1px); }
+
+        .breadcrumbs { padding: 16px 0; font-size: 14px; color: var(--color-text-secondary); }
+        .breadcrumbs a { color: var(--color-text-secondary); text-decoration: underline; text-underline-offset: 3px; }
+        .breadcrumbs a:hover { color: var(--sage-600); }
+        .breadcrumbs .sep { margin: 0 8px; }
+
+        .article-header { padding: 48px 0 32px; max-width: 720px; }
+        .article-header h1 { font-family: var(--font-mono); font-size: clamp(28px, 5vw, 40px); font-weight: 800; line-height: 1.2; letter-spacing: -1px; margin-bottom: 16px; }
+        .article-meta { font-size: 14px; color: var(--color-text-secondary); }
+        .article-meta time { font-weight: 500; }
+
+        .article-body { max-width: 720px; padding-bottom: 64px; }
+        .article-body p { margin-bottom: 20px; font-size: 17px; line-height: 1.75; color: var(--color-text); }
+        .article-body h2 { font-family: var(--font-mono); font-size: 26px; font-weight: 700; margin: 48px 0 16px; letter-spacing: -0.5px; }
+        .article-body h3 { font-family: var(--font-mono); font-size: 20px; font-weight: 600; margin: 32px 0 12px; }
+        .article-body ul, .article-body ol { margin: 0 0 20px 24px; }
+        .article-body li { margin-bottom: 8px; font-size: 17px; line-height: 1.75; }
+        .article-body strong { font-weight: 600; }
+        .article-body em { font-style: italic; }
+        .article-body a { color: var(--sage-600); text-decoration: underline; text-underline-offset: 3px; }
+        .article-body a:hover { color: var(--sage-700); }
+        .article-body blockquote { border-left: 3px solid var(--sage-400); padding: 12px 20px; margin: 24px 0; background: var(--sage-50); border-radius: 0 var(--radius-card) var(--radius-card) 0; }
+        .article-body blockquote p { margin-bottom: 0; color: var(--color-text-secondary); }
+        .article-body hr { border: none; border-top: 1px solid var(--color-border); margin: 48px 0; }
+
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 24px 0 32px; font-size: 15px; }
+        .comparison-table thead th { font-family: var(--font-mono); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; padding: 12px 16px; text-align: left; border-bottom: 2px solid var(--sage-400); color: var(--color-text-secondary); }
+        .comparison-table tbody td { padding: 12px 16px; border-bottom: 1px solid var(--color-border); }
+        .comparison-table tbody tr:last-child td { border-bottom: none; }
+        .comparison-table .highlight { color: var(--sage-600); font-weight: 600; }
+        @media (max-width: 640px) { .comparison-table { font-size: 13px; } .comparison-table thead th, .comparison-table tbody td { padding: 8px 10px; } }
+
+        .cta-box { background: var(--sage-50); border: 1px solid var(--sage-200); border-radius: var(--radius-card); padding: 32px; margin: 48px 0; text-align: center; }
+        .cta-box h2 { font-family: var(--font-mono); font-size: 24px; margin-bottom: 12px; }
+        .cta-box p { color: var(--color-text-secondary); margin-bottom: 20px; font-size: 16px; }
+        .cta-box .btn { font-size: 16px; padding: 12px 32px; }
+
+        .tips-list { counter-reset: tip; list-style: none; margin-left: 0 !important; padding: 0; }
+        .tips-list li { counter-increment: tip; position: relative; padding-left: 40px; margin-bottom: 16px !important; }
+        .tips-list li::before { content: counter(tip); position: absolute; left: 0; top: 2px; width: 28px; height: 28px; background: var(--sage-600); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 14px; font-weight: 600; }
+
+        .site-footer { border-top: 1px solid var(--color-border); padding: 40px 0; }
+        .footer-top { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; }
+        @media (min-width: 640px) { .footer-top { flex-direction: row; align-items: center; justify-content: space-between; } }
+        .footer-brand { font-family: var(--font-mono); font-size: 18px; font-weight: 800; letter-spacing: -0.5px; }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 24px; }
+        .footer-links a { font-size: 14px; color: var(--color-text-secondary); transition: color 0.2s; }
+        .footer-links a:hover { color: var(--color-accent); }
+        .footer-bottom { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--color-border); }
+        .footer-bottom p { font-size: 14px; color: var(--color-text-secondary); }
+    </style>
+</head>
+<body>
+    <nav class="site-nav">
+        <div class="wrap nav-inner">
+            <a href="/" class="nav-brand"><span class="brand-s">S</span><span class="brand-text">oftroni</span><span class="brand-us">_</span></a>
+            <div class="nav-links">
+                <a href="/apps.html" class="nav-hide-mobile">Apps</a>
+                <a href="/blog/">Blog</a>
+                <a href="/about.html" class="nav-hide-mobile">About</a>
+                <a href="/support.html" class="nav-hide-mobile">Support</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="wrap">
+            <nav class="breadcrumbs" aria-label="Breadcrumb">
+                <a href="/">Home</a><span class="sep">/</span>
+                <a href="/blog/">Blog</a><span class="sep">/</span>
+                <span>Never Forget a Recurring Task</span>
+            </nav>
+
+            <header class="article-header">
+                <h1>Never Forget a Recurring Task Again: The Complete System</h1>
+                <p class="article-meta">Published <time datetime="2026-03-20">March 20, 2026</time> · 10 min read</p>
+            </header>
+
+            <article class="article-body">
+                <p>You paid the credit card bill last month. You're 90% sure. But when was it due again? Was it the 15th or the 18th? Better check. Log in. Navigate three security screens. Oh, you already paid it. Cool. But now you're wondering if you changed the air filter. That was supposed to be every three months, right? Or was it six?</p>
+
+                <p>Sound familiar?</p>
+
+                <p>Recurring tasks are the invisible mental load that drains your energy. Unlike one-time todos (which you check off and forget), recurring tasks come back like clockwork. Bills. Chores. Maintenance. Subscriptions. They're the reason you feel like you're always forgetting <em>something</em>.</p>
+
+                <p>Here's how to build a system that actually works.</p>
+
+                <h2>Why Recurring Tasks Are Different from Regular Todos</h2>
+
+                <p>Most task apps treat recurring tasks like clones of the same todo. "Take out trash" shows up every Tuesday. You check it off. Next Tuesday, there it is again.</p>
+
+                <p>But this breaks down quickly because recurring tasks have unique properties:</p>
+
+                <ul>
+                    <li><strong>They need context.</strong> "Pay credit card" isn't enough. Which card? What's the amount? When's the due date?</li>
+                    <li><strong>Schedules vary.</strong> Some tasks repeat every week. Others every 3 months. Some are "every 5,000 miles" or "twice a year."</li>
+                    <li><strong>They accumulate guilt.</strong> Miss a one-time task and it's done. Miss a recurring task and now you're behind on a pattern. The mental weight compounds.</li>
+                    <li><strong>You need to track completion history.</strong> "Did I already do this?" is the most common question. A simple todo list doesn't answer it.</li>
+                </ul>
+
+                <p>This is why regular todo apps fail at recurring tasks. They're solving the wrong problem.</p>
+
+                <h2>Common Systems (and Why They Don't Work)</h2>
+
+                <h3>1. Calendar Reminders</h3>
+
+                <p>Putting recurring tasks in your calendar feels organized. "Pay rent" pops up on the 1st. "Oil change" reminds you every 6 months.</p>
+
+                <p><strong>The problem:</strong> Calendars are built for <em>events</em>, not <em>tasks</em>. Events happen at a specific time. Tasks have flexible windows. Your calendar doesn't know if you completed the task early, late, or not at all. Notifications pile up, and eventually you start ignoring them.</p>
+
+                <h3>2. Apple Reminders / Google Tasks</h3>
+
+                <p>Both apps support recurring reminders. Set "Water plants" to repeat weekly. Done.</p>
+
+                <p><strong>The problem:</strong> No categories, no flexible schedules, no streak tracking. Everything is a flat list. After 20 recurring tasks, it becomes noise. And if you complete something early (e.g., pay a bill 5 days before the due date), the app doesn't adjust — it just shows the same reminder again next cycle.</p>
+
+                <h3>3. Spreadsheets</h3>
+
+                <p>Some people maintain a Google Sheet or Excel file with task names, last completed dates, and next due dates. Very manual, very DIY.</p>
+
+                <p><strong>The problem:</strong> No notifications. No mobile access (unless you love editing spreadsheets on your phone). Zero automation. You have to calculate next due dates yourself. This works for organized people who check their spreadsheet religiously. For everyone else, it's doomed.</p>
+
+                <h3>4. General Todo Apps (Todoist, Things, TickTick)</h3>
+
+                <p>These apps are built for project management and GTD workflows. They have recurring task features, but they're bolted on — not the core focus.</p>
+
+                <p><strong>The problem:</strong> Overkill for simple recurring tasks. You don't need tags, priority levels, sub-projects, and smart filters to remember to take out the trash. The complexity creates friction. And most of these apps require subscriptions ($30-50/year) for recurring task features.</p>
+
+                <h2>What Makes a Good Recurring Task System?</h2>
+
+                <p>After testing every major app and method, here's what actually matters:</p>
+
+                <h3>1. Categories and Visual Organization</h3>
+
+                <p>Your brain groups tasks naturally: bills are different from chores, which are different from car maintenance. A good system respects this.</p>
+
+                <p>Instead of a giant list, you want categories:</p>
+
+                <ul>
+                    <li><strong>Bills & Subscriptions</strong> — Credit cards, rent, utilities, streaming services</li>
+                    <li><strong>Home Maintenance</strong> — HVAC filters, smoke alarms, lawn care</li>
+                    <li><strong>Health & Personal</strong> — Dentist, haircut, prescription refills</li>
+                    <li><strong>Vehicle</strong> — Oil changes, tire rotation, registration renewal</li>
+                    <li><strong>Household Chores</strong> — Laundry, trash, cleaning</li>
+                </ul>
+
+                <p>Color-coding or icon-based categories make scanning faster. Your brain processes visuals before text.</p>
+
+                <h3>2. Flexible Scheduling</h3>
+
+                <p>Not every task repeats on a fixed calendar schedule. A good system handles:</p>
+
+                <ul>
+                    <li><strong>Fixed intervals:</strong> Every 2 weeks, every month, every 90 days</li>
+                    <li><strong>Specific days:</strong> Every Tuesday, first Monday of the month</li>
+                    <li><strong>Usage-based:</strong> Every 5,000 miles, every 50 washes, every 100 hours of use</li>
+                    <li><strong>Seasonal:</strong> Twice a year, start of winter, beginning of tax season</li>
+                </ul>
+
+                <p>Your system should adapt to the task, not force the task to fit a rigid template.</p>
+
+                <h3>3. Streak Tracking and Completion History</h3>
+
+                <p>Humans are motivated by streaks. "Don't break the chain" works because seeing progress feels good — and breaking a streak feels bad.</p>
+
+                <p>A good recurring task system shows:</p>
+
+                <ul>
+                    <li>How many times in a row you've completed the task on time</li>
+                    <li>Your completion history (last 10 times, visual calendar view)</li>
+                    <li>Overdue warnings without making you feel like garbage</li>
+                </ul>
+
+                <p>This transforms tasks from "nagging chore" to "completion game." Gamification works because it taps into intrinsic motivation.</p>
+
+                <h3>4. Smart Notifications</h3>
+
+                <p>Notifications should be <em>helpful</em>, not <em>annoying</em>. That means:</p>
+
+                <ul>
+                    <li><strong>Advance warnings:</strong> Remind me 3 days before the bill is due, not the morning of</li>
+                    <li><strong>Snooze with context:</strong> "Remind me in 2 hours" or "Remind me tomorrow morning"</li>
+                    <li><strong>Quiet mode:</strong> Don't ping me at 11 PM about taking out the trash</li>
+                    <li><strong>Escalation:</strong> First reminder is gentle. Second is firmer. Third is "seriously, this is overdue"</li>
+                </ul>
+
+                <h3>5. Minimal Friction</h3>
+
+                <p>The system has to be faster than your memory. If it takes 30 seconds to log that you paid a bill, you won't use it.</p>
+
+                <p>Look for:</p>
+
+                <ul>
+                    <li>One-tap completion (no multi-step workflows)</li>
+                    <li>Widget or home screen shortcuts</li>
+                    <li>Offline support (works without internet)</li>
+                    <li>No account required (just download and go)</li>
+                </ul>
+
+                <p>Every extra tap is a reason to procrastinate.</p>
+
+                <h2>Building Your System: A Step-by-Step Guide</h2>
+
+                <h3>Step 1: Brain Dump All Your Recurring Tasks</h3>
+
+                <p>You can't manage what you don't track. Spend 15 minutes listing <em>everything</em> that repeats:</p>
+
+                <ul>
+                    <li>Bills (credit cards, rent, utilities, subscriptions)</li>
+                    <li>Health (dentist, doctor checkups, prescriptions)</li>
+                    <li>Home (HVAC filters, smoke alarm batteries, gutter cleaning)</li>
+                    <li>Vehicle (oil change, tire rotation, registration)</li>
+                    <li>Chores (laundry, trash, vacuuming, pet care)</li>
+                    <li>Personal (haircut, contact lens refills)</li>
+                </ul>
+
+                <p>Don't filter or organize yet. Just dump.</p>
+
+                <h3>Step 2: Categorize and Prioritize</h3>
+
+                <p>Group tasks into 3-5 categories that make sense for your life. Then mark priority:</p>
+
+                <ul>
+                    <li><strong>High:</strong> Has a hard deadline or financial/safety consequence (bills, car registration)</li>
+                    <li><strong>Medium:</strong> Important but flexible window (filter changes, haircut)</li>
+                    <li><strong>Low:</strong> Nice to do but not urgent (deep clean closet, organize garage)</li>
+                </ul>
+
+                <h3>Step 3: Define Schedules</h3>
+
+                <p>For each task, decide:</p>
+
+                <ul>
+                    <li>How often does it repeat?</li>
+                    <li>Is there a specific due date, or just a frequency?</li>
+                    <li>How much advance notice do I need?</li>
+                </ul>
+
+                <p>Example: "Pay Amex" → Monthly, due on 22nd, remind me 5 days early</p>
+
+                <h3>Step 4: Pick Your Tool</h3>
+
+                <p>Based on the criteria above, choose a system. Options:</p>
+
+                <ul>
+                    <li><strong>Dedicated recurring task app</strong> (DueCycle, Rotini, Streaks) — Best for most people</li>
+                    <li><strong>Todo app with strong recurring features</strong> (Todoist Premium, Things 3) — If you already use these for work</li>
+                    <li><strong>Spreadsheet</strong> — Only if you're extremely disciplined and want full control</li>
+                </ul>
+
+                <p>Avoid using calendar apps or basic reminders. They're not built for this.</p>
+
+                <h3>Step 5: Set Up and Test for One Week</h3>
+
+                <p>Add your high-priority tasks first. Test the notification timing. Make sure completing tasks feels effortless.</p>
+
+                <p>If it feels clunky after a week, switch tools. The best system is the one you'll actually use.</p>
+
+                <h3>Step 6: Review Monthly</h3>
+
+                <p>Once a month, review your system:</p>
+
+                <ul>
+                    <li>Are there tasks you keep ignoring? Maybe they're not actually important.</li>
+                    <li>Are there new recurring tasks to add?</li>
+                    <li>Is the schedule still accurate? (e.g., gym membership increased to $50/month)</li>
+                </ul>
+
+                <p>This 10-minute review keeps the system relevant.</p>
+
+                <h2>Common Mistakes to Avoid</h2>
+
+                <h3>1. Adding Too Many Tasks at Once</h3>
+
+                <p>Don't try to track 50 recurring tasks on day one. Start with your top 10 most important ones. Add more as you build the habit.</p>
+
+                <h3>2. Ignoring Flexible Tasks</h3>
+
+                <p>Not everything has a hard due date. "Clean out fridge" is more like "do this roughly once a month." That's fine. Your system should support "every 30 days-ish" without making you feel guilty if it's 35.</p>
+
+                <h3>3. Not Tracking Completion</h3>
+
+                <p>If you pay a bill but forget to mark it complete, you'll get reminded again. This creates mistrust in your system. Make completion a reflex: pay bill → mark complete → move on.</p>
+
+                <h3>4. Over-Optimizing</h3>
+
+                <p>You don't need perfect categories, perfect intervals, or perfect notification times. Done is better than perfect. Tweak as you go.</p>
+
+                <h2>The Psychology: Why This Works</h2>
+
+                <p>A good recurring task system offloads cognitive burden. Psychologists call this <strong>externalized cognition</strong> — moving information out of your brain and into a trusted system.</p>
+
+                <p>David Allen's <em>Getting Things Done</em> philosophy is built on this: your brain is for <em>thinking</em>, not <em>storage</em>. When you stop using mental energy to remember when the credit card bill is due, you free up space for creative work, deep focus, and actual decision-making.</p>
+
+                <p>The streak tracking adds <strong>gamification</strong>, which triggers dopamine release. Each completed task = small win. String together 10 wins and you've built momentum.</p>
+
+                <p>And categorization leverages <strong>cognitive chunking</strong> — your brain processes groups faster than individual items. Scanning "Bills" and seeing 3 tasks is easier than scanning a 30-item list.</p>
+
+                <div class="cta-box">
+                    <h2>Track Recurring Tasks the Smart Way</h2>
+                    <p>DueCycle is built specifically for recurring tasks.<br>Categories, flexible schedules, streak tracking, and smart reminders. No ads. No subscriptions.</p>
+                    <a href="https://apps.apple.com/us/app/duecycle/id6738698241" class="btn btn-sage">Download DueCycle →</a>
+                </div>
+
+                <hr>
+
+                <p><em>DueCycle is made by <a href="/">Softroni</a>. We build simple, useful apps that help you stay on top of life's recurring tasks. No ads, no tracking, no nonsense.</em></p>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-top">
+                <a href="/" class="footer-brand"><span class="brand-s">S</span><span class="brand-text">oftroni</span><span class="brand-us">_</span></a>
+                <nav class="footer-links">
+                    <a href="/apps.html">Apps</a>
+                    <a href="/about.html">About</a>
+                    <a href="/blog/">Blog</a>
+                    <a href="/privacy-policy.html">Privacy Policy</a>
+                    <a href="/terms-of-service.html">Terms of Service</a>
+                    <a href="/support.html">Support</a>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <script>document.write(new Date().getFullYear())</script> Softroni LLC. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
