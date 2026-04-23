@@ -264,7 +264,7 @@
                 <div class="fade-in">
                     <a href="/" class="back-link">&larr; Back to Home</a>
                     <h1>Privacy <span class="accent">Policy</span></h1>
-                    <p class="subtitle">Last Updated: February 14, 2026</p>
+                    <p class="subtitle">Last Updated: April 23, 2026</p>
                 </div>
             </div>
         </section>
@@ -288,9 +288,9 @@
                     <p>Across all Softroni applications, we may collect the following:</p>
                     <ul>
                         <li><strong>On-device preferences:</strong> Settings, session history, and user progress are stored locally on your device and are never transmitted to our servers.</li>
-                        <li><strong>Purchases and subscriptions:</strong> In-app purchases and subscriptions are processed entirely by Apple. We receive a purchase receipt to verify your subscription status but do not receive your payment details (credit card, billing address, etc.).</li>
+                        <li><strong>Purchases and subscriptions:</strong> In-app purchases and subscriptions are processed by Apple. Some apps use <strong>RevenueCat</strong> as a subscription management service to validate receipts, sync subscription status across devices, and manage entitlements. RevenueCat receives an anonymous app-generated user identifier and the purchase receipt from Apple. We do not receive or store your payment details (credit card, billing address, etc.) — these remain with Apple.</li>
                         <li><strong>Crash reports:</strong> Anonymous crash logs may be collected via Apple's built-in crash reporting to help us diagnose and fix bugs. These contain no personally identifiable information.</li>
-                        <li><strong>Analytics:</strong> We may collect anonymous, aggregated usage statistics (e.g., which features are used most often) to improve our apps. This data cannot be used to identify individual users.</li>
+                        <li><strong>Product analytics:</strong> Some apps use <strong>PostHog</strong> to collect anonymous, aggregated usage statistics (e.g., which features are used, button taps, session length) so we can understand how the app is used and improve it. Events are associated with a randomly generated, app-specific anonymous identifier — not your name, email, Apple ID, or any personally identifiable information. IP addresses are discarded and not stored. We do not use PostHog for advertising, profiling across apps, or sharing with third parties.</li>
                         <li><strong>Support communications:</strong> If you contact us for support, we retain the information you provide for as long as necessary to resolve your request.</li>
                     </ul>
                     <p>Most of our applications do not require an account, login, or any personal information to use.</p>
@@ -364,6 +364,8 @@
                     <p>We do not sell your personal information. We may share limited data only in these circumstances:</p>
                     <ul>
                         <li><strong>Apple:</strong> Subscription and purchase verification is handled by Apple's App Store infrastructure.</li>
+                        <li><strong>RevenueCat (subscription management):</strong> For apps that offer subscriptions, purchase receipts and an anonymous user identifier are sent to RevenueCat to verify purchases and manage subscription entitlements. See <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">RevenueCat's privacy policy</a>.</li>
+                        <li><strong>PostHog (product analytics):</strong> Anonymous usage events tied to a random app-generated identifier may be sent to PostHog to help us understand how the app is used. No PII is sent, and IP addresses are discarded. See <a href="https://posthog.com/privacy" target="_blank" rel="noopener">PostHog's privacy policy</a>.</li>
                         <li><strong>Cloud processing:</strong> When cloud-based features are used (e.g., AI content generation, voice processing), minimal data is sent to our processing service, encrypted in transit, and deleted after processing.</li>
                         <li><strong>Crash reporting:</strong> Anonymous crash data may be collected via Apple's crash reporting framework.</li>
                         <li><strong>Legal requirements:</strong> We may disclose data if required by law, regulation, or legal process.</li>
