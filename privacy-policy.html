@@ -264,7 +264,7 @@
                 <div class="fade-in">
                     <a href="/" class="back-link">&larr; Back to Home</a>
                     <h1>Privacy <span class="accent">Policy</span></h1>
-                    <p class="subtitle">Last Updated: May 1, 2026</p>
+                    <p class="subtitle">Last Updated: July 22, 2026</p>
                 </div>
             </div>
         </section>
@@ -290,7 +290,7 @@
                         <li><strong>On-device preferences:</strong> Settings, session history, and user progress are stored locally on your device and are never transmitted to our servers.</li>
                         <li><strong>Purchases and subscriptions:</strong> In-app purchases and subscriptions are processed by Apple. Some apps use <strong>RevenueCat</strong> as a subscription management service to validate receipts, sync subscription status across devices, and manage entitlements. RevenueCat receives an anonymous app-generated user identifier and the purchase receipt from Apple. We do not receive or store your payment details (credit card, billing address, etc.) — these remain with Apple.</li>
                         <li><strong>Crash reports:</strong> Anonymous crash logs may be collected via Apple's built-in crash reporting to help us diagnose and fix bugs. These contain no personally identifiable information.</li>
-                        <li><strong>Product analytics:</strong> Some apps use <strong>PostHog</strong> to collect anonymous, aggregated usage statistics (e.g., which features are used) so we can understand how the app is used and improve it. Events are associated with a randomly generated, app-specific anonymous identifier — not your name, email, Apple ID, or any personally identifiable information. IP addresses are used only to infer approximate geographic region (e.g., country or city) and are not stored long-term. We do not use PostHog for advertising, profiling across apps, or sharing with third parties.</li>
+                        <li><strong>Product analytics:</strong> Some apps use <strong>PostHog</strong> to understand feature usage and improve the app. Depending on the app, events may include feature interactions, progress or funnel events, and purchase-related analytics such as the selected product or plan, displayed price and currency, purchase outcome, and a StoreKit transaction identifier. Events are associated with a randomly generated, app-specific identifier — not your name, email, or Apple ID. We do not send payment-card details or billing addresses. IP addresses are used only to infer an approximate geographic region (e.g., country or city) and are not stored long-term. We do not use PostHog for advertising or cross-app profiling.</li>
                         <li><strong>Support communications:</strong> If you contact us for support, we retain the information you provide for as long as necessary to resolve your request.</li>
                     </ul>
                     <p>Most of our applications do not require an account, login, or any personal information to use.</p>
@@ -342,14 +342,13 @@
                 </div>
 
                 <div class="policy-section fade-in">
-                    <h2>8. Our Approach to Advertising</h2>
-                    <p>Our apps do not display advertisements within the app, and we do not operate our own ad network or sell your data to data brokers. We also do not engage in cross-app retargeting beyond what is described in Section 9. GeoBlitz uses the TikTok Business SDK (Section 9) solely to measure the performance of our own TikTok ad campaigns; this is the only third-party advertising integration across our apps.</p>
+                    <h2>8. No Third-Party Advertising or Tracking</h2>
+                    <p>Our apps do not display third-party advertisements, include third-party advertising SDKs, access Apple's advertising identifier (IDFA), or request App Tracking Transparency permission. We do not share app data with advertising networks, engage in cross-app tracking or retargeting, sell personal data, or participate in data brokerage programs.</p>
                 </div>
 
                 <div class="policy-section fade-in">
                     <h2>9. Advertising and Attribution</h2>
-                    <p>We use the TikTok Business SDK to measure the performance of our TikTok ad campaigns. After you grant permission via Apple's App Tracking Transparency prompt, this SDK collects your device's advertising identifier (IDFA) along with a randomized install identifier and basic device information (model, OS version), and sends standard conversion events such as app launch, registration, trial start, subscribe, and purchase to TikTok.</p>
-                    <p>If you decline the prompt, the IDFA is not collected and attribution falls back to Apple's privacy-preserving SKAdNetwork framework. The data is used solely for ad attribution and audience measurement, is not sold, and is not linked to your name or email.</p>
+                    <p>Current versions of our apps do not include third-party advertising-attribution integrations. In particular, GeoBlitz does not include the TikTok Business SDK, send data to TikTok, access IDFA, or request App Tracking Transparency permission. If we introduce an advertising or attribution integration in the future, we will update this policy and the applicable app's privacy disclosures before collecting or sharing data.</p>
                 </div>
 
                 <div class="policy-section fade-in">
@@ -371,8 +370,7 @@
                     <ul>
                         <li><strong>Apple:</strong> Subscription and purchase verification is handled by Apple's App Store infrastructure.</li>
                         <li><strong>RevenueCat (subscription management):</strong> For apps that offer subscriptions, purchase receipts and an anonymous user identifier are sent to RevenueCat to verify purchases and manage subscription entitlements. See <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">RevenueCat's privacy policy</a>.</li>
-                        <li><strong>PostHog (product analytics):</strong> Anonymous usage events tied to a random app-generated identifier may be sent to PostHog to help us understand how the app is used. No PII is sent. IP addresses are used only to infer approximate geographic region and are not stored long-term. See <a href="https://posthog.com/privacy" target="_blank" rel="noopener">PostHog's privacy policy</a>.</li>
-                        <li><strong>TikTok (GeoBlitz only):</strong> With your App Tracking Transparency permission, the TikTok Business SDK shares your device's advertising identifier (IDFA), a randomized install identifier, basic device information (model, OS version), and standard conversion events (app launch, registration, trial start, subscribe, purchase) with TikTok for ad attribution and audience measurement. If ATT permission is denied, IDFA is not shared and attribution falls back to Apple's SKAdNetwork. See Section 9.</li>
+                        <li><strong>PostHog (product analytics):</strong> Product-usage and purchase-related analytics tied to a random app-generated identifier may be sent to PostHog to help us understand how an app is used and improve it. These events may include product or plan identifiers, displayed price and currency, purchase outcome, and a StoreKit transaction identifier, but not payment-card details, billing addresses, names, email addresses, or Apple IDs. IP addresses are used only to infer an approximate geographic region and are not stored long-term. See <a href="https://posthog.com/privacy" target="_blank" rel="noopener">PostHog's privacy policy</a>.</li>
                         <li><strong>Cloud processing:</strong> When cloud-based features are used (e.g., AI content generation, voice processing), minimal data is sent to our processing service, encrypted in transit, and deleted after processing.</li>
                         <li><strong>Crash reporting:</strong> Anonymous crash data may be collected via Apple's crash reporting framework.</li>
                         <li><strong>Legal requirements:</strong> We may disclose data if required by law, regulation, or legal process.</li>
