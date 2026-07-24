@@ -250,8 +250,6 @@
       <div class="nav-inner">
         <a href="/" class="nav-brand"><img src="/logo.png" alt="Softroni logo">Softroni</a>
         <div class="nav-links">
-          <a href="/apps.html">Apps</a>
-          <a href="/blog/">Blog</a>
           <a href="/about.html">About</a>
           <a href="/support.html">Support</a>
           <a href="${ctaHref}" class="${ctaClass}">${ctaText}</a>
@@ -266,8 +264,6 @@
     const mobileMenu = document.createElement('div');
     mobileMenu.className = 'nav-mobile-menu';
     mobileMenu.innerHTML = '<a href="/">Home</a>'
-      + '<a href="/apps.html">Apps</a>'
-      + '<a href="/blog/">Blog</a>'
       + '<a href="/about.html">About</a>'
       + '<a href="/support.html">Support</a>'
       + '<a href="' + ctaHref + '" class="' + ctaClass + '">' + ctaText + '</a>';
@@ -299,7 +295,6 @@
         <a href="/" class="footer-brand"><img src="/logo.png" alt="Softroni logo">Softroni</a>
         <nav class="footer-links">
           <a href="/about.html">About</a>
-          <a href="/blog/">Blog</a>
           <a href="/privacy-policy.html">Privacy Policy</a>
           <a href="/terms-of-service.html">Terms of Service</a>
           <a href="/support.html">Support</a>

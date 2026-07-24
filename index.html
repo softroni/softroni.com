@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Softroni — Mobile, Web & AI Development</title>
-    <meta name="description" content="Softroni is a software company specializing in mobile, web, and AI development. We build modern digital products that solve real problems.">
+    <title>Softroni — Mobile, Web & AI Development Agency</title>
+    <meta name="description" content="Softroni is a mobile, web, and AI development agency. We design and build reliable digital products for startups and established businesses.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
@@ -408,61 +408,6 @@
             .step-connector::after { display: none; }
         }
 
-        /* Products section */
-        .products-bg {
-            background: var(--color-elevated);
-        }
-        .product-card {
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-card);
-            padding: 32px;
-            box-shadow: var(--shadow-subtle);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        .product-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-medium);
-        }
-        .product-badge {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--color-accent);
-            background: var(--color-accent-subtle);
-            padding: 4px 12px;
-            border-radius: 20px;
-        }
-        .product-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: var(--radius-card);
-            background: var(--color-accent-subtle);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin-bottom: 16px;
-        }
-        .product-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
-        .product-tagline { font-size: 13px; color: var(--color-accent); font-weight: 500; margin-bottom: 12px; }
-        .product-card p { color: var(--color-text-secondary); font-size: 14px; line-height: 1.7; }
-        .product-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: 16px;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--color-accent);
-            transition: gap 0.2s;
-        }
-        .product-link:hover { gap: 10px; }
-
         /* About preview */
         .about-preview p {
             color: var(--color-text-secondary);
@@ -566,11 +511,11 @@
                     <span class="hero-cursor"></span>
                 </div>
                 <div class="hero-tagline">
-                    <span>apps</span>
+                    <span>mobile</span>
+                    <span class="dot">&middot;</span>
+                    <span>web</span>
                     <span class="dot">&middot;</span>
                     <span>ai</span>
-                    <span class="dot">&middot;</span>
-                    <span>automation</span>
                 </div>
                 <p class="hero-subtitle">We design and build mobile apps, web platforms, and AI-powered solutions that help businesses move faster and work smarter.</p>
                 <div class="hero-ctas">
@@ -639,46 +584,6 @@
             </div>
         </section>
 
-        <!-- Products -->
-        <section id="apps" class="products-bg">
-            <div class="wrap">
-                <div class="text-center" style="margin-bottom: 16px;">
-                    <p class="section-label fade-in">Our Apps</p>
-                    <h2 class="section-title fade-in">Products we've built</h2>
-                </div>
-                <p class="section-subtitle text-center fade-in" style="margin-bottom: 48px;">Tools designed to help you focus, relax, and get things done.</p>
-                <div class="grid-3" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); max-width: 960px; margin: 0 auto;">
-                    <a href="/geoblitz/" class="product-card fade-in fade-in-delay-1" style="display: block;">
-                        <span class="product-badge" style="background: rgba(255, 138, 0, 0.15); color: #FF8A00;">New</span>
-                        <img src="/geoblitz/images/appicon.png" alt="GeoBlitz app icon" style="width:64px;height:64px;border-radius:16px;margin-bottom:16px;">
-                        <h3>GeoBlitz</h3>
-                        <p class="product-tagline">Geography Speed Quiz</p>
-                        <p>8 quiz modes, 220 countries &amp; territories, daily challenges, and adaptive learning. Master world geography.</p>
-                        <span class="product-link">Learn More &rarr;</span>
-                    </a>
-                    <a href="/mutewave/" class="product-card fade-in fade-in-delay-2" style="display: block;">
-                        <span class="product-badge" style="background: rgba(76, 175, 80, 0.15); color: #4CAF50;">Available Now</span>
-                        <img src="/mutewave/images/appicon.png" alt="MuteWave app icon" style="width:64px;height:64px;border-radius:16px;margin-bottom:16px;">
-                        <h3>MuteWave</h3>
-                        <p class="product-tagline">Brown Noise & Sounds</p>
-                        <p>9 noise colors, 15 nature sounds, a 5-layer mixer. Focus, sleep & ADHD relief. No ads.</p>
-                        <span class="product-link">Download on the App Store &rarr;</span>
-                    </a>
-                    <a href="/duecycle/" class="product-card fade-in fade-in-delay-3" style="display: block;">
-                        <span class="product-badge" style="background: rgba(0, 188, 212, 0.15); color: #00BCD4;">New</span>
-                        <img src="/duecycle/images/icon.png" alt="DueCycle app icon" style="width:64px;height:64px;border-radius:16px;margin-bottom:16px;">
-                        <h3>DueCycle</h3>
-                        <p class="product-tagline">Recurring Task Reminders</p>
-                        <p>Track every recurring task — bills, chores, maintenance. Set it once, never forget again.</p>
-                        <span class="product-link">Learn More &rarr;</span>
-                    </a>
-                </div>
-                <div class="text-center fade-in" style="margin-top: 32px;">
-                    <a href="/apps/" style="font-size: 15px; font-weight: 600; color: var(--color-accent);">View all 5 apps &rarr;</a>
-                </div>
-            </div>
-        </section>
-
         <!-- About Preview -->
         <section>
             <div class="wrap">
@@ -696,7 +601,7 @@
         <section class="newsletter-section">
             <div class="wrap text-center">
                 <h2>Stay in the loop</h2>
-                <p class="nl-subtitle">Get updates on our latest products, insights, and company news. No spam, ever.</p>
+                <p class="nl-subtitle">Get practical insights on mobile, web, and AI development, plus company news. No spam, ever.</p>
                 <form id="newsletterForm" class="nl-form" onsubmit="return submitNewsletter(event)">
                     <input type="email" id="newsletterEmail" placeholder="Enter your email" required>
                     <button type="submit" id="newsletterBtn">Subscribe &rarr;</button>
