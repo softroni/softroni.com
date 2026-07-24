@@ -12,8 +12,8 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom: 1px solid var(--color-border, #F0F0F0);
-      background: rgba(255,255,255,0.85);
+      border-bottom: 1px solid var(--color-border, #E4E9F2);
+      background: rgba(255,255,255,0.92);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
     }
@@ -21,19 +21,19 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 64px;
-      max-width: 1024px;
+      height: 72px;
+      max-width: 1180px;
       margin: 0 auto;
       padding: 0 24px;
     }
     .nav-brand {
-      font-family: var(--font-mono, 'JetBrains Mono', monospace);
+      font-family: var(--font-mono, 'Geist Mono', monospace);
       display: flex;
       align-items: center;
       gap: 8px;
       font-weight: 700;
       font-size: 18px;
-      color: #1A1A1A;
+      color: var(--color-text, #101828);
       text-decoration: none;
       z-index: 102;
     }
@@ -52,12 +52,12 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 28px;
     }
     .nav-links a {
       font-size: 14px;
       font-weight: 500;
-      color: var(--color-text-secondary, #999);
+      color: var(--color-text-secondary, #475467);
       transition: color 0.2s;
       text-decoration: none;
     }
@@ -75,8 +75,8 @@
       flex-direction: column;
       justify-content: center;
       gap: 5px;
-      width: 32px;
-      height: 32px;
+      width: 44px;
+      height: 44px;
       background: none;
       border: none;
       cursor: pointer;
@@ -109,7 +109,7 @@
       width: 100%;
       height: 100%;
       background: #FFFFFF;
-      z-index: 101;
+      z-index: 99;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -126,11 +126,11 @@
     .nav-mobile-menu a {
       font-size: 22px;
       font-weight: 600;
-      color: #1A1A1A;
+      color: var(--color-text, #101828);
       text-decoration: none;
       padding: 14px 32px;
       transition: color 0.2s;
-      font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, sans-serif);
+      font-family: var(--font-sans, 'Geist', -apple-system, BlinkMacSystemFont, sans-serif);
     }
     .nav-mobile-menu a:hover {
       color: var(--color-accent, #3B6BF5);
@@ -155,24 +155,25 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      min-height: 44px;
       padding: 10px 24px;
       border-radius: var(--radius-btn, 8px);
       font-size: 14px;
       font-weight: 600;
-      font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, sans-serif);
+      font-family: var(--font-sans, 'Geist', -apple-system, BlinkMacSystemFont, sans-serif);
       border: none;
       cursor: pointer;
       transition: all 0.2s;
       text-decoration: none;
     }
     .btn-primary {
-      background: var(--gradient-brand, linear-gradient(135deg, #1E3A8A, #3B82F6, #60A5FA));
+      background: var(--color-accent, #2F66E8);
       color: #fff;
     }
     .btn-primary:hover {
-      opacity: 0.9;
+      background: var(--color-accent-hover, #2454C6);
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(59, 107, 245, 0.35);
+      box-shadow: 0 10px 24px rgba(47, 102, 232, 0.24);
     }
     .btn-accent {
       background: var(--color-accent, #3B6BF5);
@@ -242,7 +243,7 @@
   // ── Navigation ──
   const nav = document.querySelector('.site-nav');
   if (nav) {
-    const ctaText = nav.getAttribute('data-cta-text') || 'Get in Touch';
+    const ctaText = nav.getAttribute('data-cta-text') || 'Start a Project';
     const ctaHref = nav.getAttribute('data-cta-href') || '/support.html';
     const ctaClass = nav.getAttribute('data-cta-class') || 'btn btn-primary';
 
@@ -250,8 +251,10 @@
       <div class="nav-inner">
         <a href="/" class="nav-brand"><img src="/logo.png" alt="Softroni logo">Softroni</a>
         <div class="nav-links">
+          <a href="/#services">Services</a>
+          <a href="/#process">Process</a>
           <a href="/about.html">About</a>
-          <a href="/support.html">Support</a>
+          <a href="/support.html">Contact</a>
           <a href="${ctaHref}" class="${ctaClass}">${ctaText}</a>
         </div>
         <button class="nav-hamburger" aria-label="Menu">
@@ -264,8 +267,10 @@
     const mobileMenu = document.createElement('div');
     mobileMenu.className = 'nav-mobile-menu';
     mobileMenu.innerHTML = '<a href="/">Home</a>'
+      + '<a href="/#services">Services</a>'
+      + '<a href="/#process">Process</a>'
       + '<a href="/about.html">About</a>'
-      + '<a href="/support.html">Support</a>'
+      + '<a href="/support.html">Contact</a>'
       + '<a href="' + ctaHref + '" class="' + ctaClass + '">' + ctaText + '</a>';
     document.body.appendChild(mobileMenu);
 
