@@ -4,11 +4,75 @@
 <meta charset="utf-8">
 <title>Paper Coach: Learn to Draw</title>
 <meta name="robots" content="noindex">
-<meta http-equiv="refresh" content="0; url=https://apps.apple.com/app/apple-store/id6816231257?pt=128560181&amp;ct=pinterest-profile&amp;mt=8">
 <link rel="canonical" href="https://apps.apple.com/app/id6816231257">
+<noscript><meta http-equiv="refresh" content="0; url=https://apps.apple.com/app/apple-store/id6816231257?pt=128560181&amp;ct=pinterest-profile&amp;mt=8"></noscript>
 </head>
 <body>
-<p>Opening <a href="https://apps.apple.com/app/apple-store/id6816231257?pt=128560181&amp;ct=pinterest-profile&amp;mt=8">Paper Coach on the App Store</a>...</p>
-<script>location.replace('https://apps.apple.com/app/apple-store/id6816231257?pt=128560181&ct=pinterest-profile&mt=8')</script>
+<p>Opening <a id="app-store" href="https://apps.apple.com/app/apple-store/id6816231257?pt=128560181&amp;ct=pinterest-profile&amp;mt=8">Paper Coach on the App Store</a>...</p>
+<script>
+// Counts a tap on this profile link (no cookies, no storage, no identifier kept), then opens the App Store.
+// See softroni.com/privacy-policy, "Our website".
+(function () {
+  var POSTHOG = 'https://us.i.posthog.com/i/v0/e/';
+  var TOKEN = 'phc_ypKEM2MfVWZQZEz24GhQwzG3NyfZksRgHEMpUiLojXQt'; // Paper Coach project 629055's public key: PostHogSink.projectKey in the app
+  var WAIT_MS = 250;     // at most this long before leaving; the request carries on (keepalive)
+  var dest = document.getElementById('app-store').href;
+  var left = false;
+  function go() { if (!left) { left = true; location.replace(dest); } }
+
+  function props() {
+    var ua = navigator.userAgent || '';
+    var campaign = (new URL(dest).searchParams.get('ct')) || 'none';
+    var parts = location.pathname.replace(/\.html$/, '').split('/');
+    var ref = 'none';
+    try { if (document.referrer) ref = new URL(document.referrer).hostname || 'none'; } catch (e) {}
+    var inApp =
+      /musical_ly|BytedanceWebview|trill_|TikTok/i.test(ua) ? 'tiktok' :
+      /Barcelona/.test(ua) ? 'threads' :
+      /Instagram/.test(ua) ? 'instagram' :
+      /FBAN|FBAV|FB_IAB|FBIOS/.test(ua) ? 'facebook' :
+      /Pinterest/i.test(ua) ? 'pinterest' :
+      /Twitter/i.test(ua) ? 'x' :
+      /Snapchat/i.test(ua) ? 'snapchat' :
+      /LinkedInApp/i.test(ua) ? 'linkedin' :
+      (/; wv\)/.test(ua) || (/iPhone|iPad|iPod/.test(ua) && !/Safari\//.test(ua))) ? 'webview' : 'browser';
+    var os = (/iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)) ? 'ios'
+      : /Android/.test(ua) ? 'android' : 'other';
+    var traffic = /(^|#)test\b/.test(location.hash) ? 'test'
+      : (navigator.webdriver || /bot|crawl|spider|slurp|preview|headless|facebookexternalhit|facebot|bytespider|lighthouse|pingdom|python|curl|wget/i.test(ua)) ? 'bot'
+      : 'human';
+    return {
+      link: 'profile', platform: campaign.split('-')[0], campaign: campaign,
+      app: parts[2] || 'none', path: location.pathname,
+      in_app: inApp, os: os, referrer_host: ref,
+      lang: (navigator.language || '').slice(0, 12), traffic: traffic,
+      $process_person_profile: false, $geoip_disable: true, $lib: 'softroni-link'
+    };
+  }
+
+  function id() {
+    try { return crypto.randomUUID(); } catch (e) { return 'l' + Date.now().toString(36) + Math.random().toString(36).slice(2); }
+  }
+
+  function start() {
+    var sent = null;
+    try {
+      if (document.visibilityState !== 'hidden') { // a prefetched or background page isn't a tap
+        var body = 'data=' + encodeURIComponent(JSON.stringify({
+          api_key: TOKEN, event: 'social_link_opened', distinct_id: id(), properties: props()
+        }));
+        sent = fetch(POSTHOG, {
+          method: 'POST', body: body, keepalive: true, mode: 'no-cors', credentials: 'omit',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        });
+      }
+    } catch (e) {} // no fetch, or anything else: just open the App Store
+    if (sent && sent.then) { sent.then(go, go); setTimeout(go, WAIT_MS); } else { go(); }
+  }
+
+  if (document.prerendering) document.addEventListener('prerenderingchange', start, { once: true });
+  else start();
+})();
+</script>
 </body>
 </html>
