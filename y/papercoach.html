@@ -10,23 +10,31 @@
 <body>
 <p>Opening <a id="app-store" href="https://apps.apple.com/app/apple-store/id6816231257?pt=128560181&amp;ct=youtube-channel&amp;mt=8">Paper Coach on the App Store</a>...</p>
 <script>
-// Counts a tap on this profile link, or on a video's link to it (no cookies, no storage, no identifier kept), then
+// Counts a tap on this profile link, or on a post's link to it (no cookies, no storage, no identifier kept), then
 // opens the App Store.
 // See softroni.com/privacy-policy, "Our website".
 (function () {
   var POSTHOG = 'https://us.i.posthog.com/i/v0/e/';
   var TOKEN = 'phc_ypKEM2MfVWZQZEz24GhQwzG3NyfZksRgHEMpUiLojXQt'; // Paper Coach project 629055's public key: PostHogSink.projectKey in the app
   var WAIT_MS = 250;     // at most this long before leaving; the request carries on (keepalive)
-  // ?v=<video> (a link in a video's description, e.g. ?v=tour-1-1): the tap and the download count for that video,
-  // under the campaign <platform>-<video>; App Store Connect takes campaigns of at most 40 characters.
-  var video = '';
-  try { video = (new URLSearchParams(location.search).get('v') || '').toLowerCase(); } catch (e) {}
+  // A link in a post rather than the profile says where it came from: ?v=<source> (the lesson, pin or video, e.g.
+  // ?v=donut or ?v=tour-1-1) goes to PostHog with the tap, and ?c=<campaign> is the App Store campaign the download
+  // counts under. c must be this page's platform or start with it (youtube, youtube-tour-1-1), so a download never
+  // counts for another platform; without it a source's campaign is <platform>-<source>. App Store Connect takes
+  // campaigns of at most 40 characters. Anything else is ignored and the link works as a profile link.
+  var params = null;
+  try { params = new URLSearchParams(location.search); } catch (e) {}
+  var video = ((params && params.get('v')) || '').toLowerCase();
   if (!/^[a-z0-9][a-z0-9-]{0,29}$/.test(video)) video = '';
   var dest = document.getElementById('app-store').href;
   var base = (new URL(dest).searchParams.get('ct')) || 'none';
-  if (video) {
+  var platform = base.split('-')[0];
+  var asked = ((params && params.get('c')) || '').toLowerCase();
+  var ct = video && asked.length <= 40 && /^[a-z0-9-]+$/.test(asked) && (asked === platform || asked.indexOf(platform + '-') === 0) ? asked
+    : video ? platform + '-' + video : '';
+  if (ct) {
     var url = new URL(dest);
-    url.searchParams.set('ct', base.split('-')[0] + '-' + video);
+    url.searchParams.set('ct', ct);
     dest = url.toString();
     document.getElementById('app-store').href = dest;
   }
@@ -55,7 +63,7 @@
       : (navigator.webdriver || /bot|crawl|spider|slurp|preview|headless|facebookexternalhit|facebot|bytespider|lighthouse|pingdom|python|curl|wget/i.test(ua)) ? 'bot'
       : 'human';
     return {
-      link: video ? 'video' : 'profile', video: video || 'none', platform: base.split('-')[0], campaign: campaign,
+      link: video ? 'post' : 'profile', source: video || 'none', platform: platform, campaign: campaign,
       app: parts[2] || 'none', path: location.pathname,
       in_app: inApp, os: os, referrer_host: ref,
       lang: (navigator.language || '').slice(0, 12), traffic: traffic,
