@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Join me on Stretch Cat</title>
+<meta name="description" content="Short movement breaks with a kitten to fill up. Stretch together and keep a shared streak going.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Join me on Stretch Cat">
+<meta property="og:description" content="Short movement breaks with a kitten to fill up. Stretch together and keep a shared streak going.">
+<meta property="og:image" content="https://softroni.com/stretchcat/icon.png">
+<link rel="icon" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding: 28px 22px;
+    background: #FFF8F6; color: #273142; text-align: center;
+    font-family: ui-rounded, "SF Pro Rounded", -apple-system, system-ui, sans-serif;
+  }
+  main { width: 100%; max-width: 380px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  img { width: 112px; height: 112px; border-radius: 25px; box-shadow: 0 10px 26px rgba(138, 74, 90, .22); margin-bottom: 10px; }
+  h1 { font-size: 32px; font-weight: 900; line-height: 1.12; letter-spacing: -.01em; }
+  #lead { font-size: 17px; font-weight: 600; line-height: 1.4; color: #5B6676; }
+  #code {
+    width: 100%; margin: 10px 0 6px; padding: 14px 16px 12px; border: 0; border-radius: 22px; background: #fff; color: inherit;
+    font-family: inherit; box-shadow: 0 6px 18px rgba(138, 74, 90, .1); cursor: pointer;
+  }
+  #code small { display: block; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #F0708A; }
+  #code strong { display: block; margin-top: 4px; font: 900 34px ui-monospace, Menlo, monospace; letter-spacing: .14em; margin-right: -.14em; }
+  a { width: 100%; padding: 17px 20px; border-radius: 999px; font-size: 17px; font-weight: 800; text-decoration: none; }
+  #open { color: #fff; background: linear-gradient(#F79AAC, #E2577A); box-shadow: 0 8px 20px rgba(226, 87, 122, .3); }
+  #store { color: #E2577A; background: #FDE8EC; }
+  #hint { font-size: 14px; font-weight: 600; line-height: 1.4; color: #6F7986; margin-top: 6px; }
+  [hidden] { display: none; }
+</style>
+</head>
+<body>
+<main>
+  <img src="icon.png" alt="Stretch Cat">
+  <h1 id="title">Join me on Stretch Cat</h1>
+  <p id="lead">Short movement breaks with a kitten to fill up.</p>
+  <button id="code" type="button" hidden><small id="code-label">Friend code</small><strong id="code-value"></strong></button>
+  <a id="open" href="stretchcat://">Open in Stretch Cat</a>
+  <a id="store" href="https://apps.apple.com/app/id6828177498">Get it on the App Store</a>
+  <p id="hint"></p>
+</main>
+<script>
+// An invite from the app: ?friend=<their code>&challenge=<id>, either or both (Invite.link in the app). Only opens the
+// app when tapped, since Safari shows an error for stretchcat:// when the app isn't installed. Nothing is stored or sent.
+(function () {
+  var CHALLENGES = { // Model/Catalog.swift; a new one that isn't here just gets the page's plain title
+    desk: 'Desk Cat Week', purrfect: 'Purrfect Week', paws: 'Happy Paws', neck: 'Neck Check', unwind: 'Unwind',
+    often: 'Little and Often', dance: 'Dance Break', squats: 'Strong Legs', morning: 'Morning Stretch',
+    holiday: 'Holiday Strolls', fresh: 'Fresh Start'
+  };
+  var q = new URLSearchParams(location.search);
+  var friend = (q.get('friend') || '').toUpperCase();
+  if (!/^[A-Z0-9]{6}$/.test(friend)) friend = '';
+  var challenge = (q.get('challenge') || '').toLowerCase();
+  if (!/^[a-z0-9_-]{1,30}$/.test(challenge)) challenge = '';
+  var name = Object.prototype.hasOwnProperty.call(CHALLENGES, challenge) ? CHALLENGES[challenge] : '';
+
+  function el(id) { return document.getElementById(id); }
+
+  el('open').href = friend ? 'stretchcat://friend/' + friend + (challenge ? '?challenge=' + challenge : '')
+    : challenge ? 'stretchcat://challenge/' + challenge : 'stretchcat://';
+
+  if (name) el('title').textContent = 'Join ' + name;
+  else if (friend) el('title').textContent = 'Stretch with a friend';
+  el('lead').textContent = friend && challenge ? 'A friend asked you to do this challenge with them on Stretch Cat. Add them to see each other’s day.'
+    : challenge ? 'A friend asked you to do this challenge with them on Stretch Cat.'
+    : friend ? 'A friend asked you to join them on Stretch Cat. Add them to see each other’s day and keep a shared streak going.'
+    : el('lead').textContent;
+
+  el('hint').textContent = 'New to Stretch Cat? Install it, then come back here and tap Open in Stretch Cat.'
+    + (friend ? ' You can also type the code in Challenges, under Stretch with friends.' : '');
+
+  if (friend) {
+    el('code').hidden = false;
+    el('code-value').textContent = friend;
+    el('code').addEventListener('click', function () {
+      if (!navigator.clipboard) return;
+      navigator.clipboard.writeText(friend).then(function () {
+        el('code-label').textContent = 'Copied';
+        setTimeout(function () { el('code-label').textContent = 'Friend code'; }, 1800);
+      });
+    });
+  }
+
+  var ua = navigator.userAgent;
+  var ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  if (!ios) { el('open').hidden = true; el('hint').hidden = true; }
+})();
+</script>
+</body>
+</html>
